@@ -281,11 +281,79 @@ npm install next-pwa
 - [ ] PWA manifest & service worker setup
 
 ### Phase 3: Authentication & Security (Minggu 3-4)
-- [ ] Setup NextAuth.js v5 (Auth.js)
-- [ ] Implementasi login/register pages
-- [ ] OAuth integration (Google, LinkedIn)
-- [ ] Protected routes middleware
-- [ ] Session management & JWT handling
+
+**Goal:** Implementasi sistem autentikasi lengkap dengan NextAuth.js v5, mendukung login via email/password dan OAuth (Google, LinkedIn), serta protected routes.
+
+#### 3.1 Setup & Configuration
+- [ ] Install NextAuth.js v5 (Auth.js) dan dependencies
+- [ ] Setup environment variables (AUTH_SECRET, AUTH_URL, OAuth credentials)
+- [ ] Konfigurasi auth.ts dengan providers (Credentials, Google, LinkedIn)
+- [ ] Setup Prisma adapter untuk database integration
+- [ ] Konfigurasi session strategy (JWT vs Database)
+
+#### 3.2 Database Schema
+- [ ] Extend Prisma schema untuk User model
+- [ ] Tambah Account model untuk OAuth providers
+- [ ] Tambah Session model (jika menggunakan database sessions)
+- [ ] Tambah VerificationToken model untuk email verification
+- [ ] Run migration: `npx prisma migrate dev`
+
+#### 3.3 Authentication Pages
+- [ ] Buat `/[locale]/login` page dengan form login
+- [ ] Buat `/[locale]/register` page dengan form registrasi
+- [ ] Design auth layout (clean, centered, responsive)
+- [ ] Implementasi form validation dengan Zod
+- [ ] Error handling & user feedback (toast notifications)
+
+#### 3.4 OAuth Integration
+- [ ] Setup Google OAuth credentials di Google Cloud Console
+- [ ] Setup LinkedIn OAuth credentials di LinkedIn Developer Portal
+- [ ] Implementasi Google Sign-In button
+- [ ] Implementasi LinkedIn Sign-In button
+- [ ] Handle OAuth callback & user creation
+
+#### 3.5 Protected Routes & Middleware
+- [ ] Update middleware.ts untuk auth protection
+- [ ] Setup route matchers untuk protected routes
+- [ ] Redirect unauthenticated users ke login page
+- [ ] Redirect authenticated users dari login ke dashboard
+- [ ] Handle locale-aware redirects
+
+#### 3.6 Session Management
+- [ ] Implementasi session provider di root layout
+- [ ] Buat useSession hook untuk client-side auth state
+- [ ] Setup JWT token configuration (expiration, refresh)
+- [ ] Implementasi session persistence
+- [ ] Handle session expiration gracefully
+
+#### 3.7 User Profile & Settings
+- [ ] Buat `/[locale]/profile` page
+- [ ] Form update profile (nama, foto, bio)
+- [ ] Change password functionality
+- [ ] Link/unlink OAuth accounts
+- [ ] Delete account functionality
+
+#### 3.8 Security Enhancements
+- [ ] Implementasi rate limiting untuk login attempts
+- [ ] Setup CSRF protection
+- [ ] Secure session cookies configuration
+- [ ] Password hashing dengan bcrypt
+- [ ] Email verification flow (optional)
+
+#### 3.9 Testing & Documentation
+- [ ] Test login dengan email/password
+- [ ] Test OAuth login (Google, LinkedIn)
+- [ ] Test protected routes behavior
+- [ ] Test session persistence
+- [ ] Update README dengan auth setup instructions
+
+**Deliverables:**
+- ✅ Sistem login/register berfungsi
+- ✅ OAuth integration (Google + LinkedIn)
+- ✅ Protected routes middleware
+- ✅ Session management
+- ✅ User profile page
+- ✅ Security best practices implemented
 
 ### Phase 4: Database & API (Minggu 4-5)
 - [ ] Setup database (PostgreSQL + Prisma atau Supabase)
