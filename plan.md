@@ -452,12 +452,109 @@ npm install next-pwa
 - ✅ Accessibility compliance (WCAG 2.1)
 - ✅ Performance optimized (lazy loading, code splitting)
 
-### Phase 4: Database & API (Minggu 4-5)
-- [ ] Setup database (PostgreSQL + Prisma atau Supabase)
-- [ ] Design database schema (users, portfolios, skills, roadmaps, achievements)
-- [ ] Create API endpoints (/api/auth, /api/portfolio, /api/skills, /api/roadmap)
-- [ ] Integrasi TanStack Query untuk data fetching & caching
-- [ ] Setup tRPC atau React Query untuk type-safe API calls
+### Phase 4: Database, API & Caching (Minggu 5-6)
+
+**Goal:** Setup database PostgreSQL dengan Prisma, membangun API endpoints yang scalable, dan mengimplementasikan caching layer dengan Redis untuk performance optimization.
+
+#### 4.1 Database Setup & Configuration
+- [ ] Setup PostgreSQL database (local atau cloud seperti Supabase/Railway)
+- [ ] Install dan konfigurasi Prisma ORM
+- [ ] Setup Prisma schema dengan semua models
+- [ ] Konfigurasi database connection pooling
+- [ ] Setup environment variables untuk database URLs
+- [ ] Run initial migration: `npx prisma migrate dev`
+
+#### 4.2 Database Schema Design
+- [ ] User model (profile, preferences, auth data)
+- [ ] Portfolio model (projects, experiences, education, certifications)
+- [ ] Skill model (skill categories, user skills, skill levels)
+- [ ] Roadmap model (milestones, progress, recommendations)
+- [ ] Achievement model (badges, certificates, awards)
+- [ ] Activity model (user activities, logs)
+- [ ] Setup database relations dan foreign keys
+- [ ] Setup database indexes untuk query optimization
+
+#### 4.3 API Endpoints Development
+- [ ] Setup Next.js API routes structure (`/api/*`)
+- [ ] Buat `/api/auth/*` endpoints (session, profile update)
+- [ ] Buat `/api/portfolio/*` endpoints (CRUD operations)
+- [ ] Buat `/api/skills/*` endpoints (skill management)
+- [ ] Buat `/api/roadmap/*` endpoints (roadmap data)
+- [ ] Buat `/api/activities/*` endpoints (activity feed)
+- [ ] Implementasi API validation dengan Zod
+- [ ] Setup error handling middleware
+- [ ] API rate limiting implementation
+
+#### 4.4 Data Fetching & State Management
+- [ ] Setup TanStack Query (React Query) configuration
+- [ ] Buat custom hooks untuk data fetching (`usePortfolio`, `useSkills`, dll)
+- [ ] Implementasi optimistic updates
+- [ ] Setup query invalidation strategies
+- [ ] Implementasi infinite scroll untuk lists
+- [ ] Setup prefetching untuk critical data
+
+#### 4.5 Redis Caching Layer ⭐
+- [ ] Setup Redis instance (local atau cloud seperti Upstash/Redis Cloud)
+- [ ] Install Redis client (ioredis atau @upstash/redis)
+- [ ] Buat caching utility functions (`getCache`, `setCache`, `deleteCache`)
+- [ ] Implementasi cache-aside pattern untuk read operations
+- [ ] Setup cache invalidation strategies (TTL, manual, event-based)
+- [ ] Cache untuk frequently accessed data:
+  - [ ] User profile data (TTL: 1 jam)
+  - [ ] Public portfolio data (TTL: 30 menit)
+  - [ ] Skill roadmaps (TTL: 6 jam)
+  - [ ] Trending skills (TTL: 1 jam)
+  - [ ] Dashboard stats (TTL: 5 menit)
+- [ ] Implementasi cache warming untuk hot data
+- [ ] Setup Redis connection pooling
+
+#### 4.6 API Performance Optimization
+- [ ] Implementasi request deduplication
+- [ ] Setup response compression (gzip/brotli)
+- [ ] Implementasi pagination untuk large datasets
+- [ ] Setup database query optimization (select specific fields)
+- [ ] Implementasi batch requests untuk multiple resources
+- [ ] Setup API response caching headers (Cache-Control, ETag)
+
+#### 4.7 Real-time Features (Optional)
+- [ ] Setup WebSocket atau Server-Sent Events (SSE)
+- [ ] Implementasi real-time notifications
+- [ ] Real-time activity feed updates
+- [ ] Live portfolio preview updates
+
+#### 4.8 Data Seeding & Migration
+- [ ] Buat seed scripts untuk development data
+- [ ] Seed default skill categories dan roadmaps
+- [ ] Setup database migration workflow
+- [ ] Backup dan restore strategies
+
+#### 4.9 Testing & Monitoring
+- [ ] Unit tests untuk API endpoints (Vitest)
+- [ ] Integration tests untuk database operations
+- [ ] Load testing untuk API performance
+- [ ] Setup database monitoring (query performance)
+- [ ] Setup Redis monitoring (cache hit/miss rates)
+- [ ] API documentation dengan Swagger/OpenAPI
+
+#### 4.10 Security & Best Practices
+- [ ] Implementasi SQL injection prevention (Prisma handles this)
+- [ ] Setup input sanitization
+- [ ] Implementasi API authentication middleware
+- [ ] Setup CORS configuration
+- [ ] Environment variables security
+- [ ] Database connection encryption (SSL)
+- [ ] Redis authentication dan encryption
+
+**Deliverables:**
+- ✅ PostgreSQL database dengan Prisma ORM
+- ✅ Complete database schema (10+ tables)
+- ✅ RESTful API endpoints (20+ endpoints)
+- ✅ Redis caching layer dengan cache strategies
+- ✅ TanStack Query integration
+- ✅ API rate limiting dan security
+- ✅ Database indexes dan query optimization
+- ✅ Cache hit rate > 80% untuk hot data
+- ✅ API response time < 200ms (cached), < 500ms (uncached)
 
 ### Phase 5: Portfolio Builder (Minggu 5-6)
 - [ ] Halaman `/portfolio` dengan layout & navigation
