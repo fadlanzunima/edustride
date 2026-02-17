@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "EduStride - Skill & Digital Portfolio",
+    "description": "Platform edukasi terpadu untuk membangun portofolio digital dan skill dari SMA hingga S3"
+  },
+  "navigation": {
+    "home": "Beranda",
+    "features": "Fitur",
+    "levels": "Level",
+    "about": "Tentang",
+    "dashboard": "Dashboard",
+    "portfolio": "Portofolio",
+    "skills": "Skill",
+    "login": "Masuk",
+    "getStarted": "Mulai Sekarang",
+    "exploreDashboard": "Jelajahi Dashboard"
+  },
+  "hero": {
+    "title": "Bangun Portofolio Digital & Skill untuk Masa Depan",
+    "subtitle": "Platform edukasi terpadu untuk pelajar Indonesia dari SMA hingga S3. Eksplorasi minat, bangun portofolio, dan siapkan karir impianmu.",
+    "selectLevel": "Pilih level edukasimu:"
+  },
+  "features": {
+    "title": "Fitur Unggulan",
+    "subtitle": "Berbagai fitur untuk membantumu berkembang di setiap jenjang pendidikan",
+    "autoPortfolio": {
+      "title": "Auto-Portfolio Generator",
+      "description": "Generate portofolio profesional secara otomatis dari data dan pencapaianmu."
+    },
+    "smartRoadmap": {
+      "title": "Smart Skill Roadmap",
+      "description": "Roadmap skill yang dipersonalisasi berdasarkan level dan tujuan karirmu."
+    },
+    "linkedin": {
+      "title": "LinkedIn Integration",
+      "description": "Sinkronisasi otomatis dengan LinkedIn untuk membangun personal branding."
+    }
+  },
+  "levels": {
+    "title": "Untuk Setiap Jenjang",
+    "subtitle": "Didesain khusus untuk kebutuhan pelajar di setiap level pendidikan",
+    "sma": {
+      "name": "SMA",
+      "title": "Eksplorasi Minat",
+      "description": "Temukan passionmu dan persiapkan diri untuk masuk perguruan tinggi impian."
+    },
+    "s1": {
+      "name": "S1",
+      "title": "Bangun Karir",
+      "description": "Magang, organisasi, dan portofolio profesional untuk memulai karir."
+    },
+    "s2s3": {
+      "name": "S2/S3",
+      "title": "Academic Excellence",
+      "description": "Riset, publikasi jurnal, dan academic branding untuk jenjang pakar."
+    }
+  },
+  "about": {
+    "title": "Tentang EduStride",
+    "vision": {
+      "title": "Visi",
+      "content": "Menjadi platform edukasi terdepan yang memfasilitasi pelajar Indonesia membangun portofolio digital dan skill relevan dengan industri."
+    },
+    "mission": {
+      "title": "Misi",
+      "items": [
+        "Menyediakan roadmap skill yang dipersonalisasi untuk setiap jenjang pendidikan",
+        "Membantu pelajar membangun portofolio digital yang profesional",
+        "Menghubungkan pelajar dengan opportunity magang dan kerja",
+        "Menciptakan komunitas pembelajar yang saling mendukung"
+      ]
+    },
+    "whyUs": {
+      "title": "Mengapa EduStride?",
+      "personalized": {
+        "title": "Personalized Journey",
+        "description": "Setiap pelajar memiliki jalur unik. Kami menyesuaikan roadmap berdasarkan level, minat, dan tujuan karir Anda."
+      },
+      "industry": {
+        "title": "Industry-Relevant Skills",
+        "description": "Skill yang diajarkan selalu up-to-date dengan kebutuhan industri terkini."
+      },
+      "community": {
+        "title": "Community Driven",
+        "description": "Bergabung dengan komunitas pelajar dan profesional yang saling mendukung pertumbuhan."
+      }
+    },
+    "stats": {
+      "activeUsers": "Pelajar Aktif",
+      "portfolios": "Portofolio Dibuat",
+      "roadmaps": "Skill Roadmap",
+      "partners": "Partner Industri"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 EduStride. All rights reserved."
+  },
+  "language": {
+    "select": "Pilih Bahasa",
+    "id": "Bahasa Indonesia",
+    "en": "English"
+  }
+}

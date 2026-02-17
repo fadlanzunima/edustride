@@ -1,0 +1,103 @@
+{
+  "metadata": {
+    "title": "EduStride - Skill & Digital Portfolio",
+    "description": "Integrated education platform to build digital portfolios and skills from high school to postgraduate"
+  },
+  "navigation": {
+    "home": "Home",
+    "features": "Features",
+    "levels": "Levels",
+    "about": "About",
+    "dashboard": "Dashboard",
+    "portfolio": "Portfolio",
+    "skills": "Skills",
+    "login": "Login",
+    "getStarted": "Get Started",
+    "exploreDashboard": "Explore Dashboard"
+  },
+  "hero": {
+    "title": "Build Digital Portfolio & Skills for the Future",
+    "subtitle": "Integrated education platform for Indonesian students from high school to postgraduate. Explore interests, build portfolios, and prepare for your dream career.",
+    "selectLevel": "Select your education level:"
+  },
+  "features": {
+    "title": "Key Features",
+    "subtitle": "Various features to help you grow at every educational level",
+    "autoPortfolio": {
+      "title": "Auto-Portfolio Generator",
+      "description": "Generate professional portfolios automatically from your data and achievements."
+    },
+    "smartRoadmap": {
+      "title": "Smart Skill Roadmap",
+      "description": "Personalized skill roadmap based on your level and career goals."
+    },
+    "linkedin": {
+      "title": "LinkedIn Integration",
+      "description": "Automatic synchronization with LinkedIn to build your personal brand."
+    }
+  },
+  "levels": {
+    "title": "For Every Level",
+    "subtitle": "Specially designed for students at every educational level",
+    "sma": {
+      "name": "High School",
+      "title": "Interest Exploration",
+      "description": "Discover your passion and prepare to enter your dream university."
+    },
+    "s1": {
+      "name": "Undergraduate",
+      "title": "Build Career",
+      "description": "Internships, organizations, and professional portfolios to start your career."
+    },
+    "s2s3": {
+      "name": "Postgraduate",
+      "title": "Academic Excellence",
+      "description": "Research, journal publications, and academic branding for expert level."
+    }
+  },
+  "about": {
+    "title": "About EduStride",
+    "vision": {
+      "title": "Vision",
+      "content": "To become the leading education platform that facilitates Indonesian students in building digital portfolios and industry-relevant skills."
+    },
+    "mission": {
+      "title": "Mission",
+      "items": [
+        "Provide personalized skill roadmaps for every educational level",
+        "Help students build professional digital portfolios",
+        "Connect students with internship and job opportunities",
+        "Create a supportive learning community"
+      ]
+    },
+    "whyUs": {
+      "title": "Why EduStride?",
+      "personalized": {
+        "title": "Personalized Journey",
+        "description": "Every student has a unique path. We customize roadmaps based on level, interests, and career goals."
+      },
+      "industry": {
+        "title": "Industry-Relevant Skills",
+        "description": "Skills taught are always up-to-date with current industry needs."
+      },
+      "community": {
+        "title": "Community Driven",
+        "description": "Join a community of students and professionals supporting each other's growth."
+      }
+    },
+    "stats": {
+      "activeUsers": "Active Students",
+      "portfolios": "Portfolios Created",
+      "roadmaps": "Skill Roadmaps",
+      "partners": "Industry Partners"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 EduStride. All rights reserved."
+  },
+  "language": {
+    "select": "Select Language",
+    "id": "Bahasa Indonesia",
+    "en": "English"
+  }
+}
