@@ -355,6 +355,103 @@ npm install next-pwa
 - ✅ User profile page
 - ✅ Security best practices implemented
 
+---
+
+### Phase 3b: UI Dashboard Enhancement (Minggu 4)
+
+**Goal:** Membangun UI dashboard yang lengkap, modern, dan user-friendly dengan navigasi yang intuitif, layout yang responsive, dan komponen-komponen yang reusable.
+
+#### 3b.1 Dashboard Layout & Navigation
+- [ ] Buat dashboard shell layout dengan sidebar/collapsible navigation
+- [ ] Implementasi responsive sidebar (mobile: bottom nav, desktop: side nav)
+- [ ] Setup navigation items dengan icons dan labels (i18n ready)
+- [ ] Buat header dengan user profile dropdown, notifications, search
+- [ ] Implementasi breadcrumbs navigation
+- [ ] Setup layout grid system untuk dashboard content
+
+#### 3b.2 Design System & Theme
+- [ ] Setup color palette untuk dashboard (primary, secondary, accent)
+- [ ] Implementasi dark mode toggle dengan next-themes
+- [ ] Setup typography scale untuk dashboard (headings, body, captions)
+- [ ] Buat spacing system (padding, margin, gap utilities)
+- [ ] Setup shadow dan border radius tokens
+- [ ] Implementasi loading states (skeletons, spinners)
+
+#### 3b.3 Core Dashboard Components
+- [ ] Buat `StatCard` component untuk metrics display
+- [ ] Buat `ActivityFeed` component untuk recent activities
+- [ ] Buat `ProgressBar` component dengan animations
+- [ ] Buat `DataTable` component dengan sorting & pagination
+- [ ] Buat `ChartCard` component untuk data visualization (placeholder)
+- [ ] Buat `QuickActions` component untuk shortcuts
+
+#### 3b.4 Widget System
+- [ ] Setup widget registry system (drag-drop ready)
+- [ ] Buat widget wrapper dengan consistent styling
+- [ ] Implementasi widget resize handles (2x1, 1x1, 2x2)
+- [ ] Buat empty state untuk widgets
+- [ ] Setup widget configuration modal
+- [ ] Implementasi widget refresh/reload functionality
+
+#### 3b.5 Dashboard Pages Structure
+- [ ] Buat `/[locale]/dashboard/home` - Main dashboard overview
+- [ ] Buat `/[locale]/dashboard/analytics` - Analytics & insights
+- [ ] Buat `/[locale]/dashboard/activities` - Activity history
+- [ ] Buat `/[locale]/dashboard/settings` - Dashboard preferences
+- [ ] Setup page transitions dengan motion
+- [ ] Implementasi page-level loading states
+
+#### 3b.6 Interactive Elements
+- [ ] Buat tooltip system untuk dashboard elements
+- [ ] Implementasi toast notification system
+- [ ] Setup modal/dialog system dengan animations
+- [ ] Buat dropdown menus dengan keyboard navigation
+- [ ] Implementasi tabs component untuk dashboard sections
+- [ ] Setup accordion/collapsible sections
+
+#### 3b.7 Data Visualization (Basic)
+- [ ] Install Recharts untuk charts
+- [ ] Buat `LineChart` component untuk trends
+- [ ] Buat `BarChart` component untuk comparisons
+- [ ] Buat `PieChart` component untuk distributions
+- [ ] Setup chart color themes (light/dark mode)
+- [ ] Implementasi chart tooltips dan legends
+
+#### 3b.8 Mobile Optimization
+- [ ] Optimize touch targets untuk mobile (min 44x44px)
+- [ ] Setup swipe gestures untuk mobile navigation
+- [ ] Implementasi pull-to-refresh untuk mobile
+- [ ] Optimize chart rendering untuk mobile screens
+- [ ] Setup mobile-specific layouts (stacked vs grid)
+- [ ] Test dashboard di berbagai mobile devices
+
+#### 3b.9 Accessibility & Performance
+- [ ] Setup ARIA labels untuk semua interactive elements
+- [ ] Implementasi keyboard navigation shortcuts
+- [ ] Setup focus management untuk modals
+- [ ] Optimize bundle size (code splitting per widget)
+- [ ] Setup lazy loading untuk heavy components
+- [ ] Implementasi error boundaries untuk widgets
+
+#### 3b.10 Testing & Documentation
+- [ ] Test dashboard di desktop (Chrome, Firefox, Safari)
+- [ ] Test dashboard di mobile (iOS Safari, Android Chrome)
+- [ ] Test keyboard navigation
+- [ ] Test screen reader compatibility
+- [ ] Buat dokumentasi komponen dashboard
+- [ ] Update README dengan dashboard setup
+
+**Deliverables:**
+- ✅ Dashboard layout dengan sidebar navigation
+- ✅ Responsive design (mobile + desktop)
+- ✅ Dark mode support
+- ✅ Reusable component library
+- ✅ Widget system dengan drag-drop ready
+- ✅ Data visualization components
+- ✅ Mobile-optimized interactions
+- ✅ Accessibility compliance (WCAG 2.1)
+- ✅ Performance optimized (lazy loading, code splitting)
+
 ### Phase 4: Database & API (Minggu 4-5)
 - [ ] Setup database (PostgreSQL + Prisma atau Supabase)
 - [ ] Design database schema (users, portfolios, skills, roadmaps, achievements)
