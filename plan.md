@@ -268,16 +268,16 @@ npm install next-pwa
 - [x] JSON-based content mapping
 - [x] Motion animations
 
-### Phase 2b: Multi-Language & Responsive Enhancement (Minggu 2-3)
-- [ ] Setup next-intl untuk internationalization
-- [ ] Buat struktur folder messages/ untuk translation files
-- [ ] Implementasi language switcher component
-- [ ] Translate semua konten ke Bahasa Indonesia & English
-- [ ] Setup routing dengan locale (/id/, /en/)
-- [ ] Mobile-first responsive design audit
-- [ ] Optimasi touch targets untuk mobile (min 44x44px)
-- [ ] Tablet layout optimization (768px - 1024px)
-- [ ] Test responsive di berbagai device (Chrome DevTools)
+### Phase 2b: Multi-Language & Responsive Enhancement ✅ (Selesai)
+- [x] Setup next-intl untuk internationalization
+- [x] Buat struktur folder messages/ untuk translation files
+- [x] Implementasi language switcher component
+- [x] Translate semua konten ke Bahasa Indonesia & English
+- [x] Setup routing dengan locale (/id/, /en/)
+- [x] Mobile-first responsive design audit
+- [x] Optimasi touch targets untuk mobile (min 44x44px)
+- [x] Tablet layout optimization (768px - 1024px)
+- [x] Test responsive di berbagai device (Chrome DevTools)
 - [ ] PWA manifest & service worker setup
 
 ### Phase 3: Authentication & Security (Minggu 3-4)
