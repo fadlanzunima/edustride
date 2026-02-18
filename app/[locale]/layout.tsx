@@ -2,6 +2,11 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ReactNode } from "react";
 
+import { AuthSessionProvider } from "@/components/providers/session-provider";
+import { AuthProvider } from "@/components/providers/auth-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+
 export default async function LocaleLayout({
   children,
   params,
@@ -12,15 +17,26 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <body className="min-h-screen bg-background font-sans antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthSessionProvider>
+            <AuthProvider>
+              <NextIntlClientProvider messages={messages}>
+                {children}
+                <Toaster position="top-center" richColors />
+              </NextIntlClientProvider>
+            </AuthProvider>
+          </AuthSessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

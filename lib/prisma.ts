@@ -11,11 +11,12 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-// Create Prisma adapter
+// Create Prisma adapter for driver-based client
 const adapter = new PrismaPg(pool);
 
-// PrismaClient is attached to the `global` object in development to prevent
-// exhausting your database connection limit.
+// PrismaClient with driver adapter
+// Note: Prisma Client generated with driverAdapters preview feature
+// requires an adapter to be provided
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({

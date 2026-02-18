@@ -1,5 +1,4 @@
 import NextAuth, { NextAuthConfig } from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import LinkedIn from "next-auth/providers/linkedin";
@@ -8,10 +7,38 @@ import { z } from "zod";
 
 import { prisma } from "./lib/prisma";
 
-// Edge-compatible auth config (for middleware)
+// Extend the session user type
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      level?: string | null;
+      institution?: string | null;
+    };
+  }
+
+  interface User {
+    level?: string | null;
+    institution?: string | null;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id?: string;
+    level?: string | null;
+    institution?: string | null;
+  }
+}
+
+// Auth configuration using JWT strategy (no database sessions required)
+// This works better with Prisma driver adapters
 export const authConfig = {
   session: {
-    strategy: "jwt",
+    strategy: "jwt" as const,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
@@ -123,13 +150,7 @@ export const authConfig = {
   },
 } satisfies NextAuthConfig;
 
-// Full auth config with Prisma adapter (for API routes)
-export const authConfigWithAdapter: NextAuthConfig = {
-  ...authConfig,
-  adapter: PrismaAdapter(prisma),
-};
-
-// Create NextAuth instance for API routes
-const { auth, handlers, signIn, signOut } = NextAuth(authConfigWithAdapter);
+// Create NextAuth instance
+const { auth, handlers, signIn, signOut } = NextAuth(authConfig);
 
 export { auth, handlers, signIn, signOut };

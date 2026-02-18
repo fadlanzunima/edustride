@@ -1,5 +1,5 @@
 import { DashboardShell } from "@/components/dashboard/shell";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ProtectedRoute } from "@/components/auth/protected-route";
 
 export const metadata = {
   title: "Dashboard - EduStride",
@@ -12,13 +12,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
+    <ProtectedRoute allowDemo={true}>
       <DashboardShell>{children}</DashboardShell>
-    </ThemeProvider>
+    </ProtectedRoute>
   );
 }

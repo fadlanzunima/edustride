@@ -16,7 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DemoUserMenu } from "@/components/auth/demo-user-menu";
+import { UserMenu } from "@/components/auth/user-menu";
 import { LanguageSwitcher } from "@/components/language-switcher/language-switcher";
 import { navGroups } from "@/lib/data/navigation";
 
@@ -146,7 +146,7 @@ export function Header({ onMenuClick }: HeaderProps) {
           </DropdownMenu>
 
           {/* User Menu */}
-          <DemoUserMenu />
+          <UserMenu />
         </div>
       </div>
 
