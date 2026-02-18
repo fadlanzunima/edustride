@@ -1,4 +1,4 @@
-import { NextAuthConfig } from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
@@ -110,3 +110,8 @@ export const authConfigWithAdapter: NextAuthConfig = {
   ...authConfig,
   adapter: PrismaAdapter(prisma),
 };
+
+// Create NextAuth instance for API routes
+const { auth, handlers, signIn, signOut } = NextAuth(authConfigWithAdapter);
+
+export { auth, handlers, signIn, signOut };

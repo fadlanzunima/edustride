@@ -12,7 +12,10 @@ datasource db {
   provider = "postgresql"
 }
 
+// ============================================
 // NextAuth.js Models
+// ============================================
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -43,27 +46,293 @@ model Session {
   @@index([userId])
 }
 
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?   // For credentials provider
-  level         String?   // SMA, S1, S2_S3
-  institution   String?   // School/University name
-  bio           String?   @db.Text
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  accounts Account[]
-  sessions Session[]
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// ============================================
+// Core User Model
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String? // For credentials provider
+  level         String?   @default("S1") // SMA, S1, S2_S3
+  institution   String? // School/University name
+  bio           String?   @db.Text
+  location      String?
+  website       String?
+  linkedIn      String?
+  github        String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  accounts     Account[]
+  sessions     Session[]
+  portfolios   Portfolio[]
+  skills       Skill[]
+  roadmaps     Roadmap[]
+  achievements Achievement[]
+  activities   Activity[]
+  stats        UserStats?
+
+  @@index([email])
+  @@index([level])
+  @@index([createdAt])
+}
+
+// ============================================
+// Portfolio Model
+// ============================================
+
+model Portfolio {
+  id          String          @id @default(cuid())
+  userId      String
+  title       String
+  description String?         @db.Text
+  type        PortfolioType   @default(PROJECT)
+  status      PortfolioStatus @default(DRAFT)
+  thumbnail   String?
+  link        String?
+  githubUrl   String?
+  demoUrl     String?
+  startDate   DateTime?
+  endDate     DateTime?
+  isFeatured  Boolean         @default(false)
+  tags        String[]        @default([])
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([type])
+  @@index([status])
+  @@index([isFeatured])
+  @@index([createdAt])
+}
+
+enum PortfolioType {
+  PROJECT
+  CERTIFICATE
+  EXPERIENCE
+  PUBLICATION
+  AWARD
+}
+
+enum PortfolioStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// ============================================
+// Skill Model
+// ============================================
+
+model Skill {
+  id          String     @id @default(cuid())
+  userId      String
+  name        String
+  category    SkillCategory @default(TECHNICAL)
+  level       SkillLevel @default(BEGINNER)
+  progress    Int        @default(0) // 0-100
+  description String?    @db.Text
+  isPublic    Boolean    @default(true)
+  endorsedBy  String[]   @default([]) // Array of user IDs who endorsed
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([category])
+  @@index([level])
+  @@unique([userId, name]) // Prevent duplicate skills per user
+}
+
+enum SkillCategory {
+  TECHNICAL
+  SOFT_SKILL
+  LANGUAGE
+  TOOL
+  DOMAIN_KNOWLEDGE
+}
+
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+// ============================================
+// Roadmap Model
+// ============================================
+
+model Roadmap {
+  id          String        @id @default(cuid())
+  userId      String
+  title       String
+  description String?       @db.Text
+  level       String        // SMA, S1, S2_S3
+  category    String        // Career, Academic, Skill, etc.
+  deadline    DateTime?
+  progress    Int           @default(0) // 0-100
+  isActive    Boolean       @default(true)
+  isTemplate  Boolean       @default(false) // For system-generated templates
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items RoadmapItem[]
+
+  @@index([userId])
+  @@index([level])
+  @@index([isActive])
+  @@index([isTemplate])
+  @@index([deadline])
+}
+
+model RoadmapItem {
+  id          String            @id @default(cuid())
+  roadmapId   String
+  title       String
+  description String?           @db.Text
+  order       Int               @default(0)
+  status      RoadmapItemStatus @default(NOT_STARTED)
+  deadline    DateTime?
+  resources   Json?             // Array of {title, url, type}
+  completedAt DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  // Relations
+  roadmap Roadmap @relation(fields: [roadmapId], references: [id], onDelete: Cascade)
+
+  @@index([roadmapId])
+  @@index([status])
+  @@index([order])
+}
+
+enum RoadmapItemStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  SKIPPED
+}
+
+// ============================================
+// Achievement Model
+// ============================================
+
+model Achievement {
+  id          String           @id @default(cuid())
+  userId      String
+  title       String
+  description String?          @db.Text
+  type        AchievementType  @default(OTHER)
+  issuer      String?          // Organization that issued it
+  issueDate   DateTime?
+  expiryDate  DateTime?
+  credentialId String?
+  credentialUrl String?
+  image       String?
+  isPublic    Boolean          @default(true)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([type])
+  @@index([issueDate])
+}
+
+enum AchievementType {
+  CERTIFICATION
+  AWARD
+  PUBLICATION
+  PATENT
+  COMPETITION
+  GRANT
+  SCHOLARSHIP
+  OTHER
+}
+
+// ============================================
+// Activity Model (Activity Feed)
+// ============================================
+
+model Activity {
+  id          String       @id @default(cuid())
+  userId      String
+  type        ActivityType
+  title       String
+  description String?      @db.Text
+  metadata    Json?        // Additional context data
+  entityType  String?      // portfolio, skill, roadmap, etc.
+  entityId    String?      // ID of related entity
+  isPublic    Boolean      @default(true)
+  createdAt   DateTime     @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([type])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}
+
+enum ActivityType {
+  PORTFOLIO_CREATED
+  PORTFOLIO_UPDATED
+  SKILL_ADDED
+  SKILL_LEVEL_UP
+  ROADMAP_CREATED
+  ROADMAP_COMPLETED
+  ROADMAP_ITEM_COMPLETED
+  ACHIEVEMENT_EARNED
+  PROFILE_UPDATED
+  CERTIFICATE_EARNED
+  PROJECT_PUBLISHED
+  EXPERIENCE_ADDED
+}
+
+// ============================================
+// User Stats (Cached Aggregates)
+// ============================================
+
+model UserStats {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  portfolioCount     Int      @default(0)
+  skillCount         Int      @default(0)
+  roadmapCount       Int      @default(0)
+  achievementCount   Int      @default(0)
+  totalProfileViews  Int      @default(0)
+  weeklyActiveHours  Int      @default(0)
+  currentStreak      Int      @default(0)
+  longestStreak      Int      @default(0)
+  lastActivityAt     DateTime?
+  updatedAt          DateTime @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
