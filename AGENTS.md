@@ -275,7 +275,31 @@ messages/
 - Recommended: Node.js 20.x LTS or 22.x
 - Current: v22.15.0
 
+### Database Setup (Phase 4)
+1. **Database**: PostgreSQL via Supabase (configured in `.env.local`)
+2. **ORM**: Prisma with full schema (User, Portfolio, Skill, Roadmap, Achievement, Activity)
+3. **To complete setup**:
+   - Run migration: `npx prisma migrate dev --name init`
+   - Generate client: `npx prisma generate`
+4. **API Endpoints**:
+   - `/api/portfolio/*` - CRUD operations for portfolio
+   - `/api/skills/*` - Skill management
+   - `/api/roadmap/*` - Roadmap with nested items
+   - `/api/activities/*` - Activity feed
+5. **Documentation**: See `docs/supabase-setup.md`
+
+### Caching (Redis)
+- **Setup**: Redis via Upstash (configured in `.env.local`)
+- **Utilities**: `lib/cache.ts` - `getCache`, `setCache`, `deleteCache`
+- **Hooks**: All data fetching hooks use automatic caching
+
+### TanStack Query Hooks
+- `usePortfolios`, `useSkills`, `useRoadmaps`, `useActivities`
+- Located in `hooks/` directory
+- Automatic caching and optimistic updates
+
 ### Demo Mode Access
 - **Dashboard**: http://localhost:3000/dashboard (no auth required)
 - **Demo User**: "Demo Student" (S1 level)
+- **Sample Data**: Dashboard currently uses sample data (not yet connected to API)
 - **Features**: All dashboard widgets, dark mode, i18n switcher
