@@ -307,13 +307,35 @@ npx prisma studio                   # Open Prisma Studio (DB GUI)
 - Located in `hooks/` directory
 - Automatic caching and optimistic updates
 
-### Demo Mode Access
-- **Dashboard**: http://localhost:3000/dashboard (no auth required)
-- **Demo User**: "Demo Student" (S1 level)
-- **Sample Data**: Dashboard currently uses sample data (not yet connected to API)
+### Database Seeder
+- **Endpoint**: `/api/seed`
+- **Methods**:
+  - `GET` - Check seed status
+  - `POST` - Seed database with sample data
+  - `POST ?force=true` - Force re-seed (delete existing)
+
+**Usage:**
+```bash
+# Check status
+curl http://localhost:3000/api/seed
+
+# Seed database
+curl -X POST http://localhost:3000/api/seed
+
+# Force re-seed
+curl -X POST "http://localhost:3000/api/seed?force=true"
+```
+
+**Demo Credentials (after seeding):**
+| Email | Password | Level | Name |
+|-------|----------|-------|------|
+| demo@edustride.id | password123 | S1 | Demo Student |
+| sma@edustride.id | password123 | SMA | SMA Student |
+| s2@edustride.id | password123 | S2/S3 | Graduate Student |
 
 ### Demo Mode Access
-- **Dashboard**: http://localhost:3000/dashboard (no auth required)
-- **Demo User**: "Demo Student" (S1 level)
-- **Sample Data**: Dashboard currently uses sample data (not yet connected to API)
-- **Features**: All dashboard widgets, dark mode, i18n switcher
+- **Dashboard**: http://localhost:3000/dashboard
+- **Auth Flow**: Full authentication with database working ✅
+- **Protected Routes**: Dashboard wrapped with ProtectedRoute ✅
+- **Session Management**: NextAuth.js with JWT ✅
+- **OAuth Ready**: Google & LinkedIn providers configured ✅
