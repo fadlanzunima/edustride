@@ -13,7 +13,16 @@
     "skills": "Skill",
     "login": "Masuk",
     "getStarted": "Mulai Sekarang",
-    "exploreDashboard": "Jelajahi Dashboard"
+    "exploreDashboard": "Jelajahi Dashboard",
+    "analytics": "Analitik",
+    "activities": "Aktivitas",
+    "experience": "Pengalaman",
+    "certificates": "Sertifikat",
+    "documents": "Dokumen",
+    "profile": "Profil",
+    "settings": "Pengaturan",
+    "main": "Utama",
+    "account": "Akun"
   },
   "hero": {
     "title": "Bangun Portofolio Digital & Skill untuk Masa Depan",
@@ -99,5 +108,55 @@
     "select": "Pilih Bahasa",
     "id": "Bahasa Indonesia",
     "en": "English"
+  },
+  "auth": {
+    "login": {
+      "title": "Masuk ke EduStride",
+      "subtitle": "Masuk untuk melanjutkan perjalanan belajarmu",
+      "email": "Email",
+      "emailPlaceholder": "nama@email.com",
+      "password": "Kata Sandi",
+      "passwordPlaceholder": "Masukkan kata sandi",
+      "submit": "Masuk",
+      "loading": "Memuat...",
+      "noAccount": "Belum punya akun?",
+      "register": "Daftar sekarang",
+      "orContinueWith": "Atau lanjutkan dengan",
+      "google": "Google",
+      "linkedin": "LinkedIn",
+      "errors": {
+        "invalidCredentials": "Email atau kata sandi salah",
+        "generic": "Terjadi kesalahan. Silakan coba lagi."
+      }
+    },
+    "register": {
+      "title": "Buat Akun EduStride",
+      "subtitle": "Bergabunglah untuk memulai perjalanan belajarmu",
+      "name": "Nama Lengkap",
+      "namePlaceholder": "Masukkan nama lengkap",
+      "email": "Email",
+      "emailPlaceholder": "nama@email.com",
+      "password": "Kata Sandi",
+      "passwordPlaceholder": "Minimal 6 karakter",
+      "confirmPassword": "Konfirmasi Kata Sandi",
+      "confirmPasswordPlaceholder": "Ulangi kata sandi",
+      "level": "Jenjang Pendidikan",
+      "selectLevel": "Pilih jenjang",
+      "institution": "Sekolah/Universitas",
+      "institutionPlaceholder": "Nama sekolah atau universitas",
+      "submit": "Daftar",
+      "loading": "Memuat...",
+      "hasAccount": "Sudah punya akun?",
+      "login": "Masuk sekarang",
+      "orContinueWith": "Atau daftar dengan",
+      "google": "Google",
+      "linkedin": "LinkedIn",
+      "errors": {
+        "passwordMismatch": "Kata sandi tidak cocok",
+        "emailExists": "Email sudah terdaftar",
+        "generic": "Terjadi kesalahan. Silakan coba lagi."
+      }
+    },
+    "logout": "Keluar"
   }
 }

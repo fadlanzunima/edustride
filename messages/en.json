@@ -13,7 +13,16 @@
     "skills": "Skills",
     "login": "Login",
     "getStarted": "Get Started",
-    "exploreDashboard": "Explore Dashboard"
+    "exploreDashboard": "Explore Dashboard",
+    "analytics": "Analytics",
+    "activities": "Activities",
+    "experience": "Experience",
+    "certificates": "Certificates",
+    "documents": "Documents",
+    "profile": "Profile",
+    "settings": "Settings",
+    "main": "Main",
+    "account": "Account"
   },
   "hero": {
     "title": "Build Digital Portfolio & Skills for the Future",
@@ -99,5 +108,55 @@
     "select": "Select Language",
     "id": "Bahasa Indonesia",
     "en": "English"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in to EduStride",
+      "subtitle": "Sign in to continue your learning journey",
+      "email": "Email",
+      "emailPlaceholder": "name@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "submit": "Sign In",
+      "loading": "Loading...",
+      "noAccount": "Don't have an account?",
+      "register": "Register now",
+      "orContinueWith": "Or continue with",
+      "google": "Google",
+      "linkedin": "LinkedIn",
+      "errors": {
+        "invalidCredentials": "Invalid email or password",
+        "generic": "An error occurred. Please try again."
+      }
+    },
+    "register": {
+      "title": "Create EduStride Account",
+      "subtitle": "Join to start your learning journey",
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "name@email.com",
+      "password": "Password",
+      "passwordPlaceholder": "At least 6 characters",
+      "confirmPassword": "Confirm Password",
+      "confirmPasswordPlaceholder": "Repeat password",
+      "level": "Education Level",
+      "selectLevel": "Select level",
+      "institution": "School/University",
+      "institutionPlaceholder": "School or university name",
+      "submit": "Register",
+      "loading": "Loading...",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in now",
+      "orContinueWith": "Or register with",
+      "google": "Google",
+      "linkedin": "LinkedIn",
+      "errors": {
+        "passwordMismatch": "Passwords do not match",
+        "emailExists": "Email already registered",
+        "generic": "An error occurred. Please try again."
+      }
+    },
+    "logout": "Logout"
   }
 }

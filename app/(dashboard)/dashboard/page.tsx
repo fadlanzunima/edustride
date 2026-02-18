@@ -1,9 +1,16 @@
-import { DashboardContent } from "@/components/widgets/dashboard-content";
+import { Suspense } from "react";
+import { DashboardContent } from "@/components/dashboard/dashboard-content";
+import { DashboardSkeleton } from "@/components/dashboard/dashboard-skeleton";
+
+export const metadata = {
+  title: "Dashboard - EduStride",
+  description: "Dashboard EduStride untuk mengelola portofolio dan skill",
+};
 
 export default function DashboardPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <Suspense fallback={<DashboardSkeleton />}>
       <DashboardContent />
-    </div>
+    </Suspense>
   );
 }

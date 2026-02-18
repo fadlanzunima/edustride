@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "EduStride - Skill & Digital Portfolio",
-  description: "Platform edukasi terpadu untuk membangun portofolio digital dan skill dari SMA hingga S3",
+  description:
+    "Platform edukasi terpadu untuk membangun portofolio digital dan skill dari SMA hingga S3",
 };
 
 export default function RootLayout({
@@ -22,5 +24,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return (
+    <>
+      {children}
+      <Toaster position="top-center" />
+    </>
+  );
 }
