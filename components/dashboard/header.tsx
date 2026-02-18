@@ -3,11 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Search, Bell, Sun, Moon, Laptop } from "lucide-react";
+import { Menu, Bell, Sun, Moon, Laptop } from "lucide-react";
 import { useTheme } from "next-themes";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -18,36 +16,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { UserMenu } from "@/components/auth/user-menu";
 import { LanguageSwitcher } from "@/components/language-switcher/language-switcher";
-import { navGroups } from "@/lib/data/navigation";
+import { CommandMenu } from "./command-menu";
 
 interface HeaderProps {
   onMenuClick: () => void;
 }
 
 export function Header({ onMenuClick }: HeaderProps) {
-  const { theme, setTheme } = useTheme();
+  const { setTheme } = useTheme();
   const pathname = usePathname();
 
-  // Generate breadcrumbs from pathname (skip locale)
-  const breadcrumbs = React.useMemo(() => {
-    const parts = pathname.split("/").filter(Boolean);
-    // Skip the first part if it's a locale (en/id)
-    const startIndex = parts[0] === "en" || parts[0] === "id" ? 1 : 0;
-    return parts.slice(startIndex).map((part, index) => {
-      const actualIndex = index + startIndex;
-      const href = "/" + parts.slice(0, actualIndex + 1).join("/");
-      // Capitalize and clean up the label
-      const label = part
-        .replace(/-/g, " ")
-        .replace(/^\w/, (c) => c.toUpperCase());
-      return { label, href };
-    });
-  }, [pathname]);
-
   return (
-    <header className="sticky top-0 z-30 flex h-16 flex-col border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-30 flex h-20 flex-col justify-center border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       {/* Main Header */}
-      <div className="flex h-16 items-center justify-between px-4 lg:px-6">
+      <div className="flex h-20 items-center justify-between px-6 lg:px-8">
         <div className="flex items-center gap-4">
           {/* Mobile Menu Button */}
           <Button
@@ -60,15 +42,9 @@ export function Header({ onMenuClick }: HeaderProps) {
             <Menu className="h-5 w-5" />
           </Button>
 
-          {/* Search */}
-          <div className="relative hidden md:block">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search..."
-              className="w-64 pl-9 bg-background"
-              aria-label="Search"
-            />
+          {/* Command Menu */}
+          <div className="hidden md:block">
+            <CommandMenu />
           </div>
         </div>
 
@@ -151,44 +127,6 @@ export function Header({ onMenuClick }: HeaderProps) {
           {/* User Menu */}
           <UserMenu />
         </div>
-      </div>
-
-      {/* Breadcrumbs - Desktop */}
-      <div className="hidden border-t bg-muted/50 px-4 py-2 lg:block lg:px-6">
-        <nav aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link
-                href="/dashboard"
-                className="hover:text-foreground transition-colors"
-              >
-                Dashboard
-              </Link>
-            </li>
-            {breadcrumbs.slice(1).map((crumb, index) => (
-              <React.Fragment key={crumb.href}>
-                <li className="text-muted-foreground">/</li>
-                <li>
-                  {index === breadcrumbs.length - 2 ? (
-                    <span
-                      className="font-medium text-foreground"
-                      aria-current="page"
-                    >
-                      {crumb.label}
-                    </span>
-                  ) : (
-                    <Link
-                      href={crumb.href}
-                      className="hover:text-foreground transition-colors"
-                    >
-                      {crumb.label}
-                    </Link>
-                  )}
-                </li>
-              </React.Fragment>
-            ))}
-          </ol>
-        </nav>
       </div>
     </header>
   );

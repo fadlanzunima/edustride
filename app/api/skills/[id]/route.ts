@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { cache } from "@/lib/cache";
 import { updateSkillSchema } from "@/lib/validations";
 
 interface RouteParams {
@@ -21,13 +20,6 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
 
     const { id } = await params;
 
-    // Try cache first
-    const cacheKey = cache.key("skill", id);
-    const cached = await cache.get(cacheKey);
-    if (cached) {
-      return NextResponse.json(cached);
-    }
-
     const skill = await prisma.skill.findUnique({
       where: { id },
     });
@@ -39,9 +31,6 @@ export async function GET(req: NextRequest, { params }: RouteParams) {
     if (skill.userId !== session.user.id) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
-
-    // Cache the result
-    await cache.set(cacheKey, skill, 300);
 
     return NextResponse.json(skill);
   } catch (error) {
@@ -114,10 +103,6 @@ export async function PATCH(req: NextRequest, { params }: RouteParams) {
       });
     }
 
-    // Invalidate caches
-    await cache.delete(cache.key("skill", id));
-    await cache.invalidateUser(session.user.id);
-
     return NextResponse.json(skill);
   } catch (error) {
     console.error("Skill PATCH error:", error);
@@ -158,10 +143,6 @@ export async function DELETE(req: NextRequest, { params }: RouteParams) {
     await prisma.skill.delete({
       where: { id },
     });
-
-    // Invalidate caches
-    await cache.delete(cache.key("skill", id));
-    await cache.invalidateUser(session.user.id);
 
     return NextResponse.json({ success: true });
   } catch (error) {

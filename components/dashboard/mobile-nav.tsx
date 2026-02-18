@@ -21,7 +21,7 @@ export function MobileNav() {
       )}
       aria-label="Mobile navigation"
     >
-      <div className="flex h-16 items-center justify-around px-4 safe-area-pb">
+      <div className="flex h-16 items-center justify-around px-2 safe-area-pb">
         {mobileNavItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname.endsWith(item.href);
@@ -32,7 +32,7 @@ export function MobileNav() {
               key={item.href}
               href={href}
               className={cn(
-                "flex flex-col items-center justify-center gap-1",
+                "flex flex-col items-center justify-center gap-0.5",
                 "min-w-[64px] min-h-[44px] rounded-lg",
                 "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 isActive
@@ -41,11 +41,13 @@ export function MobileNav() {
               )}
               aria-current={isActive ? "page" : undefined}
             >
-              <Icon className={cn("h-5 w-5", isActive && "text-primary")} />
+              <Icon
+                className={cn(
+                  "h-5 w-5",
+                  isActive && "text-primary"
+                )}
+              />
               <span className="text-xs font-medium">{t(item.titleId)}</span>
-              {isActive && (
-                <span className="absolute bottom-1 h-1 w-8 rounded-full bg-primary" />
-              )}
             </Link>
           );
         })}

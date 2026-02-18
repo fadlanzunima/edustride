@@ -11,9 +11,12 @@
     "dashboard": "Dashboard",
     "portfolio": "Portfolio",
     "skills": "Skills",
+    "achievements": "Achievements",
+    "quiz": "Quiz",
     "login": "Login",
     "getStarted": "Get Started",
     "exploreDashboard": "Explore Dashboard",
+    "learnMore": "Learn More",
     "analytics": "Analytics",
     "activities": "Activities",
     "experience": "Experience",
@@ -25,73 +28,73 @@
     "account": "Account"
   },
   "hero": {
-    "title": "Build Digital Portfolio & Skills for the Future",
-    "subtitle": "Integrated education platform for Indonesian students from high school to postgraduate. Explore interests, build portfolios, and prepare for your dream career.",
-    "selectLevel": "Select your education level:"
+    "title": "Build Your Digital Legacy & Skills for the Future",
+    "subtitle": "Integrated education platform helping 10K+ Indonesian students from high school to postgraduate build professional portfolios, develop industry-relevant skills, and achieve dream careers.",
+    "selectLevel": "Select your education pathway:"
   },
   "features": {
     "title": "Key Features",
-    "subtitle": "Various features to help you grow at every educational level",
+    "subtitle": "Everything you need to succeed at every educational stage",
     "autoPortfolio": {
       "title": "Auto-Portfolio Generator",
-      "description": "Generate professional portfolios automatically from your data and achievements."
+      "description": "Create professional portfolios automatically from your data and achievements. Save time, maximize results."
     },
     "smartRoadmap": {
       "title": "Smart Skill Roadmap",
-      "description": "Personalized skill roadmap based on your level and career goals."
+      "description": "Personalized skill roadmap based on your education level and career goals. Structured and measurable."
     },
     "linkedin": {
       "title": "LinkedIn Integration",
-      "description": "Automatic synchronization with LinkedIn to build your personal brand."
+      "description": "Automatic synchronization with LinkedIn to build a strong personal brand and connect with industry."
     }
   },
   "levels": {
     "title": "For Every Level",
-    "subtitle": "Specially designed for students at every educational level",
+    "subtitle": "Specially designed for the unique needs of students at every educational stage",
     "sma": {
       "name": "High School",
-      "title": "Interest Exploration",
-      "description": "Discover your passion and prepare to enter your dream university."
+      "title": "Exploration & Discovery",
+      "description": "Discover your passion, explore various career paths, and prepare to enter your dream university with confidence."
     },
     "s1": {
       "name": "Undergraduate",
-      "title": "Build Career",
-      "description": "Internships, organizations, and professional portfolios to start your career."
+      "title": "Building Professional Career",
+      "description": "Build a strong portfolio, land internships at top companies, and start your professional career with a solid foundation."
     },
     "s2s3": {
       "name": "Postgraduate",
-      "title": "Academic Excellence",
-      "description": "Research, journal publications, and academic branding for expert level."
+      "title": "Academic & Research Excellence",
+      "description": "Manage research publications, build academic branding, and increase your research impact at national and international levels."
     }
   },
   "about": {
     "title": "About EduStride",
     "vision": {
-      "title": "Vision",
-      "content": "To become the leading education platform that facilitates Indonesian students in building digital portfolios and industry-relevant skills."
+      "title": "Our Vision",
+      "content": "To become Indonesia's leading education platform that empowers students to build professional digital portfolios and develop skills relevant to 2026 industry needs."
     },
     "mission": {
-      "title": "Mission",
+      "title": "Our Mission",
       "items": [
         "Provide personalized skill roadmaps for every educational level",
-        "Help students build professional digital portfolios",
-        "Connect students with internship and job opportunities",
-        "Create a supportive learning community"
+        "Help students build professional and verified digital portfolios",
+        "Connect students with internship and career opportunities at top companies",
+        "Create a supportive learning community that collaborates for success"
       ]
     },
     "whyUs": {
       "title": "Why EduStride?",
       "personalized": {
-        "title": "Personalized Journey",
-        "description": "Every student has a unique path. We customize roadmaps based on level, interests, and career goals."
+        "title": "Personalized Pathway",
+        "description": "Every student is unique. We customize roadmaps based on your level, interests, and career goals with a data-driven approach."
       },
       "industry": {
         "title": "Industry-Relevant Skills",
-        "description": "Skills taught are always up-to-date with current industry needs."
+        "description": "Curriculum always updated according to current industry needs. Learn skills that companies actually demand."
       },
       "community": {
-        "title": "Community Driven",
-        "description": "Join a community of students and professionals supporting each other's growth."
+        "title": "Supportive Community",
+        "description": "Join 10K+ students and professionals supporting each other's growth and success together."
       }
     },
     "stats": {
@@ -102,7 +105,26 @@
     }
   },
   "footer": {
-    "copyright": "© 2025 EduStride. All rights reserved."
+    "copyright": "© {year} EduStride. All rights reserved."
+  },
+  "landing": {
+    "features": "Features",
+    "levels": "Levels",
+    "about": "About",
+    "journey": "Journey",
+    "testimonials": "Testimonials",
+    "login": "Login",
+    "getStarted": "Get Started",
+    "exploreDashboard": "Explore Dashboard",
+    "learnMore": "Learn More",
+    "selectLevel": "Select your education pathway:",
+    "featuresTitle": "Key Features",
+    "featuresSubtitle": "Everything you need to succeed at every educational stage",
+    "levelsTitle": "For Every Level",
+    "levelsSubtitle": "Specially designed for the unique needs of students at every stage",
+    "badge": "#1 Education Platform in Indonesia",
+    "ctaTitle": "Ready to Start Your Journey?",
+    "ctaDescription": "Join 10K+ students and build a digital portfolio that will open doors to your future."
   },
   "language": {
     "select": "Select Language",
@@ -216,5 +238,332 @@
       "notFound": "Portfolio not found",
       "notFoundDescription": "The portfolio you are looking for may have been deleted or does not exist."
     }
+  },
+  "skills": {
+    "title": "Skill Hub",
+    "description": "Manage and track your skill progress",
+    "addSkill": "Add Skill",
+    "skillName": "Skill Name",
+    "categoryLabel": "Category",
+    "levelLabel": "Level",
+    "description": "Description",
+    "makePublic": "Make Public",
+    "makePublicDescription": "Show this skill on your public portfolio",
+    "cancel": "Cancel",
+    "adding": "Adding...",
+    "searchPlaceholder": "Search skills...",
+    "noSkills": "No skills yet",
+    "noSkillsDescription": "Start adding skills to track your progress",
+    "addYourFirstSkill": "Add Your First Skill",
+    "progress": "Progress",
+    "yourSkills": "Your Skills",
+    "tabs": {
+      "skills": "Skills",
+      "quiz": "Quiz"
+    },
+    "category": {
+      "technical": "Technical",
+      "soft_skill": "Soft Skill",
+      "language": "Language",
+      "tool": "Tool",
+      "domain_knowledge": "Domain Knowledge"
+    },
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
+    },
+    "roadmap": {
+      "title": "Skill Roadmap",
+      "description": "Visualize your skill progress by category",
+      "overall": "Average",
+      "skills": "skills",
+      "noData": "No skill data to display yet"
+    },
+    "quiz": {
+      "title": "Quiz & Assessment",
+      "description": "Test your knowledge with interactive quizzes",
+      "timeLimit": "Time Limit",
+      "passingScore": "Passing Score",
+      "instructions": "Instructions",
+      "instruction1": "Answer all questions by selecting one option",
+      "instruction2": "You cannot change answers after submission",
+      "instruction3": "Achieve the minimum score to pass the assessment",
+      "startQuiz": "Start Quiz",
+      "question": "Question",
+      "points": "points",
+      "previous": "Previous",
+      "next": "Next",
+      "submit": "Submit",
+      "passed": "Passed!",
+      "failed": "Not Passed",
+      "scoreDescription": "You answered {score}% correctly out of {total} questions",
+      "congratulations": "Congratulations!",
+      "keepLearning": "Keep Learning",
+      "passedMessage": "You've passed this assessment. Keep improving your skills!",
+      "failedMessage": "You need {passingScore}% to pass. Try again!",
+      "retake": "Retake",
+      "continue": "Continue",
+      "type": {
+        "multiple_choice": "Multiple Choice",
+        "true_false": "True/False",
+        "short_answer": "Short Answer",
+        "essay": "Essay"
+      }
+    },
+    "charts": {
+      "categoryDistribution": "Category Distribution",
+      "categoryDescription": "Skill distribution by category",
+      "levelDistribution": "Level Distribution",
+      "levelDescription": "Your skill proficiency levels",
+      "topSkills": "Top Skills",
+      "topSkillsDescription": "Top 10 skills by progress",
+      "skills": "skills",
+      "progress": "Progress"
+    }
+  },
+  "badges": {
+    "title": "Badges & Achievements",
+    "description": "Collect badges by completing challenges",
+    "earned": "Earned",
+    "pointsProgress": "Points Progress",
+    "earnedBadges": "Earned Badges",
+    "lockedBadges": "Locked Badges",
+    "category": {
+      "skill": "Skill",
+      "portfolio": "Portfolio",
+      "quiz": "Quiz",
+      "milestone": "Milestone",
+      "special": "Special",
+      "other": "Other"
+    }
+  },
+  "achievements": {
+    "title": "Achievements & Certifications",
+    "description": "Manage your achievements, certifications, and awards",
+    "tabs": {
+      "all": "All",
+      "certifications": "Certifications",
+      "awards": "Awards",
+      "publications": "Publications"
+    },
+    "types": {
+      "certification": "Certification",
+      "award": "Award",
+      "publication": "Publication",
+      "patent": "Patent",
+      "competition": "Competition",
+      "grant": "Grant",
+      "scholarship": "Scholarship",
+      "other": "Other"
+    },
+    "viewCredential": "View Credential",
+    "noDate": "No date"
+  },
+  "experience": {
+    "title": "Work Experience",
+    "description": "Manage your professional and organizational experience",
+    "addExperience": "Add Experience",
+    "present": "Present",
+    "types": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "internship": "Internship",
+      "freelance": "Freelance",
+      "contract": "Contract"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your account preferences and profile",
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "profile": {
+      "title": "Profile",
+      "description": "Manage your profile information",
+      "edit": "Edit Profile",
+      "name": "Full Name",
+      "email": "Email"
+    },
+    "appearance": {
+      "title": "Appearance",
+      "description": "Customize the app appearance",
+      "darkMode": "Dark Mode",
+      "darkModeDesc": "Enable dark theme for the app",
+      "language": "Language",
+      "languageDesc": "Choose your preferred language"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Manage your notification preferences",
+      "email": "Email Notifications",
+      "emailDesc": "Receive updates via email",
+      "push": "Push Notifications",
+      "pushDesc": "Receive push notifications in browser",
+      "badges": "Badge Notifications",
+      "badgesDesc": "Get notified when you earn a new badge"
+    },
+    "privacy": {
+      "title": "Privacy & Security",
+      "description": "Manage privacy and security settings",
+      "twoFactor": "Two-Factor Authentication",
+      "twoFactorDesc": "Add an extra layer of security",
+      "enable": "Enable",
+      "publicProfile": "Public Profile",
+      "publicProfileDesc": "Make your profile visible to others"
+    }
+  },
+  "documents": {
+    "title": "Documents",
+    "description": "Manage your academic documents, certificates, and portfolio",
+    "upload": "Upload Document",
+    "searchPlaceholder": "Search documents...",
+    "download": "Download",
+    "details": "Details",
+    "delete": "Delete",
+    "tabs": {
+      "all": "All",
+      "academic": "Academic",
+      "certificate": "Certificate",
+      "portfolio": "Portfolio",
+      "personal": "Personal"
+    }
+  },
+  "quiz": {
+    "title": "Quiz & Assessment",
+    "description": "Test your knowledge with interactive quizzes",
+    "createQuiz": "Create Quiz",
+    "totalQuizzes": "Total Quizzes",
+    "totalAttempts": "Total Attempts",
+    "passRate": "Pass Rate",
+    "searchPlaceholder": "Search quizzes...",
+    "filterCategory": "Filter Category",
+    "filterDifficulty": "Filter Difficulty",
+    "allCategories": "All Categories",
+    "allLevels": "All Levels",
+    "allQuizzes": "All Quizzes",
+    "technical": "Technical",
+    "softSkill": "Soft Skill",
+    "language": "Language",
+    "tool": "Tool",
+    "domainKnowledge": "Domain Knowledge",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "expert": "Expert",
+    "generalQuiz": "General Quiz",
+    "questions": "Questions",
+    "minutes": "min",
+    "startQuiz": "Start Quiz",
+    "noQuizzes": "No quizzes yet",
+    "noQuizzesDescription": "Start creating quizzes to test your knowledge",
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "expert": "Expert"
+    }
+  },
+  "quizCreate": {
+    "title": "Create New Quiz",
+    "description": "Add questions to test your understanding",
+    "basicInfo": "Basic Information",
+    "basicInfoDescription": "Details about this quiz",
+    "titleLabel": "Quiz Title",
+    "titlePlaceholder": "Enter quiz title",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Describe this quiz",
+    "category": "Category",
+    "difficulty": "Difficulty Level",
+    "timeLimit": "Time Limit (minutes)",
+    "timeLimitPlaceholder": "Leave empty for no limit",
+    "passingScore": "Passing Score (%)",
+    "linkedSkill": "Linked Skill",
+    "selectSkill": "Select skill...",
+    "noLinkedSkill": "No linked skill",
+    "questions": "Questions",
+    "questionsDescription": "Add questions for this quiz",
+    "addQuestion": "Add Question",
+    "questionLabel": "Question",
+    "questionPlaceholder": "Write your question here",
+    "questionType": "Question Type",
+    "multipleChoice": "Multiple Choice",
+    "trueFalse": "True/False",
+    "points": "Points",
+    "options": "Answer Options",
+    "optionPlaceholder": "Enter answer option",
+    "addOption": "Add Option",
+    "trueFalseHint": "First option will be 'True', second option will be 'False'",
+    "cancel": "Cancel",
+    "creating": "Creating...",
+    "createQuiz": "Create Quiz",
+    "technical": "Technical",
+    "softSkill": "Soft Skill",
+    "language": "Language",
+    "tool": "Tool",
+    "domainKnowledge": "Domain Knowledge",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "expert": "Expert",
+    "noQuestions": "No questions yet. Click 'Add Question' to get started.",
+    "errors": {
+      "titleRequired": "Quiz title is required",
+      "atLeastOneQuestion": "At least 1 question is required",
+      "failed": "Failed to create quiz"
+    },
+    "success": "Quiz created successfully!"
+  },
+  "quizTake": {
+    "back": "Back",
+    "completed": "completed",
+    "question": "Question",
+    "points": "{points} points",
+    "multipleChoice": "Multiple Choice",
+    "trueFalse": "True/False",
+    "true": "True",
+    "false": "False",
+    "previous": "Previous",
+    "next": "Next",
+    "submitQuiz": "Submit Quiz",
+    "submitting": "Submitting...",
+    "questionNavigator": "Question Navigator",
+    "current": "Current",
+    "answered": "Answered",
+    "unanswered": "Unanswered",
+    "confirmSubmit": "You have unanswered questions. Are you sure you want to submit?",
+    "submitted": "Quiz submitted successfully!",
+    "submitFailed": "Failed to submit quiz",
+    "quizNotFound": "Quiz not found",
+    "backToQuizzes": "Back to Quizzes"
+  },
+  "quizResults": {
+    "title": "Quiz Results",
+    "retake": "Retake Quiz",
+    "backToQuizzes": "Back to Quizzes",
+    "totalQuestions": "Total Questions",
+    "correct": "Correct",
+    "incorrect": "Incorrect",
+    "yourScore": "Your Score",
+    "passingScore": "Passing Score",
+    "passedMessage": "Congratulations! You passed this quiz.",
+    "failedMessage": "You didn't pass. The passing score is {passingScore}%.",
+    "excellent": "Excellent!",
+    "good": "Good Job!",
+    "fair": "Fair",
+    "needsImprovement": "Needs Improvement",
+    "answerReview": "Answer Review",
+    "answerReviewDescription": "Review your answers and learn from mistakes",
+    "questionNum": "Question {num}",
+    "points": "{points} points",
+    "correctAnswer": "Correct Answer",
+    "yourAnswer": "Your Answer",
+    "explanation": "Explanation",
+    "true": "True",
+    "false": "False",
+    "attemptHistory": "Attempt History",
+    "attemptHistoryDescription": "View all your attempts",
+    "attemptNum": "Attempt {num}"
   }
 }

@@ -11,9 +11,12 @@
     "dashboard": "Dashboard",
     "portfolio": "Portofolio",
     "skills": "Skill",
+    "achievements": "Pencapaian",
+    "quiz": "Kuis",
     "login": "Masuk",
     "getStarted": "Mulai Sekarang",
     "exploreDashboard": "Jelajahi Dashboard",
+    "learnMore": "Pelajari Lebih Lanjut",
     "analytics": "Analitik",
     "activities": "Aktivitas",
     "experience": "Pengalaman",
@@ -25,73 +28,73 @@
     "account": "Akun"
   },
   "hero": {
-    "title": "Bangun Portofolio Digital & Skill untuk Masa Depan",
-    "subtitle": "Platform edukasi terpadu untuk pelajar Indonesia dari SMA hingga S3. Eksplorasi minat, bangun portofolio, dan siapkan karir impianmu.",
-    "selectLevel": "Pilih level edukasimu:"
+    "title": "Bangun Warisan Digital & Skill untuk Masa Depan",
+    "subtitle": "Platform edukasi terpadu yang membantu 10K+ pelajar Indonesia dari SMA hingga S3 membangun portofolio profesional, mengembangkan skill relevan industri, dan meraih karir impian.",
+    "selectLevel": "Pilih jalur edukasimu:"
   },
   "features": {
     "title": "Fitur Unggulan",
-    "subtitle": "Berbagai fitur untuk membantumu berkembang di setiap jenjang pendidikan",
+    "subtitle": "Lengkap dengan semua yang kamu butuhkan untuk sukses di setiap tahap pendidikan",
     "autoPortfolio": {
       "title": "Auto-Portfolio Generator",
-      "description": "Generate portofolio profesional secara otomatis dari data dan pencapaianmu."
+      "description": "Buat portofolio profesional secara otomatis dari data dan pencapaianmu. Hemat waktu, hasil maksimal."
     },
     "smartRoadmap": {
       "title": "Smart Skill Roadmap",
-      "description": "Roadmap skill yang dipersonalisasi berdasarkan level dan tujuan karirmu."
+      "description": "Roadmap skill yang dipersonalisasi berdasarkan level pendidikan dan tujuan karirmu. Terstruktur dan terukur."
     },
     "linkedin": {
       "title": "LinkedIn Integration",
-      "description": "Sinkronisasi otomatis dengan LinkedIn untuk membangun personal branding."
+      "description": "Sinkronisasi otomatis dengan LinkedIn untuk membangun personal branding yang kuat dan terhubung dengan industri."
     }
   },
   "levels": {
     "title": "Untuk Setiap Jenjang",
-    "subtitle": "Didesain khusus untuk kebutuhan pelajar di setiap level pendidikan",
+    "subtitle": "Didesain khusus untuk kebutuhan unik pelajar di setiap tahap pendidikan",
     "sma": {
       "name": "SMA",
-      "title": "Eksplorasi Minat",
-      "description": "Temukan passionmu dan persiapkan diri untuk masuk perguruan tinggi impian."
+      "title": "Eksplorasi & Penemuan",
+      "description": "Temukan passionmu, eksplorasi berbagai jalur karir, dan persiapkan diri masuk perguruan tinggi impian dengan keyakinan."
     },
     "s1": {
       "name": "S1",
-      "title": "Bangun Karir",
-      "description": "Magang, organisasi, dan portofolio profesional untuk memulai karir."
+      "title": "Membangun Karir Profesional",
+      "description": "Bangun portofolio kuat, dapatkan magang di perusahaan top, dan mulai karir profesional dengan fondasi yang solid."
     },
     "s2s3": {
       "name": "S2/S3",
-      "title": "Academic Excellence",
-      "description": "Riset, publikasi jurnal, dan academic branding untuk jenjang pakar."
+      "title": "Excellence Akademik & Riset",
+      "description": "Kelola publikasi riset, bangun academic branding, dan tingkatkan impact penelitianmu di tingkat nasional maupun internasional."
     }
   },
   "about": {
     "title": "Tentang EduStride",
     "vision": {
-      "title": "Visi",
-      "content": "Menjadi platform edukasi terdepan yang memfasilitasi pelajar Indonesia membangun portofolio digital dan skill relevan dengan industri."
+      "title": "Visi Kami",
+      "content": "Menjadi platform edukasi terdepan di Indonesia yang memberdayakan pelajar untuk membangun portofolio digital profesional dan mengembangkan skill yang relevan dengan kebutuhan industri 2026."
     },
     "mission": {
-      "title": "Misi",
+      "title": "Misi Kami",
       "items": [
         "Menyediakan roadmap skill yang dipersonalisasi untuk setiap jenjang pendidikan",
-        "Membantu pelajar membangun portofolio digital yang profesional",
-        "Menghubungkan pelajar dengan opportunity magang dan kerja",
-        "Menciptakan komunitas pembelajar yang saling mendukung"
+        "Membantu pelajar membangun portofolio digital yang profesional dan terverifikasi",
+        "Menghubungkan pelajar dengan opportunity magang dan karir di perusahaan top",
+        "Menciptakan komunitas pembelajar yang saling mendukung dan berkolaborasi"
       ]
     },
     "whyUs": {
       "title": "Mengapa EduStride?",
       "personalized": {
-        "title": "Personalized Journey",
-        "description": "Setiap pelajar memiliki jalur unik. Kami menyesuaikan roadmap berdasarkan level, minat, dan tujuan karir Anda."
+        "title": "Jalur yang Dipersonalisasi",
+        "description": "Setiap pelajar unik. Kami menyesuaikan roadmap berdasarkan level, minat, dan tujuan karirmu dengan pendekatan data-driven."
       },
       "industry": {
-        "title": "Industry-Relevant Skills",
-        "description": "Skill yang diajarkan selalu up-to-date dengan kebutuhan industri terkini."
+        "title": "Skill Relevan Industri",
+        "description": "Kurikulum selalu diperbarui sesuai kebutuhan industri terkini. Belajar skill yang benar-benar dicari perusahaan."
       },
       "community": {
-        "title": "Community Driven",
-        "description": "Bergabung dengan komunitas pelajar dan profesional yang saling mendukung pertumbuhan."
+        "title": "Komunitas yang Mendukung",
+        "description": "Bergabung dengan 10K+ pelajar dan profesional yang saling mendukung pertumbuhan dan kesuksesan bersama."
       }
     },
     "stats": {
@@ -102,7 +105,26 @@
     }
   },
   "footer": {
-    "copyright": "© 2025 EduStride. All rights reserved."
+    "copyright": "© {year} EduStride. All rights reserved."
+  },
+  "landing": {
+    "features": "Fitur",
+    "levels": "Level",
+    "about": "Tentang",
+    "journey": "Perjalanan",
+    "testimonials": "Testimoni",
+    "login": "Masuk",
+    "getStarted": "Mulai Sekarang",
+    "exploreDashboard": "Jelajahi Dashboard",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "selectLevel": "Pilih jalur edukasimu:",
+    "featuresTitle": "Fitur Unggulan",
+    "featuresSubtitle": "Lengkap dengan semua yang kamu butuhkan untuk sukses di setiap tahap pendidikan",
+    "levelsTitle": "Untuk Setiap Jenjang",
+    "levelsSubtitle": "Didesain khusus untuk kebutuhan unik pelajar di setiap tahap pendidikan",
+    "badge": "Platform Edukasi #1 Indonesia",
+    "ctaTitle": "Siap Memulai Perjalananmu?",
+    "ctaDescription": "Bergabunglah dengan 10K+ pelajar lainnya dan bangun portofolio digital yang akan membuka pintu masa depanmu."
   },
   "language": {
     "select": "Pilih Bahasa",
@@ -216,5 +238,332 @@
       "notFound": "Portfolio tidak ditemukan",
       "notFoundDescription": "Portfolio yang Anda cari mungkin telah dihapus atau tidak ada."
     }
+  },
+  "skills": {
+    "title": "Skill Hub",
+    "description": "Kelola dan lacak perkembangan skillmu",
+    "addSkill": "Tambah Skill",
+    "skillName": "Nama Skill",
+    "categoryLabel": "Kategori",
+    "levelLabel": "Level",
+    "description": "Deskripsi",
+    "makePublic": "Buat Publik",
+    "makePublicDescription": "Tampilkan skill ini di portofolio publik Anda",
+    "cancel": "Batal",
+    "adding": "Menambahkan...",
+    "searchPlaceholder": "Cari skill...",
+    "noSkills": "Belum ada skill",
+    "noSkillsDescription": "Mulai tambahkan skill untuk melacak perkembanganmu",
+    "addYourFirstSkill": "Tambah Skill Pertama",
+    "progress": "Progress",
+    "yourSkills": "Skill Kamu",
+    "tabs": {
+      "skills": "Skill",
+      "quiz": "Kuis"
+    },
+    "category": {
+      "technical": "Teknis",
+      "soft_skill": "Soft Skill",
+      "language": "Bahasa",
+      "tool": "Alat",
+      "domain_knowledge": "Pengetahuan Domain"
+    },
+    "level": {
+      "beginner": "Pemula",
+      "intermediate": "Menengah",
+      "advanced": "Lanjut",
+      "expert": "Ahli"
+    },
+    "roadmap": {
+      "title": "Skill Roadmap",
+      "description": "Visualisasi perkembangan skill berdasarkan kategori",
+      "overall": "Rata-rata",
+      "skills": "skill",
+      "noData": "Belum ada data skill untuk ditampilkan"
+    },
+    "quiz": {
+      "title": "Kuis & Assessment",
+      "description": "Uji pengetahuanmu dengan kuis interaktif",
+      "timeLimit": "Batas Waktu",
+      "passingScore": "Nilai Lulus",
+      "instructions": "Instruksi",
+      "instruction1": "Jawab semua pertanyaan dengan memilih satu jawaban",
+      "instruction2": "Kamu tidak dapat mengubah jawaban setelah submit",
+      "instruction3": "Capai nilai minimal untuk lulus assessment",
+      "startQuiz": "Mulai Kuis",
+      "question": "Pertanyaan",
+      "points": "poin",
+      "previous": "Sebelumnya",
+      "next": "Lanjut",
+      "submit": "Submit",
+      "passed": "Lulus!",
+      "failed": "Belum Lulus",
+      "scoreDescription": "Kamu menjawab benar {score}% dari {total} pertanyaan",
+      "congratulations": "Selamat!",
+      "keepLearning": "Terus Belajar",
+      "passedMessage": "Kamu telah lulus assessment ini. Terus tingkatkan skillmu!",
+      "failedMessage": "Kamu perlu nilai {passingScore}% untuk lulus. Coba lagi!",
+      "retake": "Ulangi",
+      "continue": "Lanjut",
+      "type": {
+        "multiple_choice": "Pilihan Ganda",
+        "true_false": "Benar/Salah",
+        "short_answer": "Jawaban Singkat",
+        "essay": "Essay"
+      }
+    },
+    "charts": {
+      "categoryDistribution": "Distribusi Kategori",
+      "categoryDescription": "Sebaran skill berdasarkan kategori",
+      "levelDistribution": "Distribusi Level",
+      "levelDescription": "Tingkat kemahiran skill kamu",
+      "topSkills": "Top Skills",
+      "topSkillsDescription": "10 skill dengan progress tertinggi",
+      "skills": "skill",
+      "progress": "Progress"
+    }
+  },
+  "badges": {
+    "title": "Badge & Pencapaian",
+    "description": "Kumpulkan badge dengan menyelesaikan tantangan",
+    "earned": "Diraih",
+    "pointsProgress": "Progress Poin",
+    "earnedBadges": "Badge yang Diraih",
+    "lockedBadges": "Badge Terkunci",
+    "category": {
+      "skill": "Skill",
+      "portfolio": "Portofolio",
+      "quiz": "Kuis",
+      "milestone": "Milestone",
+      "special": "Spesial",
+      "other": "Lainnya"
+    }
+  },
+  "achievements": {
+    "title": "Pencapaian & Sertifikasi",
+    "description": "Kelola pencapaian, sertifikasi, dan penghargaanmu",
+    "tabs": {
+      "all": "Semua",
+      "certifications": "Sertifikasi",
+      "awards": "Penghargaan",
+      "publications": "Publikasi"
+    },
+    "types": {
+      "certification": "Sertifikasi",
+      "award": "Penghargaan",
+      "publication": "Publikasi",
+      "patent": "Paten",
+      "competition": "Kompetisi",
+      "grant": "Hibah",
+      "scholarship": "Beasiswa",
+      "other": "Lainnya"
+    },
+    "viewCredential": "Lihat Kredensial",
+    "noDate": "Tidak ada tanggal"
+  },
+  "experience": {
+    "title": "Pengalaman Kerja",
+    "description": "Kelola pengalaman profesional dan organisasimu",
+    "addExperience": "Tambah Pengalaman",
+    "present": "Sekarang",
+    "types": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "internship": "Magang",
+      "freelance": "Freelance",
+      "contract": "Kontrak"
+    }
+  },
+  "settings": {
+    "title": "Pengaturan",
+    "description": "Kelola preferensi akun dan profilmu",
+    "cancel": "Batal",
+    "save": "Simpan Perubahan",
+    "profile": {
+      "title": "Profil",
+      "description": "Kelola informasi profilmu",
+      "edit": "Edit Profil",
+      "name": "Nama Lengkap",
+      "email": "Email"
+    },
+    "appearance": {
+      "title": "Tampilan",
+      "description": "Sesuaikan tampilan aplikasi",
+      "darkMode": "Mode Gelap",
+      "darkModeDesc": "Aktifkan tema gelap untuk aplikasi",
+      "language": "Bahasa",
+      "languageDesc": "Pilih bahasa yang kamu gunakan"
+    },
+    "notifications": {
+      "title": "Notifikasi",
+      "description": "Kelola preferensi notifikasimu",
+      "email": "Notifikasi Email",
+      "emailDesc": "Terima update melalui email",
+      "push": "Notifikasi Push",
+      "pushDesc": "Terima notifikasi push di browser",
+      "badges": "Notifikasi Badge",
+      "badgesDesc": "Dapatkan notifikasi saat mendapat badge baru"
+    },
+    "privacy": {
+      "title": "Privasi & Keamanan",
+      "description": "Kelola pengaturan privasi dan keamanan",
+      "twoFactor": "Autentikasi 2 Faktor",
+      "twoFactorDesc": "Tambahkan lapisan keamanan ekstra",
+      "enable": "Aktifkan",
+      "publicProfile": "Profil Publik",
+      "publicProfileDesc": "Buat profilmu terlihat oleh orang lain"
+    }
+  },
+  "documents": {
+    "title": "Dokumen",
+    "description": "Kelola dokumen akademik, sertifikat, dan portofoliomu",
+    "upload": "Upload Dokumen",
+    "searchPlaceholder": "Cari dokumen...",
+    "download": "Unduh",
+    "details": "Detail",
+    "delete": "Hapus",
+    "tabs": {
+      "all": "Semua",
+      "academic": "Akademik",
+      "certificate": "Sertifikat",
+      "portfolio": "Portofolio",
+      "personal": "Personal"
+    }
+  },
+  "quiz": {
+    "title": "Kuis & Assessment",
+    "description": "Uji pengetahuanmu dengan kuis interaktif",
+    "createQuiz": "Buat Kuis",
+    "totalQuizzes": "Total Kuis",
+    "totalAttempts": "Total Percobaan",
+    "passRate": "Tingkat Kelulusan",
+    "searchPlaceholder": "Cari kuis...",
+    "filterCategory": "Filter Kategori",
+    "filterDifficulty": "Filter Tingkat",
+    "allCategories": "Semua Kategori",
+    "allLevels": "Semua Tingkat",
+    "allQuizzes": "Semua Kuis",
+    "technical": "Teknis",
+    "softSkill": "Soft Skill",
+    "language": "Bahasa",
+    "tool": "Alat",
+    "domainKnowledge": "Pengetahuan Domain",
+    "beginner": "Pemula",
+    "intermediate": "Menengah",
+    "advanced": "Lanjut",
+    "expert": "Ahli",
+    "generalQuiz": "Kuis Umum",
+    "questions": "Pertanyaan",
+    "minutes": "menit",
+    "startQuiz": "Mulai Kuis",
+    "noQuizzes": "Belum ada kuis",
+    "noQuizzesDescription": "Mulai buat kuis untuk menguji pengetahuanmu",
+    "difficulty": {
+      "beginner": "Pemula",
+      "intermediate": "Menengah",
+      "advanced": "Lanjut",
+      "expert": "Ahli"
+    }
+  },
+  "quizCreate": {
+    "title": "Buat Kuis Baru",
+    "description": "Tambahkan pertanyaan untuk menguji pemahamanmu",
+    "basicInfo": "Informasi Dasar",
+    "basicInfoDescription": "Detail tentang kuis ini",
+    "titleLabel": "Judul Kuis",
+    "titlePlaceholder": "Masukkan judul kuis",
+    "descriptionLabel": "Deskripsi",
+    "descriptionPlaceholder": "Deskripsikan kuis ini",
+    "category": "Kategori",
+    "difficulty": "Tingkat Kesulitan",
+    "timeLimit": "Batas Waktu (menit)",
+    "timeLimitPlaceholder": "Kosongkan jika tanpa batas",
+    "passingScore": "Nilai Kelulusan (%)",
+    "linkedSkill": "Skill Terkait",
+    "selectSkill": "Pilih skill...",
+    "noLinkedSkill": "Tidak ada skill terkait",
+    "questions": "Pertanyaan",
+    "questionsDescription": "Tambahkan pertanyaan untuk kuis ini",
+    "addQuestion": "Tambah Pertanyaan",
+    "questionLabel": "Pertanyaan",
+    "questionPlaceholder": "Tulis pertanyaanmu di sini",
+    "questionType": "Tipe Pertanyaan",
+    "multipleChoice": "Pilihan Ganda",
+    "trueFalse": "Benar/Salah",
+    "points": "Poin",
+    "options": "Pilihan Jawaban",
+    "optionPlaceholder": "Masukkan pilihan jawaban",
+    "addOption": "Tambah Pilihan",
+    "trueFalseHint": "Opsi pertama akan menjadi 'Benar', opsi kedua akan menjadi 'Salah'",
+    "cancel": "Batal",
+    "creating": "Membuat...",
+    "createQuiz": "Buat Kuis",
+    "technical": "Teknis",
+    "softSkill": "Soft Skill",
+    "language": "Bahasa",
+    "tool": "Alat",
+    "domainKnowledge": "Pengetahuan Domain",
+    "beginner": "Pemula",
+    "intermediate": "Menengah",
+    "advanced": "Lanjut",
+    "expert": "Ahli",
+    "noQuestions": "Belum ada pertanyaan. Klik 'Tambah Pertanyaan' untuk memulai.",
+    "errors": {
+      "titleRequired": "Judul kuis wajib diisi",
+      "atLeastOneQuestion": "Minimal 1 pertanyaan wajib diisi",
+      "failed": "Gagal membuat kuis"
+    },
+    "success": "Kuis berhasil dibuat!"
+  },
+  "quizTake": {
+    "back": "Kembali",
+    "completed": "selesai",
+    "question": "Pertanyaan",
+    "points": "{points} poin",
+    "multipleChoice": "Pilihan Ganda",
+    "trueFalse": "Benar/Salah",
+    "true": "Benar",
+    "false": "Salah",
+    "previous": "Sebelumnya",
+    "next": "Lanjut",
+    "submitQuiz": "Submit Kuis",
+    "submitting": "Submitting...",
+    "questionNavigator": "Navigator Pertanyaan",
+    "current": "Saat ini",
+    "answered": "Dijawab",
+    "unanswered": "Belum dijawab",
+    "confirmSubmit": "Masih ada pertanyaan yang belum dijawab. Yakin ingin submit?",
+    "submitted": "Kuis berhasil disubmit!",
+    "submitFailed": "Gagal submit kuis",
+    "quizNotFound": "Kuis tidak ditemukan",
+    "backToQuizzes": "Kembali ke Kuis"
+  },
+  "quizResults": {
+    "title": "Hasil Kuis",
+    "retake": "Ulangi Kuis",
+    "backToQuizzes": "Kembali ke Kuis",
+    "totalQuestions": "Total Pertanyaan",
+    "correct": "Benar",
+    "incorrect": "Salah",
+    "yourScore": "Nilai Kamu",
+    "passingScore": "Nilai Kelulusan",
+    "passedMessage": "Selamat! Kamu lulus kuis ini.",
+    "failedMessage": "Kamu belum lulus. Nilai kelulusan adalah {passingScore}%.",
+    "excellent": "Luar Biasa!",
+    "good": "Bagus!",
+    "fair": "Cukup Baik",
+    "needsImprovement": "Perlu Peningkatan",
+    "answerReview": "Review Jawaban",
+    "answerReviewDescription": "Lihat jawabanmu dan pelajari kesalahan",
+    "questionNum": "Pertanyaan {num}",
+    "points": "{points} poin",
+    "correctAnswer": "Jawaban Benar",
+    "yourAnswer": "Jawaban Kamu",
+    "explanation": "Penjelasan",
+    "true": "Benar",
+    "false": "Salah",
+    "attemptHistory": "Riwayat Percobaan",
+    "attemptHistoryDescription": "Lihat semua percobaanmu",
+    "attemptNum": "Percobaan {num}"
   }
 }

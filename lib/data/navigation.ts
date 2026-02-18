@@ -9,6 +9,7 @@ import {
   Briefcase,
   FileText,
   Award,
+  Brain,
   type LucideIcon,
 } from "lucide-react";
 
@@ -64,16 +65,26 @@ export const portfolioNavItems: NavItem[] = [
     icon: GraduationCap,
   },
   {
+    title: "Quiz",
+    titleId: "quiz",
+    href: "/dashboard/quiz",
+    icon: Brain,
+    badge: "New",
+    badgeId: "newQuiz",
+  },
+  {
+    title: "Achievements",
+    titleId: "achievements",
+    href: "/dashboard/achievements",
+    icon: Award,
+    badge: "2",
+    badgeId: "newAchievements",
+  },
+  {
     title: "Experience",
     titleId: "experience",
     href: "/dashboard/experience",
     icon: Briefcase,
-  },
-  {
-    title: "Certificates",
-    titleId: "certificates",
-    href: "/dashboard/certificates",
-    icon: Award,
   },
   {
     title: "Documents",

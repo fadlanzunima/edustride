@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
-import { cache } from "@/lib/cache";
 import { createSkillSchema, skillQuerySchema } from "@/lib/validations";
 
 /**
@@ -32,20 +31,6 @@ export async function GET(req: NextRequest) {
 
     const { category, level, search, page, limit, sortBy, sortOrder } =
       validation.data;
-
-    // Generate cache key
-    const cacheKey = cache.key(
-      "user",
-      session.user.id,
-      "skills",
-      JSON.stringify(validation.data)
-    );
-
-    // Try to get from cache
-    const cached = await cache.get(cacheKey);
-    if (cached) {
-      return NextResponse.json(cached);
-    }
 
     // Build where clause
     const where: Record<string, unknown> = { userId: session.user.id };
@@ -78,9 +63,6 @@ export async function GET(req: NextRequest) {
         totalPages: Math.ceil(total / limit),
       },
     };
-
-    // Cache the result
-    await cache.set(cacheKey, result, 300);
 
     return NextResponse.json(result);
   } catch (error) {
@@ -136,9 +118,6 @@ export async function POST(req: NextRequest) {
         },
       },
     });
-
-    // Invalidate cache
-    await cache.invalidateUser(session.user.id);
 
     return NextResponse.json(skill, { status: 201 });
   } catch (error) {

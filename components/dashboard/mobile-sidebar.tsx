@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X, type LucideIcon } from "lucide-react";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +11,6 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -39,15 +38,18 @@ export function MobileSidebar({ open, onOpenChange }: MobileSidebarProps) {
           Navigation sidebar with main menu items
         </div>
         {/* Header */}
-        <SheetHeader className="border-b p-4">
+        <SheetHeader className="border-b p-6">
           <div className="flex items-center justify-between">
-            <SheetTitle className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <span className="text-sm font-bold text-primary-foreground">
+            <SheetTitle className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg">
+                <span className="text-base font-bold text-primary-foreground">
                   E
                 </span>
               </div>
-              <span className="text-lg font-semibold">EduStride</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold tracking-tight">EduStride</span>
+                <span className="text-xs text-muted-foreground">Learning Platform</span>
+              </div>
             </SheetTitle>
             <Button
               variant="ghost"
@@ -110,7 +112,7 @@ function MobileNavLink({ item, isActive, onClick }: MobileNavLinkProps) {
       href={href}
       onClick={onClick}
       className={cn(
-        "flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors",
+        "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
         "hover:bg-accent hover:text-accent-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         "min-h-[44px]", // Touch target optimization
@@ -119,9 +121,12 @@ function MobileNavLink({ item, isActive, onClick }: MobileNavLinkProps) {
       aria-current={isActive ? "page" : undefined}
     >
       <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-primary")} />
-      <span className="flex-1">{t(item.titleId)}</span>
+      <span className="flex-1 truncate">{t(item.titleId)}</span>
       {item.badge && (
-        <Badge variant="secondary" className="h-5 min-w-5 px-1 text-xs">
+        <Badge
+          variant="secondary"
+          className="h-5 min-w-5 shrink-0 px-1 text-xs"
+        >
           {item.badge}
         </Badge>
       )}

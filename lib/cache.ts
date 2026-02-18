@@ -1,19 +1,9 @@
-import { Redis } from "ioredis";
+/**
+ * In-memory cache utility (fallback when Redis is not available)
+ */
 
-// Redis client configuration
-const getRedisClient = () => {
-  if (process.env.REDIS_URL) {
-    return new Redis(process.env.REDIS_URL, {
-      maxRetriesPerRequest: 3,
-      enableReadyCheck: true,
-    });
-  }
-
-  // Return null if no Redis URL is configured
-  return null;
-};
-
-const redis = getRedisClient();
+// Simple in-memory cache
+const memoryCache = new Map<string, { value: any; expiry: number }>();
 
 // Cache configuration
 const DEFAULT_TTL = 60 * 5; // 5 minutes in seconds
@@ -27,16 +17,18 @@ export const cache = {
    * Get value from cache
    */
   async get<T>(key: string): Promise<T | null> {
-    if (!redis) return null;
-
-    try {
-      const value = await redis.get(`${CACHE_PREFIX}${key}`);
-      if (!value) return null;
-      return JSON.parse(value) as T;
-    } catch (error) {
-      console.error("Cache get error:", error);
+    const fullKey = `${CACHE_PREFIX}${key}`;
+    const item = memoryCache.get(fullKey);
+    
+    if (!item) return null;
+    
+    // Check if expired
+    if (Date.now() > item.expiry) {
+      memoryCache.delete(fullKey);
       return null;
     }
+    
+    return item.value as T;
   },
 
   /**
@@ -47,42 +39,28 @@ export const cache = {
     value: unknown,
     ttl: number = DEFAULT_TTL
   ): Promise<void> {
-    if (!redis) return;
-
-    try {
-      const serialized = JSON.stringify(value);
-      await redis.setex(`${CACHE_PREFIX}${key}`, ttl, serialized);
-    } catch (error) {
-      console.error("Cache set error:", error);
-    }
+    const fullKey = `${CACHE_PREFIX}${key}`;
+    const expiry = Date.now() + (ttl * 1000);
+    memoryCache.set(fullKey, { value, expiry });
   },
 
   /**
    * Delete value from cache
    */
   async delete(key: string): Promise<void> {
-    if (!redis) return;
-
-    try {
-      await redis.del(`${CACHE_PREFIX}${key}`);
-    } catch (error) {
-      console.error("Cache delete error:", error);
-    }
+    const fullKey = `${CACHE_PREFIX}${key}`;
+    memoryCache.delete(fullKey);
   },
 
   /**
    * Delete multiple values matching pattern
    */
   async deletePattern(pattern: string): Promise<void> {
-    if (!redis) return;
-
-    try {
-      const keys = await redis.keys(`${CACHE_PREFIX}${pattern}`);
-      if (keys.length > 0) {
-        await redis.del(...keys);
+    const regex = new RegExp(`^${CACHE_PREFIX}${pattern.replace(/\*/g, '.*')}$`);
+    for (const key of memoryCache.keys()) {
+      if (regex.test(key)) {
+        memoryCache.delete(key);
       }
-    } catch (error) {
-      console.error("Cache delete pattern error:", error);
     }
   },
 
@@ -99,16 +77,17 @@ export const cache = {
   key(...parts: string[]): string {
     return parts.join(":");
   },
+  
+  /**
+   * Invalidate cache matching pattern (alias for deletePattern)
+   */
+  async invalidate(pattern: string): Promise<void> {
+    await this.deletePattern(pattern);
+  },
 };
 
 /**
  * Cached query wrapper
- * Usage:
- * const data = await cachedQuery(
- *   cache.key("user", userId, "portfolio"),
- *   () => prisma.portfolio.findMany({ where: { userId } }),
- *   300 // 5 minutes TTL
- * );
  */
 export async function cachedQuery<T>(
   cacheKey: string,

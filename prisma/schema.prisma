@@ -84,6 +84,9 @@ model User {
   achievements Achievement[]
   activities   Activity[]
   stats        UserStats?
+  quizzes      Quiz[]
+  quizAttempts QuizAttempt[]
+  userBadges   UserBadge[]
 
   @@index([email])
   @@index([level])
@@ -155,6 +158,7 @@ model Skill {
 
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizzes Quiz[]
 
   @@index([userId])
   @@index([category])
@@ -271,6 +275,166 @@ enum AchievementType {
   GRANT
   SCHOLARSHIP
   OTHER
+}
+
+// ============================================
+// Badge System (Gamification)
+// ============================================
+
+model Badge {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String   @db.Text
+  icon        String   // Icon name or emoji
+  category    BadgeCategory @default(OTHER)
+  difficulty  BadgeDifficulty @default(MEDIUM)
+  points      Int      @default(10)
+  color       String   @default("blue") // For UI styling
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  
+  // Relations
+  userBadges UserBadge[]
+
+  @@index([category])
+  @@index([isActive])
+}
+
+model UserBadge {
+  id          String   @id @default(cuid())
+  userId      String
+  badgeId     String
+  earnedAt    DateTime @default(now())
+  context     String?  @db.Text // Context of why badge was earned
+  metadata    Json?    // Additional data
+
+  // Relations
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badge Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeId])
+  @@index([userId])
+  @@index([earnedAt])
+}
+
+enum BadgeCategory {
+  SKILL
+  PORTFOLIO
+  QUIZ
+  MILESTONE
+  SPECIAL
+  OTHER
+}
+
+enum BadgeDifficulty {
+  EASY
+  MEDIUM
+  HARD
+  LEGENDARY
+}
+
+// ============================================
+// Skill Assessment & Quiz Models
+// ============================================
+
+model Quiz {
+  id          String    @id @default(cuid())
+  userId      String
+  skillId     String?   // Optional: link to specific skill
+  title       String
+  description String?   @db.Text
+  category    SkillCategory @default(TECHNICAL)
+  difficulty  QuizDifficulty @default(INTERMEDIATE)
+  timeLimit   Int?      // in minutes, null = no limit
+  passingScore Int      @default(70) // percentage
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relations
+  user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill  Skill?    @relation(fields: [skillId], references: [id], onDelete: SetNull)
+  questions QuizQuestion[]
+  attempts QuizAttempt[]
+
+  @@index([userId])
+  @@index([skillId])
+  @@index([category])
+  @@index([difficulty])
+}
+
+model QuizQuestion {
+  id        String   @id @default(cuid())
+  quizId    String
+  question  String   @db.Text
+  type      QuestionType @default(MULTIPLE_CHOICE)
+  order     Int      @default(0)
+  points    Int      @default(1)
+  options   Json?    // Array of {text, isCorrect} for multiple choice
+  correctAnswer String? // For simple question types
+  explanation String? @db.Text // Optional explanation
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  answers QuizAnswer[]
+
+  @@index([quizId])
+  @@unique([quizId, order])
+}
+
+model QuizAttempt {
+  id        String   @id @default(cuid())
+  quizId    String
+  userId    String
+  score     Int      @default(0) // percentage
+  passed    Boolean  @default(false)
+  startedAt DateTime @default(now())
+  completedAt DateTime?
+  answers   Json?    // Array of {questionId, answer, isCorrect}
+  feedback  String?  @db.Text
+
+  // Relations
+  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionAnswers QuizAnswer[]
+
+  @@index([quizId])
+  @@index([userId])
+  @@index([completedAt])
+}
+
+model QuizAnswer {
+  id        String   @id @default(cuid())
+  attemptId String
+  questionId String
+  answer    String   @db.Text // User's answer
+  isCorrect Boolean  @default(false)
+  points    Int      @default(0)
+  createdAt DateTime @default(now())
+
+  // Relations
+  attempt  QuizAttempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([attemptId])
+  @@index([questionId])
+  @@unique([attemptId, questionId])
+}
+
+enum QuizDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+  ESSAY
 }
 
 // ============================================

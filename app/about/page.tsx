@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { GraduationCap, Target, Users, Lightbulb, Heart, Rocket } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import NextLink from "next/link";
 
 export default function AboutPage() {
   return (
@@ -261,12 +262,12 @@ export default function AboutPage() {
             portofolio dan skill mereka bersama EduStride.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/dashboard" 
+            <NextLink
+              href="/dashboard"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
             >
               Mulai Sekarang
-            </a>
+            </NextLink>
             <a 
               href="mailto:hello@edustride.id" 
               className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-input bg-background font-medium hover:bg-accent transition-colors"

@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronLeft, ChevronRight, type LucideIcon } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -32,7 +32,7 @@ export function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
     <TooltipProvider delayDuration={0}>
       <motion.aside
         initial={false}
-        animate={{ width: isCollapsed ? 80 : 280 }}
+        animate={{ width: isCollapsed ? 80 : 320 }}
         transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
         className={cn(
           "fixed left-0 top-0 z-40 flex h-screen flex-col border-r bg-sidebar",
@@ -40,7 +40,7 @@ export function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
         )}
       >
         {/* Header */}
-        <div className="flex h-16 items-center justify-between px-4">
+        <div className="flex h-20 items-center justify-between px-6">
           <AnimatePresence mode="wait">
             {!isCollapsed && (
               <motion.div
@@ -48,20 +48,23 @@ export function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -10 }}
                 transition={{ duration: 0.2 }}
-                className="flex items-center gap-2"
+                className="flex items-center gap-3"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                  <span className="text-sm font-bold text-primary-foreground">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg">
+                  <span className="text-base font-bold text-primary-foreground">
                     E
                   </span>
                 </div>
-                <span className="text-lg font-semibold">EduStride</span>
+                <div className="flex flex-col">
+                  <span className="text-xl font-bold tracking-tight">EduStride</span>
+                  <span className="text-xs text-muted-foreground">Learning Platform</span>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
           {isCollapsed && (
-            <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <span className="text-sm font-bold text-primary-foreground">
+            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg">
+              <span className="text-base font-bold text-primary-foreground">
                 E
               </span>
             </div>
@@ -155,7 +158,7 @@ function NavLink({ item, isActive, isCollapsed }: NavLinkProps) {
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+        "flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
@@ -166,9 +169,12 @@ function NavLink({ item, isActive, isCollapsed }: NavLinkProps) {
       <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-primary")} />
       {!isCollapsed && (
         <>
-          <span className="flex-1">{t(item.titleId)}</span>
+          <span className="flex-1 truncate">{t(item.titleId)}</span>
           {item.badge && (
-            <Badge variant="secondary" className="h-5 min-w-5 px-1 text-xs">
+            <Badge
+              variant="secondary"
+              className="h-5 min-w-5 shrink-0 px-1 text-xs"
+            >
               {item.badge}
             </Badge>
           )}

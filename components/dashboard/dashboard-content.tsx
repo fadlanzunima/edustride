@@ -58,7 +58,7 @@ export function DashboardContent() {
             Welcome back, Student!
           </h1>
           <p className="text-muted-foreground">
-            Here's what's happening with your portfolio today.
+            Here&apos;s what&apos;s happening with your portfolio today.
           </p>
         </div>
         <div className="flex gap-2">
