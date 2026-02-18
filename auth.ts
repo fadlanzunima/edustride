@@ -36,44 +36,62 @@ export const authConfig = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // Validate credentials
-        const parsedCredentials = z
-          .object({
-            email: z.string().email(),
-            password: z.string().min(6),
-          })
-          .safeParse(credentials);
+        try {
+          // Validate credentials
+          const parsedCredentials = z
+            .object({
+              email: z.string().email(),
+              password: z.string().min(6),
+            })
+            .safeParse(credentials);
 
-        if (!parsedCredentials.success) {
+          if (!parsedCredentials.success) {
+            console.error(
+              "Invalid credentials format:",
+              parsedCredentials.error
+            );
+            return null;
+          }
+
+          const { email, password } = parsedCredentials.data;
+          console.log("Authorizing user:", email);
+
+          // Find user by email
+          const user = await prisma.user.findUnique({
+            where: { email },
+          });
+
+          if (!user) {
+            console.error("User not found:", email);
+            return null;
+          }
+
+          if (!user.password) {
+            console.error("User has no password (OAuth only):", email);
+            return null;
+          }
+
+          // Verify password
+          const isPasswordValid = await compare(password, user.password);
+
+          if (!isPasswordValid) {
+            console.error("Invalid password for user:", email);
+            return null;
+          }
+
+          console.log("User authorized successfully:", email);
+          return {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            image: user.image,
+            level: user.level,
+            institution: user.institution,
+          };
+        } catch (error) {
+          console.error("Authorization error:", error);
           return null;
         }
-
-        const { email, password } = parsedCredentials.data;
-
-        // Find user by email
-        const user = await prisma.user.findUnique({
-          where: { email },
-        });
-
-        if (!user || !user.password) {
-          return null;
-        }
-
-        // Verify password
-        const isPasswordValid = await compare(password, user.password);
-
-        if (!isPasswordValid) {
-          return null;
-        }
-
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          image: user.image,
-          level: user.level,
-          institution: user.institution,
-        };
       },
     }),
   ],

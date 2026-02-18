@@ -49,21 +49,28 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
+      console.log("Attempting login...", data.email);
       const result = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
       });
 
+      console.log("Login result:", result);
+
       if (result?.error) {
-        toast.error(t("errors.invalidCredentials"));
-      } else {
+        console.error("Login error:", result.error);
+        toast.error(t("errors.invalidCredentials") + `: ${result.error}`);
+      } else if (result?.ok) {
         toast.success("Login successful!");
         router.push(`/${locale}/dashboard`);
         router.refresh();
+      } else {
+        toast.error("Login failed: Unknown error");
       }
     } catch (error) {
-      toast.error(t("errors.generic"));
+      console.error("Login exception:", error);
+      toast.error(t("errors.generic") + `: ${error}`);
     } finally {
       setIsLoading(false);
     }
