@@ -158,5 +158,63 @@
       }
     },
     "logout": "Keluar"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Kelola proyek, sertifikat, dan pengalaman Anda",
+    "create": "Buat Portfolio",
+    "edit": "Edit Portfolio",
+    "delete": "Hapus Portfolio",
+    "view": "Lihat Detail",
+    "search": "Cari portfolio...",
+    "noData": "Belum ada portfolio",
+    "noDataDescription": "Mulai buat portfolio pertamamu untuk menampilkan proyek, sertifikat, dan pengalamanmu.",
+    "form": {
+      "basicInfo": "Informasi Dasar",
+      "title": "Judul",
+      "titleRequired": "Judul wajib diisi",
+      "type": "Tipe",
+      "status": "Status",
+      "description": "Deskripsi",
+      "timeline": "Timeline",
+      "startDate": "Tanggal Mulai",
+      "endDate": "Tanggal Selesai",
+      "links": "Tautan",
+      "externalLink": "Tautan Eksternal",
+      "githubUrl": "URL GitHub",
+      "demoUrl": "URL Demo",
+      "thumbnail": "Gambar Thumbnail",
+      "thumbnailUrl": "URL Thumbnail",
+      "tags": "Tag",
+      "addTag": "Tambah tag...",
+      "tagHint": "Tekan Enter untuk menambahkan tag",
+      "featured": "Tampilkan di Beranda",
+      "featuredDescription": "Portfolio yang ditampilkan akan muncul di bagian featured",
+      "cancel": "Batal",
+      "save": "Simpan Perubahan",
+      "create": "Buat Portfolio",
+      "saving": "Menyimpan..."
+    },
+    "types": {
+      "PROJECT": "Proyek",
+      "CERTIFICATE": "Sertifikat",
+      "EXPERIENCE": "Pengalaman",
+      "PUBLICATION": "Publikasi",
+      "AWARD": "Penghargaan"
+    },
+    "statuses": {
+      "DRAFT": "Draft",
+      "PUBLISHED": "Dipublikasikan",
+      "ARCHIVED": "Diarsipkan"
+    },
+    "detail": {
+      "information": "Informasi",
+      "created": "Dibuat",
+      "updated": "Diperbarui",
+      "share": "Bagikan",
+      "copyLink": "Salin link berhasil",
+      "notFound": "Portfolio tidak ditemukan",
+      "notFoundDescription": "Portfolio yang Anda cari mungkin telah dihapus atau tidak ada."
+    }
   }
 }

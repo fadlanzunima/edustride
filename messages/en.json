@@ -158,5 +158,63 @@
       }
     },
     "logout": "Logout"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Manage your projects, certificates, and experiences",
+    "create": "Create Portfolio",
+    "edit": "Edit Portfolio",
+    "delete": "Delete Portfolio",
+    "view": "View Details",
+    "search": "Search portfolios...",
+    "noData": "No portfolios yet",
+    "noDataDescription": "Start by creating your first portfolio to showcase your projects, certificates, and experiences.",
+    "form": {
+      "basicInfo": "Basic Information",
+      "title": "Title",
+      "titleRequired": "Title is required",
+      "type": "Type",
+      "status": "Status",
+      "description": "Description",
+      "timeline": "Timeline",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "links": "Links",
+      "externalLink": "External Link",
+      "githubUrl": "GitHub URL",
+      "demoUrl": "Demo URL",
+      "thumbnail": "Thumbnail Image",
+      "thumbnailUrl": "Thumbnail URL",
+      "tags": "Tags",
+      "addTag": "Add tag...",
+      "tagHint": "Press Enter to add a tag",
+      "featured": "Show on Homepage",
+      "featuredDescription": "Featured portfolios will appear in the featured section",
+      "cancel": "Cancel",
+      "save": "Save Changes",
+      "create": "Create Portfolio",
+      "saving": "Saving..."
+    },
+    "types": {
+      "PROJECT": "Project",
+      "CERTIFICATE": "Certificate",
+      "EXPERIENCE": "Experience",
+      "PUBLICATION": "Publication",
+      "AWARD": "Award"
+    },
+    "statuses": {
+      "DRAFT": "Draft",
+      "PUBLISHED": "Published",
+      "ARCHIVED": "Archived"
+    },
+    "detail": {
+      "information": "Information",
+      "created": "Created",
+      "updated": "Updated",
+      "share": "Share",
+      "copyLink": "Link copied successfully",
+      "notFound": "Portfolio not found",
+      "notFoundDescription": "The portfolio you are looking for may have been deleted or does not exist."
+    }
   }
 }
