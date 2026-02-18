@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/webp", "image/avif"],
   },
-  
+
   // Experimental features
   experimental: {
     // Enable if needed

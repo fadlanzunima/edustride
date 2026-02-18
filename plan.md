@@ -39,7 +39,8 @@ Membangun platform yang memfasilitasi pelajar Indonesia untuk membangun portofol
 Berdasarkan State of React 2024 dan tren terbaru:
 
 ### Core Framework
-- **Next.js 15** - React framework dengan App Router stabil dan React 19 support
+- **Next.js 15.2.0** - React framework dengan App Router stabil dan React 19 support
+  - *Note: Downgraded dari 16.1.6 karena Turbopack instability issues*
 
 ### UI Components
 - **Tailwind CSS** - CSS framework #1 (73% usage)

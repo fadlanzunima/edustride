@@ -15,7 +15,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.574.0",
     "motion": "^12.34.1",
-    "next": "16.1.6",
+    "next": "^15.2.0",
     "next-intl": "^4.8.3",
     "nuqs": "^2.8.8",
     "radix-ui": "^1.4.3",
@@ -27,6 +27,7 @@
     "zustand": "^5.0.11"
   },
   "devDependencies": {
+    "@next/swc-wasm-nodejs": "^16.1.6",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
