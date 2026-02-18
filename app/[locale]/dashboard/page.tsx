@@ -1,14 +1,14 @@
-"use client";
+import { DashboardContent } from "@/components/dashboard/dashboard-content";
 
-import { ProtectedRoute } from "@/components/auth/protected-route";
-import { DashboardContent } from "@/components/widgets/dashboard-content";
+export const metadata = {
+  title: "Dashboard - EduStride",
+  description: "Dashboard EduStride untuk mengelola portofolio dan skill",
+};
 
 export default function DashboardPage() {
   return (
-    <ProtectedRoute>
-      <div className="container mx-auto px-4 py-8">
-        <DashboardContent />
-      </div>
-    </ProtectedRoute>
+    <div className="container mx-auto px-4 py-8">
+      <DashboardContent />
+    </div>
   );
 }

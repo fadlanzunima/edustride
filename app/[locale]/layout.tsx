@@ -2,8 +2,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ReactNode } from "react";
 
-import { AuthSessionProvider } from "@/components/providers/session-provider";
-
 export default async function LocaleLayout({
   children,
   params,
@@ -21,7 +19,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <AuthSessionProvider>{children}</AuthSessionProvider>
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

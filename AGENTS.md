@@ -254,8 +254,28 @@ messages/
 ### Configuration Changes
 1. **next.config.ts**: Removed deprecated `swcMinify` option (no longer valid in Next.js 15+)
 2. **middleware.ts**: Still using legacy middleware convention (deprecated, migrate to `proxy.ts` in future)
+3. **Demo Mode**: Authentication bypassed for development
+   - Removed `AuthSessionProvider` from layout (session API errors)
+   - Removed `ProtectedRoute` from dashboard pages
+   - Dashboard accessible without login at `/dashboard`
+   - Using `DemoUserMenu` component for demo user display
+
+### Authentication Setup (For Production)
+1. **Current**: JWT-only auth config (no database adapter)
+2. **Providers**: Credentials, Google OAuth, LinkedIn OAuth
+3. **To enable full auth**:
+   - Setup PostgreSQL database
+   - Uncomment PrismaAdapter in `auth.ts`
+   - Add `AuthSessionProvider` back to layout
+   - Wrap protected pages with `ProtectedRoute`
+   - Configure OAuth credentials in `.env`
 
 ### Node.js Requirements
 - Minimum: Node.js 18.18.0
 - Recommended: Node.js 20.x LTS or 22.x
 - Current: v22.15.0
+
+### Demo Mode Access
+- **Dashboard**: http://localhost:3000/dashboard (no auth required)
+- **Demo User**: "Demo Student" (S1 level)
+- **Features**: All dashboard widgets, dark mode, i18n switcher
