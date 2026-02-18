@@ -25,9 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-      {children}
-      <Toaster position="top-center" />
-    </>
+    <html lang="id">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {children}
+        <Toaster position="top-center" />
+      </body>
+    </html>
   );
 }
