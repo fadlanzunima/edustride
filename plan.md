@@ -724,13 +724,14 @@ curl -X POST "http://localhost:3000/api/seed?force=true"
 - `app/api/quizzes/[id]/attempts/route.ts` - Quiz attempts API
 - `app/[locale]/dashboard/quiz/page.tsx` - Quiz list page
 - `app/[locale]/dashboard/quiz/create/page.tsx` - Quiz create page
+- `app/[locale]/dashboard/quiz/[id]/page.tsx` - Quiz take page ✅ ADDED
+- `app/[locale]/dashboard/quiz/[id]/results/page.tsx` - Quiz results page ✅ ADDED
 
 **Next Steps:**
-- [ ] Quiz detail/take page (taking quiz interactively)
-- [ ] Quiz results page dengan detailed feedback
 - [ ] Quiz leaderboard & analytics
 - [ ] More question types (Essay, Short Answer)
 - [ ] Manual review for essay questions
+- [ ] Share quiz results feature
 
 ### Phase 7: Advanced Dashboard Widgets (Minggu 7-8)
 - [ ] Interactive Career Explorer widget (SMA) - eksplorasi jurusan & karir
