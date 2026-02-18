@@ -10,6 +10,9 @@ export function MobileNav() {
   const t = useTranslations("navigation");
   const pathname = usePathname();
 
+  // Get locale from pathname
+  const locale = pathname.split("/")[1] || "id";
+
   return (
     <nav
       className={cn(
@@ -21,12 +24,13 @@ export function MobileNav() {
       <div className="flex h-16 items-center justify-around px-4 safe-area-pb">
         {mobileNavItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const isActive = pathname.endsWith(item.href);
+          const href = `/${locale}${item.href}`;
 
           return (
             <Link
               key={item.href}
-              href={item.href}
+              href={href}
               className={cn(
                 "flex flex-col items-center justify-center gap-1",
                 "min-w-[64px] min-h-[44px] rounded-lg",

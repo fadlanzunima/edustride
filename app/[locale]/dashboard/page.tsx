@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { DashboardContent } from "@/components/dashboard/dashboard-content";
+import { DashboardSkeleton } from "@/components/dashboard/dashboard-skeleton";
 
 export const metadata = {
   title: "Dashboard - EduStride",
@@ -7,8 +9,8 @@ export const metadata = {
 
 export default function DashboardPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <Suspense fallback={<DashboardSkeleton />}>
       <DashboardContent />
-    </div>
+    </Suspense>
   );
 }

@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import { AuthSessionProvider } from "@/components/providers/session-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { QueryProvider } from "@/components/providers/query-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 export default async function LocaleLayout({
@@ -28,14 +29,16 @@ export default async function LocaleLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AuthSessionProvider>
-            <AuthProvider>
-              <NextIntlClientProvider messages={messages}>
-                {children}
-                <Toaster position="top-center" richColors />
-              </NextIntlClientProvider>
-            </AuthProvider>
-          </AuthSessionProvider>
+          <QueryProvider>
+            <AuthSessionProvider>
+              <AuthProvider>
+                <NextIntlClientProvider messages={messages}>
+                  {children}
+                  <Toaster position="top-center" richColors />
+                </NextIntlClientProvider>
+              </AuthProvider>
+            </AuthSessionProvider>
+          </QueryProvider>
         </ThemeProvider>
       </body>
     </html>

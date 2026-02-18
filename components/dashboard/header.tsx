@@ -28,11 +28,14 @@ export function Header({ onMenuClick }: HeaderProps) {
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
 
-  // Generate breadcrumbs from pathname
+  // Generate breadcrumbs from pathname (skip locale)
   const breadcrumbs = React.useMemo(() => {
     const parts = pathname.split("/").filter(Boolean);
-    return parts.map((part, index) => {
-      const href = "/" + parts.slice(0, index + 1).join("/");
+    // Skip the first part if it's a locale (en/id)
+    const startIndex = parts[0] === "en" || parts[0] === "id" ? 1 : 0;
+    return parts.slice(startIndex).map((part, index) => {
+      const actualIndex = index + startIndex;
+      const href = "/" + parts.slice(0, actualIndex + 1).join("/");
       // Capitalize and clean up the label
       const label = part
         .replace(/-/g, " ")

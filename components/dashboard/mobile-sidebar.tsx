@@ -73,7 +73,7 @@ export function MobileSidebar({ open, onOpenChange }: MobileSidebarProps) {
                     <MobileNavLink
                       key={item.href}
                       item={item}
-                      isActive={pathname === item.href}
+                      isActive={pathname.endsWith(item.href)}
                       onClick={() => onOpenChange(false)}
                     />
                   ))}
@@ -98,11 +98,16 @@ interface MobileNavLinkProps {
 
 function MobileNavLink({ item, isActive, onClick }: MobileNavLinkProps) {
   const t = useTranslations("navigation");
+  const pathname = usePathname();
   const Icon = item.icon;
+
+  // Get locale from pathname
+  const locale = pathname.split("/")[1] || "id";
+  const href = `/${locale}${item.href}`;
 
   return (
     <Link
-      href={item.href}
+      href={href}
       onClick={onClick}
       className={cn(
         "flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors",

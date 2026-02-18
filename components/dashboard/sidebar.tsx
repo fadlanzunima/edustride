@@ -103,7 +103,7 @@ export function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
                     <NavLink
                       key={item.href}
                       item={item}
-                      isActive={pathname === item.href}
+                      isActive={pathname.endsWith(item.href)}
                       isCollapsed={isCollapsed}
                     />
                   ))}
@@ -143,11 +143,17 @@ interface NavLinkProps {
 
 function NavLink({ item, isActive, isCollapsed }: NavLinkProps) {
   const t = useTranslations("navigation");
+  const pathname = usePathname();
   const Icon = item.icon;
+
+  // Get locale from pathname (e.g., /en/dashboard -> en)
+  const locale = pathname.split("/")[1] || "id";
+  // Build locale-aware href
+  const href = `/${locale}${item.href}`;
 
   const content = (
     <Link
-      href={item.href}
+      href={href}
       className={cn(
         "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
         "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
