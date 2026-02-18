@@ -339,3 +339,22 @@ curl -X POST "http://localhost:3000/api/seed?force=true"
 - **Protected Routes**: Dashboard wrapped with ProtectedRoute ✅
 - **Session Management**: NextAuth.js with JWT ✅
 - **OAuth Ready**: Google & LinkedIn providers configured ✅
+
+### Portfolio Builder (Phase 5) ✅
+- **Pages**:
+  - `/dashboard/portfolio` - List portfolios with filter/sort
+  - `/dashboard/portfolio/create` - Create new portfolio
+  - `/dashboard/portfolio/[id]/edit` - Edit portfolio
+  - `/dashboard/portfolio/[id]` - View portfolio details
+- **Features**:
+  - Form dengan Zod validation
+  - Date picker (Indonesian locale)
+  - Tag management
+  - Thumbnail preview
+  - Grid/List view toggle
+  - Search & filter
+- **Components**: PortfolioForm, PortfolioList, PortfolioCard, PortfolioSummary
+
+**Next Phases:**
+- Phase 6: Skill Hub (assessment, tracking, sertifikasi)
+- Phase 7: AI Integration (rekomendasi, resume parser)
