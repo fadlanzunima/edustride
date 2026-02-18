@@ -275,18 +275,27 @@ messages/
 - Recommended: Node.js 20.x LTS or 22.x
 - Current: v22.15.0
 
-### Database Setup (Phase 4)
+### Database Setup (Phase 4) ✅ COMPLETED
 1. **Database**: PostgreSQL via Supabase (configured in `.env.local`)
-2. **ORM**: Prisma with full schema (User, Portfolio, Skill, Roadmap, Achievement, Activity)
-3. **To complete setup**:
-   - Run migration: `npx prisma migrate dev --name init`
-   - Generate client: `npx prisma generate`
-4. **API Endpoints**:
+   - Using **Session Pooler** for IPv4 compatibility
+   - Connection: `aws-1-ap-southeast-1.pooler.supabase.com:5432`
+2. **ORM**: Prisma with full schema
+   - Models: User, Account, Session, Portfolio, Skill, Roadmap, Achievement, Activity
+   - Migration: `20260218060442_init` ✅ Applied
+   - Prisma Client: v7.4.0 ✅ Generated
+3. **API Endpoints**:
    - `/api/portfolio/*` - CRUD operations for portfolio
    - `/api/skills/*` - Skill management
    - `/api/roadmap/*` - Roadmap with nested items
    - `/api/activities/*` - Activity feed
-5. **Documentation**: See `docs/supabase-setup.md`
+4. **Documentation**: See `docs/supabase-setup.md`
+
+**Commands:**
+```bash
+npx prisma migrate dev --name init  # Create & apply migrations
+npx prisma generate                 # Generate Prisma Client
+npx prisma studio                   # Open Prisma Studio (DB GUI)
+```
 
 ### Caching (Redis)
 - **Setup**: Redis via Upstash (configured in `.env.local`)
@@ -297,6 +306,11 @@ messages/
 - `usePortfolios`, `useSkills`, `useRoadmaps`, `useActivities`
 - Located in `hooks/` directory
 - Automatic caching and optimistic updates
+
+### Demo Mode Access
+- **Dashboard**: http://localhost:3000/dashboard (no auth required)
+- **Demo User**: "Demo Student" (S1 level)
+- **Sample Data**: Dashboard currently uses sample data (not yet connected to API)
 
 ### Demo Mode Access
 - **Dashboard**: http://localhost:3000/dashboard (no auth required)
