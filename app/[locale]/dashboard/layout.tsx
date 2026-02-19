@@ -1,5 +1,6 @@
 import { DashboardShell } from "@/components/dashboard/shell";
 import { ProtectedRoute } from "@/components/auth/protected-route";
+import { NuqsProvider } from "@/components/providers/nuqs-provider";
 
 export const metadata = {
   title: "Dashboard - EduStride",
@@ -13,7 +14,9 @@ export default function DashboardLayout({
 }) {
   return (
     <ProtectedRoute allowDemo={true}>
-      <DashboardShell>{children}</DashboardShell>
+      <NuqsProvider>
+        <DashboardShell>{children}</DashboardShell>
+      </NuqsProvider>
     </ProtectedRoute>
   );
 }

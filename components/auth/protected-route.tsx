@@ -92,7 +92,12 @@ export function ProtectedRoute({
             <Button
               variant="outline"
               className="w-full"
-              onClick={enableDemoMode}
+              onClick={() => {
+                console.log(
+                  "ProtectedRoute: Enabling demo mode from button click"
+                );
+                enableDemoMode();
+              }}
             >
               Continue in Demo Mode
             </Button>

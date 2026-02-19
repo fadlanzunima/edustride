@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { motion } from "motion/react";
 import {
   FileText,
   Award,
@@ -11,6 +12,7 @@ import {
   Upload,
   Share2,
   BookOpen,
+  Sparkles,
 } from "lucide-react";
 import { StatCard } from "./stat-card";
 import { ActivityFeed, sampleActivities } from "./activity-feed";
@@ -20,6 +22,17 @@ import { Widget, WidgetGrid, QuickActionsWidget } from "./widget";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { LevelSwitcher } from "@/components/level-switcher/level-switcher";
+import { useLevelStore } from "@/lib/store/level-store";
+import { cn } from "@/lib/utils";
+import type { Level } from "@/types";
+
+// Phase 7 Widgets
+import { CareerExplorerWidget } from "@/components/widgets/career-explorer";
+import { PortfolioPreviewWidget } from "@/components/widgets/portfolio-preview";
+import { ResearchImpactWidget } from "@/components/widgets/research-impact";
+import { AnalyticsDashboardWidget } from "@/components/widgets/analytics-dashboard";
+import { NotificationCenterWidget } from "@/components/widgets/notification-center";
 
 // Sample data for charts
 const skillProgressData = [
@@ -48,28 +61,85 @@ const weeklyActivity = [
   { name: "Sun", hours: 2 },
 ];
 
+// Level-specific welcome messages
+const welcomeMessages: Record<Level, { title: string; subtitle: string }> = {
+  SMA: {
+    title: "Selamat datang kembali, Pejuang SNBT!",
+    subtitle:
+      "Ayo eksplorasi jurusan dan persiapkan dirimu untuk masa depan yang gemilang.",
+  },
+  S1: {
+    title: "Welcome back, Future Professional!",
+    subtitle:
+      "Build your portfolio, develop skills, and prepare for your dream career.",
+  },
+  "S2/S3": {
+    title: "Welcome back, Researcher!",
+    subtitle: "Track your research impact and advance your academic journey.",
+  },
+};
+
+// Level-specific theme colors
+const levelColors: Record<Level, { gradient: string; accent: string }> = {
+  SMA: {
+    gradient: "from-cyan-500 to-blue-500",
+    accent: "cyan",
+  },
+  S1: {
+    gradient: "from-blue-600 to-indigo-600",
+    accent: "blue",
+  },
+  "S2/S3": {
+    gradient: "from-slate-700 to-slate-900",
+    accent: "slate",
+  },
+};
+
 export function DashboardContent() {
+  const { currentLevel } = useLevelStore();
+  const welcome = welcomeMessages[currentLevel];
+  const colors = levelColors[currentLevel];
+
   return (
     <div className="space-y-6">
-      {/* Welcome Section */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Welcome back, Student!
-          </h1>
-          <p className="text-muted-foreground">
-            Here&apos;s what&apos;s happening with your portfolio today.
-          </p>
+      {/* Welcome Section with Level Switcher */}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <motion.div
+            key={currentLevel}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              {welcome.title}
+            </h1>
+            <p className="text-muted-foreground mt-1">{welcome.subtitle}</p>
+          </motion.div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm">
+              <Share2 className="mr-2 h-4 w-4" />
+              Share
+            </Button>
+            <Button
+              size="sm"
+              className={cn("bg-gradient-to-r", colors.gradient)}
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              New Project
+            </Button>
+          </div>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Share2 className="mr-2 h-4 w-4" />
-            Share
-          </Button>
-          <Button size="sm">
-            <Plus className="mr-2 h-4 w-4" />
-            New Project
-          </Button>
+
+        {/* Level Switcher */}
+        <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50">
+          <div className="flex-1">
+            <p className="text-sm font-medium">Current Level</p>
+            <p className="text-xs text-muted-foreground">
+              Customize your dashboard based on your education level
+            </p>
+          </div>
+          <LevelSwitcher />
         </div>
       </div>
 
@@ -108,6 +178,37 @@ export function DashboardContent() {
           delay={0.3}
         />
       </div>
+
+      {/* Level-Specific Featured Widget */}
+      <motion.div
+        key={currentLevel}
+        initial={{ opacity: 0, scale: 0.98 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3 }}
+        className="grid gap-4 lg:grid-cols-3"
+      >
+        {/* Primary Level-Specific Widget */}
+        <div className="lg:col-span-2">
+          {currentLevel === "SMA" && <CareerExplorerWidget />}
+          {currentLevel === "S1" && <PortfolioPreviewWidget />}
+          {currentLevel === "S2/S3" && <ResearchImpactWidget />}
+        </div>
+
+        {/* Secondary Widgets */}
+        <div className="space-y-4">
+          {/* Notification Center */}
+          <NotificationCenterWidget />
+        </div>
+      </motion.div>
+
+      {/* Analytics Dashboard */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <AnalyticsDashboardWidget />
+      </motion.div>
 
       {/* Main Widget Grid */}
       <WidgetGrid>
@@ -333,6 +434,45 @@ export function DashboardContent() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Feature Highlights Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4 }}
+        className={cn(
+          "p-6 rounded-2xl bg-gradient-to-r text-white",
+          colors.gradient
+        )}
+      >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-white/20">
+              <Sparkles className="h-6 w-6" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold">
+                {currentLevel === "SMA" && "Jelajahi Karier Impianmu"}
+                {currentLevel === "S1" && "Bangun Portofolio Profesionalmu"}
+                {currentLevel === "S2/S3" && "Tingkatkan Dampak Risetmu"}
+              </h3>
+              <p className="text-sm text-white/80">
+                {currentLevel === "SMA" &&
+                  "Temukan jurusan yang tepat dengan Career Explorer"}
+                {currentLevel === "S1" &&
+                  "Optimalkan portofoliomu untuk recruiters"}
+                {currentLevel === "S2/S3" &&
+                  "Tracking publikasi dan metrik riset dalam satu tempat"}
+              </p>
+            </div>
+          </div>
+          <Button variant="secondary" className="shrink-0">
+            {currentLevel === "SMA" && "Mulai Eksplorasi"}
+            {currentLevel === "S1" && "Lihat Preview"}
+            {currentLevel === "S2/S3" && "Lihat Impact"}
+          </Button>
+        </div>
+      </motion.div>
     </div>
   );
 }

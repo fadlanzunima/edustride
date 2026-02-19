@@ -1,22 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Viewport } from "next";
+import { defaultMetadata, defaultViewport } from "@/lib/metadata";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export const metadata: Metadata = {
-  title: "EduStride - Skill & Digital Portfolio",
-  description:
-    "Platform edukasi terpadu untuk membangun portofolio digital dan skill dari SMA hingga S3",
-};
+// Export metadata and viewport for SEO
+export const metadata = defaultMetadata;
+export const viewport: Viewport = defaultViewport;
 
 export default function RootLayout({
   children,

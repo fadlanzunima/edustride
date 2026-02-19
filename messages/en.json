@@ -102,7 +102,8 @@
       "portfolios": "Portfolios Created",
       "roadmaps": "Skill Roadmaps",
       "partners": "Industry Partners"
-    }
+    },
+    "statsTitle": "Statistics"
   },
   "footer": {
     "copyright": "© {year} EduStride. All rights reserved."
@@ -124,7 +125,10 @@
     "levelsSubtitle": "Specially designed for the unique needs of students at every stage",
     "badge": "#1 Education Platform in Indonesia",
     "ctaTitle": "Ready to Start Your Journey?",
-    "ctaDescription": "Join 10K+ students and build a digital portfolio that will open doors to your future."
+    "ctaDescription": "Join 10K+ students and build a digital portfolio that will open doors to your future.",
+    "subtitle": "Integrated education platform helping 10K+ Indonesian students build professional portfolios and industry-relevant skills.",
+    "ctaPrimary": "Get Started",
+    "ctaSecondary": "Watch Demo"
   },
   "language": {
     "select": "Select Language",
