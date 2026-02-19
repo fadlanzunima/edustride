@@ -175,5 +175,50 @@ EduStride kini telah **siap untuk deployment ke production**! Semua fitur core t
 
 ---
 
+## 🔒 Strict Tech Stack Rules (NEW - Feb 2026)
+
+The following rules are now **MANDATORY** for all development:
+
+### Database (PostgreSQL ONLY)
+- ✅ **MUST USE** PostgreSQL via Supabase (No SQLite/MySQL)
+- ✅ **MUST USE** Prisma ORM v7.4.0 with driver adapter
+- ❌ **NEVER** delete or modify migration files
+- ✅ Environment: `DATABASE_URL` in `.env.local`
+
+### Authentication
+- ✅ **MUST USE** NextAuth.js v5 with JWT strategy
+- ✅ **MUST USE** bcryptjs for password hashing
+- ✅ Protected routes via middleware.ts
+
+### Frontend Stack
+- ✅ **MUST USE** Next.js 15.2.0 + React 19
+- ✅ **MUST USE** TypeScript (strict mode)
+- ✅ **MUST USE** Tailwind CSS v4 + shadcn/ui
+- ✅ **MUST USE** Motion for animations
+- ✅ **MUST USE** next-intl for i18n (id/en)
+
+### State Management
+- ✅ **MUST USE** Zustand (client state)
+- ✅ **MUST USE** TanStack Query (server state)
+- ✅ **MUST USE** nuqs (URL state)
+
+### Form Handling
+- ✅ **MUST USE** React Hook Form + Zod validation
+
+**See full rules in [`plan.md`](plan.md:942)**
+
+---
+
+## 🐛 Bug Fixes (Latest)
+
+### Login Issue Fixed (19 Feb 2026)
+- ✅ Updated Supabase database credentials in `.env.local`
+- ✅ Improved login error handling in `app/[locale]/login/page.tsx`
+- ✅ Login now working with demo credentials:
+  - Email: `demo@edustride.id`
+  - Password: `password123`
+
+---
+
 **Repository**: https://github.com/fadlanzunima/edustride
 **Last Commit**: `11be9d2` - Phase 8: Integration & Polish - Complete implementation

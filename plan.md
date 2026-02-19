@@ -936,4 +936,108 @@ curl -X POST "http://localhost:3000/api/seed?force=true"
 
 ---
 
-**Catatan:** Tech stack ini dipilih berdasarkan data State of React 2024 dan tren industri terkini untuk memastikan maintainability dan developer experience terbaik.
+## 12. Strict Tech Stack Rules (Updated Feb 2026)
+
+The following rules are **MANDATORY** and must be followed strictly. No exceptions without explicit approval.
+
+### Database (PostgreSQL ONLY)
+- ✅ **MUST USE** PostgreSQL via Supabase for production
+- ✅ **MUST USE** Prisma ORM v7.4.0 with driver adapter pattern
+- ❌ **NEVER** switch to SQLite, MySQL, or other databases
+- ❌ **NEVER** remove migrations or schema files
+- ✅ Connection pooling via Supabase Session Pooler (Port 5432)
+- ✅ Environment variable: `DATABASE_URL` in `.env.local`
+
+### Authentication (NextAuth.js v5)
+- ✅ **MUST USE** NextAuth.js v5 (Auth.js) with credentials provider
+- ✅ **MUST USE** JWT session strategy (no database sessions)
+- ✅ **MUST USE** bcryptjs for password hashing
+- ✅ OAuth: Google & LinkedIn ready (optional but configured)
+- ✅ Protected routes via middleware.ts
+
+### Frontend Stack (Strict)
+- ✅ **MUST USE** Next.js 15.2.0 (App Router)
+- ✅ **MUST USE** React 19
+- ✅ **MUST USE** TypeScript (strict mode enabled)
+- ✅ **MUST USE** Tailwind CSS v4
+- ✅ **MUST USE** shadcn/ui components (New York style)
+- ✅ **MUST USE** Motion (Framer Motion rebrand) for animations
+- ✅ **MUST USE** next-intl for i18n (id/en)
+
+### State Management (Strict)
+- ✅ **MUST USE** Zustand for client state
+- ✅ **MUST USE** TanStack Query for server state
+- ✅ **MUST USE** nuqs for URL state management
+
+### Form Handling (Strict)
+- ✅ **MUST USE** React Hook Form
+- ✅ **MUST USE** Zod for validation
+- ✅ **MUST USE** @hookform/resolvers
+
+### File Structure Rules
+```
+app/
+  [locale]/           # All routes must be under locale
+    (landing)/        # Landing page route group
+    (dashboard)/      # Protected dashboard routes
+    login/            # Auth pages
+    register/
+  api/                # API routes
+components/
+  ui/                 # shadcn components only
+  dashboard/          # Dashboard-specific components
+  widgets/            # Level-specific widgets
+lib/
+  prisma.ts           # Prisma client singleton
+  utils.ts            # Utility functions
+  store/              # Zustand stores
+hooks/                # Custom React hooks
+prisma/
+  schema.prisma       # Database schema (DO NOT MODIFY STRUCTURE)
+  migrations/         # Migration files (DO NOT DELETE)
+```
+
+### Naming Conventions (Strict)
+| Type | Convention | Example |
+|------|------------|---------|
+| Components | PascalCase | `UserProfile.tsx` |
+| Files | kebab-case | `user-profile.tsx` |
+| Hooks | camelCase with `use` | `useAuth()` |
+| Types/Interfaces | PascalCase | `UserProps` |
+| Constants | UPPER_SNAKE_CASE | `MAX_ITEMS` |
+| CSS Classes | kebab-case | `btn-primary` |
+
+### Code Style Rules (Strict)
+- ✅ Double quotes for strings
+- ✅ Semicolons always
+- ✅ 2 spaces indentation
+- ✅ Line width ~80-100 characters
+- ✅ Trailing commas in objects/arrays
+- ✅ Import order: React → Next → Third-party → @/ → Relative
+
+### Git Rules (Strict)
+- ✅ Migrations must be committed
+- ✅ `.env.local` must NEVER be committed
+- ✅ All TypeScript errors must be resolved before commit
+- ✅ Use `npm run lint` before committing
+
+### Testing Requirements
+- ✅ Vitest for unit tests
+- ✅ Playwright for E2E tests
+- ✅ Test files: `*.test.ts` or `*.spec.ts`
+
+### Performance Rules
+- ✅ Lazy loading for heavy components
+- ✅ next/image for all images
+- ✅ Hardware-accelerated transforms only
+- ✅ No inline styles (use Tailwind)
+
+### Security Rules
+- ✅ Environment variables for secrets
+- ✅ Input sanitization via Zod
+- ✅ Rate limiting on auth endpoints
+- ✅ CSRF protection enabled
+
+---
+
+**Catatan:** Tech stack ini dipilih berdasarkan data State of React 2024 dan tren industri terkini untuk memastikan maintainability dan developer experience terbaik. **STRICT ADHERENCE REQUIRED** - consult with lead before any changes.

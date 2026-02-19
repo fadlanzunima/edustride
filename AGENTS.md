@@ -415,6 +415,55 @@ edustride/
 - Hardcode text without i18n
 - Ignore TypeScript errors
 - Commit `.env` files
+- **Switch database from PostgreSQL to SQLite/MySQL**
+- **Delete or modify Prisma migration files**
+- **Change tech stack without approval**
+
+---
+
+## 🔒 STRICT RULES - MANDATORY (Feb 2026)
+
+**WARNING: These rules are NON-NEGOTIABLE. Any deviation requires explicit approval.**
+
+### Database (PostgreSQL ONLY)
+- ✅ **MUST USE** PostgreSQL via Supabase for production
+- ✅ **MUST USE** Prisma ORM v7.4.0 with driver adapter pattern
+- ❌ **NEVER** switch to SQLite, MySQL, or other databases
+- ❌ **NEVER** remove migrations or schema files
+- ✅ Connection pooling via Supabase Session Pooler
+- ✅ Environment: `DATABASE_URL` in `.env.local`
+
+### Authentication (NextAuth.js v5)
+- ✅ **MUST USE** NextAuth.js v5 with credentials provider
+- ✅ **MUST USE** JWT session strategy
+- ✅ **MUST USE** bcryptjs for password hashing
+
+### Frontend Stack (Locked)
+- ✅ **MUST USE** Next.js 15.2.0 (App Router)
+- ✅ **MUST USE** React 19
+- ✅ **MUST USE** TypeScript (strict mode)
+- ✅ **MUST USE** Tailwind CSS v4
+- ✅ **MUST USE** shadcn/ui (New York style)
+- ✅ **MUST USE** Motion for animations
+- ✅ **MUST USE** next-intl for i18n (id/en)
+
+### State Management (Locked)
+- ✅ **MUST USE** Zustand for client state
+- ✅ **MUST USE** TanStack Query for server state
+- ✅ **MUST USE** nuqs for URL state
+
+### Form Handling (Locked)
+- ✅ **MUST USE** React Hook Form + Zod validation
+
+### Before Making Changes
+1. Check [`plan.md`](plan.md) for strict rules
+2. Check [`COMPLETED_PHASES.md`](COMPLETED_PHASES.md) for current status
+3. Verify tech stack compatibility
+4. Run `npm run lint` and `npx tsc --noEmit`
+
+**When in doubt, ASK first. Do NOT assume.**
+
+---
 
 ## Current Project Status (Feb 2026)
 

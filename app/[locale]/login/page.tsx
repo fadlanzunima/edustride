@@ -60,7 +60,14 @@ export default function LoginPage() {
 
       if (result?.error) {
         console.error("Login error:", result.error);
-        toast.error(t("errors.invalidCredentials") + `: ${result.error}`);
+        // Check if it's a database connection error
+        if (result.error === "CredentialsSignin") {
+          toast.error(
+            "Database connection failed. Please check your network connection or try again later."
+          );
+        } else {
+          toast.error(t("errors.invalidCredentials"));
+        }
       } else if (result?.ok) {
         toast.success("Login successful!");
         router.push(`/${locale}/dashboard`);
