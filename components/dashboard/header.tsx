@@ -3,19 +3,18 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Bell, Sun, Moon, Laptop } from "lucide-react";
+import { Menu, Sun, Moon, Laptop } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserMenu } from "@/components/auth/user-menu";
 import { LanguageSwitcher } from "@/components/language-switcher/language-switcher";
+import { NotificationCenter } from "./notification-center";
 import { CommandMenu } from "./command-menu";
 
 interface HeaderProps {
@@ -79,73 +78,12 @@ export function Header({ onMenuClick }: HeaderProps) {
           </DropdownMenu>
 
           {/* Notifications */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
-                <Badge
-                  variant="destructive"
-                  className="absolute -right-1 -top-1 h-5 min-w-5 px-1 text-xs"
-                >
-                  3
-                </Badge>
-                <span className="sr-only">Notifications</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-80">
-              <div className="flex items-center justify-between px-3 py-2">
-                <span className="font-semibold">Notifications</span>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-auto px-2 py-1 text-xs"
-                >
-                  Mark all as read
-                </Button>
-              </div>
-              <DropdownMenuSeparator />
-              <div className="max-h-80 overflow-auto">
-                <NotificationItem
-                  title="New achievement unlocked!"
-                  description="You've completed your first portfolio project."
-                  time="2 hours ago"
-                />
-                <NotificationItem
-                  title="Skill assessment available"
-                  description="Take the JavaScript skill test to earn a badge."
-                  time="5 hours ago"
-                />
-                <NotificationItem
-                  title="Weekly progress report"
-                  description="Your learning activity for this week is ready."
-                  time="1 day ago"
-                />
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <NotificationCenter />
 
           {/* User Menu */}
           <UserMenu />
         </div>
       </div>
     </header>
-  );
-}
-
-interface NotificationItemProps {
-  title: string;
-  description: string;
-  time: string;
-}
-
-function NotificationItem({ title, description, time }: NotificationItemProps) {
-  return (
-    <div className="flex flex-col gap-1 px-3 py-2 hover:bg-muted cursor-pointer">
-      <p className="text-sm font-medium">{title}</p>
-      <p className="text-xs text-muted-foreground line-clamp-2">
-        {description}
-      </p>
-      <p className="text-xs text-muted-foreground">{time}</p>
-    </div>
   );
 }

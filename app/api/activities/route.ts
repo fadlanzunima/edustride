@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { cache } from "@/lib/cache";
-import { activityQuerySchema } from "@/lib/validations";
+import { activityQuerySchema, createActivitySchema } from "@/lib/validations";
+import { trackActivity } from "@/lib/realtime";
 
 /**
  * GET /api/activities
@@ -89,6 +90,71 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(result);
   } catch (error) {
     console.error("Activities GET error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * POST /api/activities
+ * Create a new activity and broadcast real-time update
+ */
+export async function POST(req: NextRequest) {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const body = await req.json();
+    const validation = createActivitySchema.safeParse(body);
+
+    if (!validation.success) {
+      return NextResponse.json(
+        {
+          error: "Invalid request body",
+          details: validation.error.flatten(),
+        },
+        { status: 400 }
+      );
+    }
+
+    const { type, title, description, entityType, entityId, metadata } =
+      validation.data;
+
+    // Create activity in database
+    const activity = await prisma.activity.create({
+      data: {
+        userId: session.user.id,
+        type,
+        title,
+        description,
+        entityType,
+        entityId,
+        metadata: metadata || {},
+      },
+    });
+
+    // Broadcast real-time activity event
+    trackActivity(session.user.id, {
+      action: type,
+      entityType: entityType || "general",
+      entityId,
+      metadata: {
+        title,
+        description,
+        ...metadata,
+      },
+    });
+
+    // Invalidate activities cache
+    await cache.deletePattern(`user:${session.user.id}:activities:*`);
+
+    return NextResponse.json(activity, { status: 201 });
+  } catch (error) {
+    console.error("Activities POST error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

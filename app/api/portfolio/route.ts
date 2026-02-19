@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { cache } from "@/lib/cache";
 import { createPortfolioSchema, portfolioQuerySchema } from "@/lib/validations";
+import { notifyPortfolioUpdate, trackActivity } from "@/lib/realtime";
 
 /**
  * GET /api/portfolio
@@ -142,6 +143,24 @@ export async function POST(req: NextRequest) {
         }`,
         entityType: "portfolio",
         entityId: portfolio.id,
+      },
+    });
+
+    // Broadcast real-time portfolio update
+    notifyPortfolioUpdate(session.user.id, {
+      portfolioId: portfolio.id,
+      action: portfolio.status === "PUBLISHED" ? "published" : "created",
+      title: portfolio.title,
+    });
+
+    // Broadcast real-time activity
+    trackActivity(session.user.id, {
+      action: "PORTFOLIO_CREATED",
+      entityType: "portfolio",
+      entityId: portfolio.id,
+      metadata: {
+        title: portfolio.title,
+        type: portfolio.type,
       },
     });
 

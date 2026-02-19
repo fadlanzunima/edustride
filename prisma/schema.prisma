@@ -76,17 +76,18 @@ model User {
   updatedAt     DateTime  @updatedAt
 
   // Relations
-  accounts     Account[]
-  sessions     Session[]
-  portfolios   Portfolio[]
-  skills       Skill[]
-  roadmaps     Roadmap[]
-  achievements Achievement[]
-  activities   Activity[]
-  stats        UserStats?
-  quizzes      Quiz[]
-  quizAttempts QuizAttempt[]
-  userBadges   UserBadge[]
+  accounts      Account[]
+  sessions      Session[]
+  portfolios    Portfolio[]
+  skills        Skill[]
+  roadmaps      Roadmap[]
+  achievements  Achievement[]
+  activities    Activity[]
+  stats         UserStats?
+  quizzes       Quiz[]
+  quizAttempts  QuizAttempt[]
+  userBadges    UserBadge[]
+  notifications Notification[]
 
   @@index([email])
   @@index([level])
@@ -144,26 +145,26 @@ enum PortfolioStatus {
 // ============================================
 
 model Skill {
-  id          String     @id @default(cuid())
+  id          String        @id @default(cuid())
   userId      String
   name        String
   category    SkillCategory @default(TECHNICAL)
-  level       SkillLevel @default(BEGINNER)
-  progress    Int        @default(0) // 0-100
-  description String?    @db.Text
-  isPublic    Boolean    @default(true)
-  endorsedBy  String[]   @default([]) // Array of user IDs who endorsed
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  level       SkillLevel    @default(BEGINNER)
+  progress    Int           @default(0) // 0-100
+  description String?       @db.Text
+  isPublic    Boolean       @default(true)
+  endorsedBy  String[]      @default([]) // Array of user IDs who endorsed
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   quizzes Quiz[]
 
+  @@unique([userId, name]) // Prevent duplicate skills per user
   @@index([userId])
   @@index([category])
   @@index([level])
-  @@unique([userId, name]) // Prevent duplicate skills per user
 }
 
 enum SkillCategory {
@@ -186,21 +187,21 @@ enum SkillLevel {
 // ============================================
 
 model Roadmap {
-  id          String        @id @default(cuid())
+  id          String    @id @default(cuid())
   userId      String
   title       String
-  description String?       @db.Text
-  level       String        // SMA, S1, S2_S3
-  category    String        // Career, Academic, Skill, etc.
+  description String?   @db.Text
+  level       String // SMA, S1, S2_S3
+  category    String // Career, Academic, Skill, etc.
   deadline    DateTime?
-  progress    Int           @default(0) // 0-100
-  isActive    Boolean       @default(true)
-  isTemplate  Boolean       @default(false) // For system-generated templates
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  progress    Int       @default(0) // 0-100
+  isActive    Boolean   @default(true)
+  isTemplate  Boolean   @default(false) // For system-generated templates
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   // Relations
-  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user  User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   items RoadmapItem[]
 
   @@index([userId])
@@ -218,7 +219,7 @@ model RoadmapItem {
   order       Int               @default(0)
   status      RoadmapItemStatus @default(NOT_STARTED)
   deadline    DateTime?
-  resources   Json?             // Array of {title, url, type}
+  resources   Json? // Array of {title, url, type}
   completedAt DateTime?
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
@@ -243,20 +244,20 @@ enum RoadmapItemStatus {
 // ============================================
 
 model Achievement {
-  id          String           @id @default(cuid())
-  userId      String
-  title       String
-  description String?          @db.Text
-  type        AchievementType  @default(OTHER)
-  issuer      String?          // Organization that issued it
-  issueDate   DateTime?
-  expiryDate  DateTime?
-  credentialId String?
+  id            String          @id @default(cuid())
+  userId        String
+  title         String
+  description   String?         @db.Text
+  type          AchievementType @default(OTHER)
+  issuer        String? // Organization that issued it
+  issueDate     DateTime?
+  expiryDate    DateTime?
+  credentialId  String?
   credentialUrl String?
-  image       String?
-  isPublic    Boolean          @default(true)
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  image         String?
+  isPublic      Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -282,17 +283,17 @@ enum AchievementType {
 // ============================================
 
 model Badge {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  description String   @db.Text
-  icon        String   // Icon name or emoji
-  category    BadgeCategory @default(OTHER)
+  id          String          @id @default(cuid())
+  name        String          @unique
+  description String          @db.Text
+  icon        String // Icon name or emoji
+  category    BadgeCategory   @default(OTHER)
   difficulty  BadgeDifficulty @default(MEDIUM)
-  points      Int      @default(10)
-  color       String   @default("blue") // For UI styling
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  
+  points      Int             @default(10)
+  color       String          @default("blue") // For UI styling
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+
   // Relations
   userBadges UserBadge[]
 
@@ -301,12 +302,12 @@ model Badge {
 }
 
 model UserBadge {
-  id          String   @id @default(cuid())
-  userId      String
-  badgeId     String
-  earnedAt    DateTime @default(now())
-  context     String?  @db.Text // Context of why badge was earned
-  metadata    Json?    // Additional data
+  id       String   @id @default(cuid())
+  userId   String
+  badgeId  String
+  earnedAt DateTime @default(now())
+  context  String?  @db.Text // Context of why badge was earned
+  metadata Json? // Additional data
 
   // Relations
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -338,24 +339,24 @@ enum BadgeDifficulty {
 // ============================================
 
 model Quiz {
-  id          String    @id @default(cuid())
-  userId      String
-  skillId     String?   // Optional: link to specific skill
-  title       String
-  description String?   @db.Text
-  category    SkillCategory @default(TECHNICAL)
-  difficulty  QuizDifficulty @default(INTERMEDIATE)
-  timeLimit   Int?      // in minutes, null = no limit
-  passingScore Int      @default(70) // percentage
-  isActive    Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id           String         @id @default(cuid())
+  userId       String
+  skillId      String? // Optional: link to specific skill
+  title        String
+  description  String?        @db.Text
+  category     SkillCategory  @default(TECHNICAL)
+  difficulty   QuizDifficulty @default(INTERMEDIATE)
+  timeLimit    Int? // in minutes, null = no limit
+  passingScore Int            @default(70) // percentage
+  isActive     Boolean        @default(true)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 
   // Relations
-  user   User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skill  Skill?    @relation(fields: [skillId], references: [id], onDelete: SetNull)
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill     Skill?         @relation(fields: [skillId], references: [id], onDelete: SetNull)
   questions QuizQuestion[]
-  attempts QuizAttempt[]
+  attempts  QuizAttempt[]
 
   @@index([userId])
   @@index([skillId])
@@ -364,40 +365,40 @@ model Quiz {
 }
 
 model QuizQuestion {
-  id        String   @id @default(cuid())
-  quizId    String
-  question  String   @db.Text
-  type      QuestionType @default(MULTIPLE_CHOICE)
-  order     Int      @default(0)
-  points    Int      @default(1)
-  options   Json?    // Array of {text, isCorrect} for multiple choice
+  id            String       @id @default(cuid())
+  quizId        String
+  question      String       @db.Text
+  type          QuestionType @default(MULTIPLE_CHOICE)
+  order         Int          @default(0)
+  points        Int          @default(1)
+  options       Json? // Array of {text, isCorrect} for multiple choice
   correctAnswer String? // For simple question types
-  explanation String? @db.Text // Optional explanation
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  explanation   String?      @db.Text // Optional explanation
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
 
   // Relations
-  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quiz    Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
   answers QuizAnswer[]
 
-  @@index([quizId])
   @@unique([quizId, order])
+  @@index([quizId])
 }
 
 model QuizAttempt {
-  id        String   @id @default(cuid())
-  quizId    String
-  userId    String
-  score     Int      @default(0) // percentage
-  passed    Boolean  @default(false)
-  startedAt DateTime @default(now())
+  id          String    @id @default(cuid())
+  quizId      String
+  userId      String
+  score       Int       @default(0) // percentage
+  passed      Boolean   @default(false)
+  startedAt   DateTime  @default(now())
   completedAt DateTime?
-  answers   Json?    // Array of {questionId, answer, isCorrect}
-  feedback  String?  @db.Text
+  answers     Json? // Array of {questionId, answer, isCorrect}
+  feedback    String?   @db.Text
 
   // Relations
-  quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz            Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   questionAnswers QuizAnswer[]
 
   @@index([quizId])
@@ -406,21 +407,21 @@ model QuizAttempt {
 }
 
 model QuizAnswer {
-  id        String   @id @default(cuid())
-  attemptId String
+  id         String   @id @default(cuid())
+  attemptId  String
   questionId String
-  answer    String   @db.Text // User's answer
-  isCorrect Boolean  @default(false)
-  points    Int      @default(0)
-  createdAt DateTime @default(now())
+  answer     String   @db.Text // User's answer
+  isCorrect  Boolean  @default(false)
+  points     Int      @default(0)
+  createdAt  DateTime @default(now())
 
   // Relations
   attempt  QuizAttempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
   question QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
+  @@unique([attemptId, questionId])
   @@index([attemptId])
   @@index([questionId])
-  @@unique([attemptId, questionId])
 }
 
 enum QuizDifficulty {
@@ -447,9 +448,9 @@ model Activity {
   type        ActivityType
   title       String
   description String?      @db.Text
-  metadata    Json?        // Additional context data
-  entityType  String?      // portfolio, skill, roadmap, etc.
-  entityId    String?      // ID of related entity
+  metadata    Json? // Additional context data
+  entityType  String? // portfolio, skill, roadmap, etc.
+  entityId    String? // ID of related entity
   isPublic    Boolean      @default(true)
   createdAt   DateTime     @default(now())
 
@@ -482,21 +483,53 @@ enum ActivityType {
 // ============================================
 
 model UserStats {
-  id                 String   @id @default(cuid())
-  userId             String   @unique
-  portfolioCount     Int      @default(0)
-  skillCount         Int      @default(0)
-  roadmapCount       Int      @default(0)
-  achievementCount   Int      @default(0)
-  totalProfileViews  Int      @default(0)
-  weeklyActiveHours  Int      @default(0)
-  currentStreak      Int      @default(0)
-  longestStreak      Int      @default(0)
-  lastActivityAt     DateTime?
-  updatedAt          DateTime @updatedAt
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  portfolioCount    Int       @default(0)
+  skillCount        Int       @default(0)
+  roadmapCount      Int       @default(0)
+  achievementCount  Int       @default(0)
+  totalProfileViews Int       @default(0)
+  weeklyActiveHours Int       @default(0)
+  currentStreak     Int       @default(0)
+  longestStreak     Int       @default(0)
+  lastActivityAt    DateTime?
+  updatedAt         DateTime  @updatedAt
 
   // Relations
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+// ============================================
+// Notification Model (Real-time Notifications)
+// ============================================
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  title     String
+  message   String           @db.Text
+  type      NotificationType @default(INFO)
+  read      Boolean          @default(false)
+  actionUrl String? // Optional link for call-to-action
+  metadata  Json? // Additional data
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+  @@index([userId, read])
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ERROR
 }
