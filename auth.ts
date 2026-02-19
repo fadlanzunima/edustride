@@ -31,6 +31,7 @@ declare module "next-auth/jwt" {
     id?: string;
     level?: string | null;
     institution?: string | null;
+    image?: string | null;
   }
 }
 
@@ -123,11 +124,53 @@ export const authConfig = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger, session }) {
+    async signIn({ user, account, profile }) {
+      // Handle OAuth sign in - store/update profile image
+      if (account && profile && user.email) {
+        const imageUrl =
+          profile.image ?? profile.picture ?? profile.avatar_url ?? null;
+
+        if (imageUrl) {
+          try {
+            // Check if user exists and update image if needed
+            const existingUser = await prisma.user.findUnique({
+              where: { email: user.email },
+              select: { id: true, image: true },
+            });
+
+            if (existingUser) {
+              // Update image if not set or different
+              if (!existingUser.image || existingUser.image !== imageUrl) {
+                await prisma.user.update({
+                  where: { id: existingUser.id },
+                  data: { image: imageUrl },
+                });
+                console.log(`Updated profile image for user: ${user.email}`);
+              }
+            }
+          } catch (error) {
+            console.error("Error updating OAuth profile image:", error);
+            // Don't fail sign-in if image update fails
+          }
+        }
+      }
+      return true;
+    },
+    async jwt({ token, user, trigger, session, account, profile }) {
       if (user) {
         token.id = user.id;
         token.level = user.level;
         token.institution = user.institution;
+        token.image = user.image;
+      }
+
+      // Handle OAuth profile data on initial sign in
+      if (account && profile) {
+        const imageUrl =
+          profile.image ?? profile.picture ?? profile.avatar_url ?? null;
+        if (imageUrl) {
+          token.image = imageUrl;
+        }
       }
 
       // Handle session update
@@ -135,6 +178,7 @@ export const authConfig = {
         token.name = session.name;
         token.level = session.level;
         token.institution = session.institution;
+        token.image = session.image;
       }
 
       return token;
@@ -144,6 +188,7 @@ export const authConfig = {
         session.user.id = token.id as string;
         session.user.level = token.level as string | undefined;
         session.user.institution = token.institution as string | undefined;
+        session.user.image = token.image as string | undefined;
       }
       return session;
     },
