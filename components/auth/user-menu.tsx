@@ -40,6 +40,9 @@ export function UserMenu() {
   };
 
   const handleSignOut = async () => {
+    localStorage.removeItem("edustride-level");
+    localStorage.removeItem("edustride-user");
+
     if (isDemoMode) {
       disableDemoMode();
       router.push(`/${locale}/login`);

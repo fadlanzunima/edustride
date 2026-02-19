@@ -3,6 +3,15 @@
     "title": "EduStride - Skill & Digital Portfolio",
     "description": "Platform edukasi terpadu untuk membangun portofolio digital dan skill dari SMA hingga S3"
   },
+  "common": {
+    "emptyState": {
+      "title": "Belum Ada Data",
+      "description": "Kamu belum memiliki data apa pun. Mulai dengan membuat portofolio atau menambahkan skill pertama kamu.",
+      "createPortfolio": "Buat Portofolio",
+      "addSkill": "Tambah Skill",
+      "exploreFeatures": "Jelajahi Fitur"
+    }
+  },
   "navigation": {
     "home": "Beranda",
     "features": "Fitur",
@@ -208,7 +217,14 @@
     "submit": "Kirim",
     "loading": "Memuat...",
     "noData": "Tidak ada data",
-    "comingSoon": "Segera hadir"
+    "comingSoon": "Segera hadir",
+    "emptyState": {
+      "title": "Belum ada data",
+      "description": "Kamu belum memiliki data apa pun. Mulai dengan membuat portofolio atau menambahkan skill pertama kamu.",
+      "createPortfolio": "Buat Portofolio",
+      "addSkill": "Tambah Skill",
+      "exploreFeatures": "Jelajahi Fitur"
+    }
   },
   "portfolio": {
     "title": "Portofolio",
@@ -357,6 +373,19 @@
     "download": "Download",
     "details": "Detail",
     "delete": "Hapus"
+  },
+  "experience": {
+    "title": "Pengalaman Kerja",
+    "description": "Kelola pengalaman profesional dan organisasimu",
+    "addExperience": "Tambah Pengalaman",
+    "present": "Sekarang",
+    "types": {
+      "full_time": "Penuh Waktu",
+      "part_time": "Paruh Waktu",
+      "internship": "Magang",
+      "freelance": "Freelance",
+      "contract": "Kontrak"
+    }
   },
   "quizTake": {
     "back": "Kembali",

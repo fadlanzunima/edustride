@@ -7,6 +7,36 @@ import { z } from "zod";
 
 import { prisma } from "./lib/prisma";
 
+/**
+ * Default avatar URL for users without a profile image.
+ * Uses a generated avatar service with the app's branding.
+ */
+export const DEFAULT_AVATAR_URL =
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=EduStride&backgroundColor=b6e3f4";
+
+/**
+ * Validates if a string is a valid HTTPS URL.
+ * Prevents XSS attacks from malicious image URLs.
+ */
+function isValidImageUrl(url: string | null | undefined): url is string {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Gets the user image with a fallback to the default avatar.
+ * @param image - The user's image URL or null/undefined
+ * @returns A valid image URL string
+ */
+export function getUserImage(image: string | null | undefined): string {
+  return isValidImageUrl(image) ? image : DEFAULT_AVATAR_URL;
+}
+
 // Extend the session user type
 declare module "next-auth" {
   interface Session {
@@ -14,6 +44,10 @@ declare module "next-auth" {
       id: string;
       name?: string | null;
       email?: string | null;
+      /**
+       * User's profile image URL.
+       * Falls back to DEFAULT_AVATAR_URL if not set or invalid.
+       */
       image?: string | null;
       level?: string | null;
       institution?: string | null;
@@ -188,7 +222,10 @@ export const authConfig = {
         session.user.id = token.id as string;
         session.user.level = token.level as string | undefined;
         session.user.institution = token.institution as string | undefined;
-        session.user.image = token.image as string | undefined;
+        // Always provide a valid image URL with fallback to default avatar
+        session.user.image = getUserImage(
+          token.image as string | null | undefined
+        );
       }
       return session;
     },

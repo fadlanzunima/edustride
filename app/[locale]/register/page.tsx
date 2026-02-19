@@ -208,7 +208,7 @@ export default function RegisterPage() {
                 >
                   <option value="SMA">SMA (High School)</option>
                   <option value="S1">S1 (Undergraduate)</option>
-                  <option value="S2_S3">S2/S3 (Postgraduate)</option>
+                  <option value="S2/S3">S2/S3 (Postgraduate)</option>
                 </select>
                 {errors.level && (
                   <p className="text-sm text-red-500">{errors.level.message}</p>

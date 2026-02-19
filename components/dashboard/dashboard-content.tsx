@@ -26,6 +26,11 @@ import { LevelSwitcher } from "@/components/level-switcher/level-switcher";
 import { useLevelStore } from "@/lib/store/level-store";
 import { cn } from "@/lib/utils";
 import type { Level } from "@/types";
+import { usePortfolios } from "@/hooks/use-portfolio";
+import { useSkills } from "@/hooks/use-skills";
+import { DashboardEmptyState } from "./dashboard-empty-state";
+import { DashboardSkeleton } from "./dashboard-skeleton";
+import { useSession } from "next-auth/react";
 
 // Phase 7 Widgets
 import { CareerExplorerWidget } from "@/components/widgets/career-explorer";
@@ -96,9 +101,61 @@ const levelColors: Record<Level, { gradient: string; accent: string }> = {
 };
 
 export function DashboardContent() {
-  const { currentLevel } = useLevelStore();
-  const welcome = welcomeMessages[currentLevel];
-  const colors = levelColors[currentLevel];
+  const { currentLevel, initializeFromSession } = useLevelStore();
+  const { data: session, status } = useSession();
+
+  // Initialize level from session on first load
+  React.useEffect(() => {
+    if (status === "authenticated") {
+      initializeFromSession(session?.user?.level as Level);
+    }
+  }, [status, session?.user?.level, initializeFromSession]);
+
+  // Determine effective level: ALWAYS prioritize session level over store level
+  // This ensures the correct level is shown based on the logged-in user
+  const effectiveLevel: Level = React.useMemo(() => {
+    // Priority 1: Session level (from database) - check regardless of status
+    // This ensures we show the database level immediately when available
+    if (session?.user?.level) {
+      const sessionLevel = session.user.level as Level;
+      if (["SMA", "S1", "S2/S3"].includes(sessionLevel)) {
+        return sessionLevel;
+      }
+    }
+
+    // Priority 2: Store level (from localStorage) - only if no session level
+    if (currentLevel) {
+      return currentLevel;
+    }
+
+    // Priority 3: Default to S1 if no session level and no store
+    return "S1";
+  }, [session?.user?.level, currentLevel]);
+
+  const welcome = welcomeMessages[effectiveLevel];
+  const colors = levelColors[effectiveLevel];
+
+  // Fetch user data to check if they have any content
+  const { data: portfoliosData, isLoading: isLoadingPortfolios } =
+    usePortfolios({ limit: 1 });
+  const { data: skillsData, isLoading: isLoadingSkills } = useSkills({
+    limit: 1,
+  });
+
+  const isLoading = isLoadingPortfolios || isLoadingSkills;
+  const hasData =
+    (portfoliosData?.pagination?.total ?? 0) > 0 ||
+    (skillsData?.pagination?.total ?? 0) > 0;
+
+  // Show loading skeleton while fetching data
+  if (isLoading) {
+    return <DashboardSkeleton />;
+  }
+
+  // Show empty state if user has no data
+  if (!hasData) {
+    return <DashboardEmptyState level={effectiveLevel} />;
+  }
 
   return (
     <div className="space-y-6">
@@ -106,7 +163,7 @@ export function DashboardContent() {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <motion.div
-            key={currentLevel}
+            key={effectiveLevel}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
@@ -181,7 +238,7 @@ export function DashboardContent() {
 
       {/* Level-Specific Featured Widget */}
       <motion.div
-        key={currentLevel}
+        key={effectiveLevel}
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
@@ -189,9 +246,9 @@ export function DashboardContent() {
       >
         {/* Primary Level-Specific Widget */}
         <div className="lg:col-span-2">
-          {currentLevel === "SMA" && <CareerExplorerWidget />}
-          {currentLevel === "S1" && <PortfolioPreviewWidget />}
-          {currentLevel === "S2/S3" && <ResearchImpactWidget />}
+          {effectiveLevel === "SMA" && <CareerExplorerWidget />}
+          {effectiveLevel === "S1" && <PortfolioPreviewWidget />}
+          {effectiveLevel === "S2/S3" && <ResearchImpactWidget />}
         </div>
 
         {/* Secondary Widgets */}
@@ -452,24 +509,24 @@ export function DashboardContent() {
             </div>
             <div>
               <h3 className="text-lg font-bold">
-                {currentLevel === "SMA" && "Jelajahi Karier Impianmu"}
-                {currentLevel === "S1" && "Bangun Portofolio Profesionalmu"}
-                {currentLevel === "S2/S3" && "Tingkatkan Dampak Risetmu"}
+                {effectiveLevel === "SMA" && "Jelajahi Karier Impianmu"}
+                {effectiveLevel === "S1" && "Bangun Portofolio Profesionalmu"}
+                {effectiveLevel === "S2/S3" && "Tingkatkan Dampak Risetmu"}
               </h3>
               <p className="text-sm text-white/80">
-                {currentLevel === "SMA" &&
+                {effectiveLevel === "SMA" &&
                   "Temukan jurusan yang tepat dengan Career Explorer"}
-                {currentLevel === "S1" &&
+                {effectiveLevel === "S1" &&
                   "Optimalkan portofoliomu untuk recruiters"}
-                {currentLevel === "S2/S3" &&
+                {effectiveLevel === "S2/S3" &&
                   "Tracking publikasi dan metrik riset dalam satu tempat"}
               </p>
             </div>
           </div>
           <Button variant="secondary" className="shrink-0">
-            {currentLevel === "SMA" && "Mulai Eksplorasi"}
-            {currentLevel === "S1" && "Lihat Preview"}
-            {currentLevel === "S2/S3" && "Lihat Impact"}
+            {effectiveLevel === "SMA" && "Mulai Eksplorasi"}
+            {effectiveLevel === "S1" && "Lihat Preview"}
+            {effectiveLevel === "S2/S3" && "Lihat Impact"}
           </Button>
         </div>
       </motion.div>

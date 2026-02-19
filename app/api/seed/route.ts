@@ -13,6 +13,7 @@ const SEED_USERS = [
     institution: "Universitas Indonesia",
     bio: "Mahasiswa Teknik Informatika yang passionate dengan web development",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Demo",
+    hasData: true,
   },
   {
     email: "sma@edustride.id",
@@ -22,6 +23,7 @@ const SEED_USERS = [
     institution: "SMA Negeri 1 Jakarta",
     bio: "Siswa SMA yang tertarik dengan teknologi dan programming",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Budi",
+    hasData: true,
   },
   {
     email: "s2@edustride.id",
@@ -31,6 +33,17 @@ const SEED_USERS = [
     institution: "ITB",
     bio: "Researcher di bidang AI dan Machine Learning",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Candra",
+    hasData: true,
+  },
+  {
+    email: "empty@edustride.id",
+    name: "New User",
+    password: "password123",
+    level: "S1" as const,
+    institution: "",
+    bio: "",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=NewUser",
+    hasData: false,
   },
 ];
 
@@ -372,6 +385,13 @@ export async function POST(request: Request) {
 
       console.log(`✅ User created: ${user.name} (${user.email})`);
       results.users.push(`${user.name} (${user.email})`);
+
+      // Skip creating data for users with hasData = false
+      if (!userData.hasData) {
+        console.log(`  ⚪ Skipped data creation (empty state demo user)`);
+        console.log();
+        continue;
+      }
 
       // Create portfolios for this user
       const userPortfolios = PORTFOLIO_DATA[userData.level];

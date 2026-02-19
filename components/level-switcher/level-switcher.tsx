@@ -10,14 +10,14 @@ const levels: Level[] = ["SMA", "S1", "S2/S3"];
 
 export function LevelSwitcher() {
   const { currentLevel, setLevel } = useLevelStore();
-  const theme = levelThemes[currentLevel];
+  const theme = levelThemes[currentLevel ?? "S1"];
 
   return (
     <div className="flex items-center gap-2 p-2 bg-muted rounded-full w-fit">
       {levels.map((level) => {
         const isActive = currentLevel === level;
         const levelTheme = levelThemes[level];
-        
+
         return (
           <motion.button
             key={level}
@@ -42,13 +42,11 @@ export function LevelSwitcher() {
                 transition={{
                   type: "spring",
                   stiffness: 500,
-                  damping: 30
+                  damping: 30,
                 }}
               />
             )}
-            <span className="relative z-10">
-              {level}
-            </span>
+            <span className="relative z-10">{level}</span>
           </motion.button>
         );
       })}
