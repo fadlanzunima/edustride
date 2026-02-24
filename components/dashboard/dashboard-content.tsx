@@ -22,7 +22,6 @@ import { Widget, WidgetGrid, QuickActionsWidget } from "./widget";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { LevelSwitcher } from "@/components/level-switcher/level-switcher";
 import { useLevelStore } from "@/lib/store/level-store";
 import { cn } from "@/lib/utils";
 import type { Level } from "@/types";
@@ -194,15 +193,23 @@ export function DashboardContent() {
           </div>
         </div>
 
-        {/* Level Switcher */}
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-muted/50">
+        {/* Level Display - SMA Only */}
+        <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500">
+            <GraduationCap className="h-5 w-5 text-white" />
+          </div>
           <div className="flex-1">
-            <p className="text-sm font-medium">Current Level</p>
+            <p className="text-sm font-medium">Siswa SMA</p>
             <p className="text-xs text-muted-foreground">
-              Customize your dashboard based on your education level
+              Persiapan SNBT dan Eksplorasi Karir
             </p>
           </div>
-          <LevelSwitcher />
+          <Badge
+            variant="secondary"
+            className="bg-cyan-500/20 text-cyan-600 border-cyan-500/30"
+          >
+            SMA
+          </Badge>
         </div>
       </div>
 
