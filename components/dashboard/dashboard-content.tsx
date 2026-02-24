@@ -164,36 +164,31 @@ export function DashboardContent() {
 
   return (
     <div className="space-y-6">
-      {/* Welcome Section with Level Switcher */}
+      {/* Welcome Section */}
       <div className="flex flex-col gap-4">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <motion.div
-            key={effectiveLevel}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              {welcome.title}
-            </h1>
-            <p className="text-muted-foreground mt-1">{welcome.subtitle}</p>
-          </motion.div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              <Share2 className="mr-2 h-4 w-4" />
-              Share
-            </Button>
-            <Button
-              size="sm"
-              className={cn("bg-gradient-to-r", colors.gradient)}
-            >
-              <Plus className="mr-2 h-4 w-4" />
-              New Project
-            </Button>
-          </div>
-        </div>
+        <motion.div
+          key={effectiveLevel}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            {welcome.title}
+          </h1>
+          <p className="text-muted-foreground mt-1">{welcome.subtitle}</p>
+        </motion.div>
 
-        {/* Level section removed for SMA-only mode */}
+        {/* Action Buttons - Inline with content flow */}
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm">
+            <Share2 className="mr-2 h-4 w-4" />
+            Share
+          </Button>
+          <Button size="sm" className={cn("bg-gradient-to-r", colors.gradient)}>
+            <Plus className="mr-2 h-4 w-4" />
+            New Project
+          </Button>
+        </div>
       </div>
 
       {/* Stats Row */}
