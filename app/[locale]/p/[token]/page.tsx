@@ -19,6 +19,7 @@ import {
   Eye,
 } from "lucide-react";
 import Link from "next/link";
+import { PublicProfileThemeToggle } from "@/components/public-profile/theme-toggle";
 
 interface PublicProfilePageProps {
   params: Promise<{ token: string }>;
@@ -87,7 +88,7 @@ export default async function PublicProfilePage({
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md border-b sticky top-0 z-50">
+      <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
@@ -96,6 +97,7 @@ export default async function PublicProfilePage({
             <span className="font-bold text-xl">EduStride</span>
           </Link>
           <div className="flex items-center gap-2">
+            <PublicProfileThemeToggle />
             <Badge variant="secondary" className="gap-1">
               <Eye className="h-3 w-3" />
               {user.viewCount + 1} views
@@ -106,7 +108,7 @@ export default async function PublicProfilePage({
 
       <main className="max-w-4xl mx-auto px-4 py-8 space-y-6">
         {/* Profile Header */}
-        <Card className="border-0 shadow-xl bg-white/80 backdrop-blur-sm">
+        <Card className="border-0 shadow-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
           <CardContent className="p-8">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               <Avatar className="h-32 w-32 ring-4 ring-cyan-100">
