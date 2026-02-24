@@ -305,6 +305,30 @@ export default function LandingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollVelocity = useScrollVelocity();
   const { scrollYProgress } = useScroll({ target: containerRef });
+  const [stats, setStats] = useState({
+    totalSMAUsers: 0,
+    totalPortfolios: 0,
+    totalSchools: 0,
+    successRate: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const response = await fetch("/api/stats");
+        if (response.ok) {
+          const data = await response.json();
+          setStats(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchStats();
+  }, []);
 
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, 100]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -329,138 +353,147 @@ export default function LandingPage() {
     },
     {
       icon: BarChart3,
-      title: "Progress Tracking",
+      title: "SNBT Progress Tracker",
       description:
-        "Monitor perkembangan skill dan portofolio dengan analytics real-time",
+        "Pantau progress persiapan SNBT dan eksplorasi jurusan dengan analytics real-time",
       gradient: "from-orange-500 via-amber-500 to-yellow-500",
       accent: "orange",
       size: "medium",
     },
     {
       icon: Shield,
-      title: "Verified Credentials",
+      title: "Sertifikat Terverifikasi",
       description:
-        "Sertifikat dan pencapaian terverifikasi untuk kredibilitas maksimal",
+        "Sertifikat dan pencapaian terverifikasi untuk portofolio SNBT & beasiswa",
       gradient: "from-emerald-500 via-green-500 to-teal-500",
       accent: "emerald",
       size: "small",
     },
     {
       icon: Rocket,
-      title: "Career Booster",
+      title: "Eksplorasi Karir",
       description:
-        "Koneksi langsung ke opportunity magang dan karir di top companies",
+        "Temukan passion dan jalur karir yang sesuai dengan minat dan bakatmu",
       gradient: "from-pink-500 via-rose-500 to-red-500",
       accent: "pink",
       size: "small",
     },
   ];
 
-  const stats = [
+  // Stats are now fetched from API
+  const statsConfig = [
     {
-      value: "10K+",
-      label: t("about.stats.activeUsers"),
+      key: "totalSMAUsers",
+      label: "Siswa SMA Aktif",
       icon: Users,
       color: "from-violet-500 to-purple-500",
     },
     {
-      value: "5K+",
-      label: t("about.stats.portfolios"),
+      key: "totalPortfolios",
+      label: "Portofolio SNBT",
       icon: Briefcase,
       color: "from-blue-500 to-cyan-500",
     },
     {
-      value: "50+",
-      label: t("about.stats.partners"),
+      key: "totalSchools",
+      label: "Sekolah Mitra",
       icon: Award,
       color: "from-orange-500 to-pink-500",
     },
     {
-      value: "100%",
-      label: t("about.stats.roadmaps"),
+      key: "successRate",
+      label: "Lolos PTN",
       icon: Target,
       color: "from-emerald-500 to-teal-500",
+      suffix: "%",
     },
   ];
 
   const testimonials = [
     {
-      name: "Sarah Amelia",
-      role: "S1 - Universitas Indonesia",
-      avatar: "👩‍🎓",
-      content:
-        "EduStride membantu saya membuat portofolio profesional dengan mudah. Sekarang saya lebih percaya diri melamar magang!",
-      rating: 5,
-      company: "Accepted at GoTo",
-    },
-    {
       name: "Muhammad Rizki",
       role: "SMA - SMAN 8 Jakarta",
       avatar: "👨‍🎓",
       content:
-        "Platform ini membantuku menemukan passion di bidang data science. Roadmap-nya sangat terstruktur!",
+        "Portofolio digitalku membantuku lolos SNBT dan diterima di Teknik Informatika UI. Platform ini sangat membantu!",
       rating: 5,
-      company: "SNBT Accepted",
+      company: "Diterima di UI",
     },
     {
-      name: "Dr. Andi Pratama",
-      role: "S3 - Institut Teknologi Bandung",
-      avatar: "🧑‍🏫",
+      name: "Sarah Amelia",
+      role: "SMA - SMAN 3 Bandung",
+      avatar: "👩‍🎓",
       content:
-        "Fitur tracking publikasi riset sangat membantu saya mengelola penelitian dan meningkatkan academic branding.",
+        "EduStride membantuku menemukan passion di bidang kedokteran. Career quiz-nya sangat akurat dan membantu!",
       rating: 5,
-      company: "Published 5 Papers",
+      company: "Diterima di FK UI",
+    },
+    {
+      name: "Budi Santoso",
+      role: "SMA - SMAN 1 Surabaya",
+      avatar: "🧑‍🎓",
+      content:
+        "Dengan portofolio digital, saya berhasil mendapatkan beasiswa prestasi. Dokumentasi prestasi jadi lebih mudah!",
+      rating: 5,
+      company: "Beasiswa LPDP",
     },
   ];
 
   const steps = [
     {
       number: "01",
-      title: t("levels.sma.title"),
-      description: t("levels.sma.description"),
-      icon: Sparkles,
+      title: "Buat Portofolio Digital",
+      description:
+        "Dokumentasikan prestasi akademik, organisasi, dan proyekmu dalam portofolio profesional yang menarik.",
+      icon: FileText,
       color: "from-cyan-400 via-cyan-500 to-blue-500",
       bgGlow: "bg-cyan-500/30",
-      features: ["Career Exploration", "SNBT Prep", "Skill Discovery"],
+      features: [
+        "Portofolio SNBT",
+        "Dokumentasi Prestasi",
+        "Organisasi & Ekskul",
+      ],
     },
     {
       number: "02",
-      title: t("levels.s1.title"),
-      description: t("levels.s1.description"),
-      icon: TrendingUp,
+      title: "Persiapkan SNBT",
+      description:
+        "Gunakan roadmap terstruktur untuk persiapan ujian masuk perguruan tinggi negeri favoritmu.",
+      icon: Target,
       color: "from-blue-500 via-indigo-500 to-purple-500",
       bgGlow: "bg-blue-500/30",
-      features: ["Internship Ready", "Portfolio Build", "Network Growth"],
+      features: ["Tryout Online", "Eksplorasi Jurusan", "Tracking Progress"],
     },
     {
       number: "03",
-      title: t("levels.s2s3.title"),
-      description: t("levels.s2s3.description"),
-      icon: Award,
+      title: "Eksplorasi Karir",
+      description:
+        "Temukan passion dan jalur karir yang sesuai dengan minat, bakat, dan tujuan masa depanmu.",
+      icon: Rocket,
       color: "from-purple-500 via-pink-500 to-rose-500",
       bgGlow: "bg-purple-500/30",
-      features: ["Research Track", "Publication Mgmt", "Academic Brand"],
+      features: ["Career Quiz", "Info Jurusan", "Roadmap Karir"],
     },
   ];
 
   const trustBadges = [
-    { icon: Shield, text: "Data Terenkripsi" },
-    { icon: CheckCircle2, text: "Terpercaya 10K+ Users" },
-    { icon: Rocket, text: "Career Success" },
-    { icon: Heart, text: "Built with Love" },
+    { icon: Shield, text: "Portofolio SNBT Ready" },
+    { icon: CheckCircle2, text: "5K+ Siswa SMA" },
+    { icon: Rocket, text: "Persiapan PTN" },
+    { icon: Heart, text: "Eksplorasi Karir" },
     { icon: Star, text: "4.9/5 Rating" },
-    { icon: Award, text: "Award Winning" },
+    { icon: Award, text: "Beasiswa Ready" },
   ];
 
   const partners = [
-    "Google",
-    "Microsoft",
-    "Amazon",
-    "Tokopedia",
-    "Gojek",
-    "Grab",
-    "Shopee",
-    "Sea",
+    "Universitas Indonesia",
+    "ITB",
+    "Universitas Gadjah Mada",
+    "Universitas Airlangga",
+    "IPB",
+    "Universitas Padjadjaran",
+    "UI",
+    "UGM",
   ];
 
   return (
@@ -553,7 +586,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-4"
           >
-            <LevelSwitcher />
+            {/* LevelSwitcher hidden for SMA-only mode */}
             <Link href="/login">
               <Button
                 variant="ghost"
@@ -606,7 +639,7 @@ export default function LandingPage() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
               <span className="text-sm font-medium bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                Now with AI-Powered Portfolio Builder
+                #1 Platform Portofolio Digital untuk Siswa SMA
               </span>
               <ArrowRight className="w-4 h-4 text-emerald-400" />
             </motion.div>
@@ -870,7 +903,8 @@ export default function LandingPage() {
           </motion.div>
         </section>
 
-        {/* Partners Marquee */}
+        {/* Partners Marquee - Hidden for SMA-only mode */}
+        {/*
         <section className="py-12 border-y border-white/10 overflow-hidden">
           <p className="text-center text-sm text-muted-foreground mb-6">
             Trusted by students from leading universities
@@ -888,6 +922,7 @@ export default function LandingPage() {
             </div>
           </Marquee>
         </section>
+        */}
 
         {/* Stats Section - Floating Cards */}
         <section id="about" className="py-32 px-4 relative">
@@ -913,37 +948,43 @@ export default function LandingPage() {
             </motion.div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-              {stats.map((stat, index) => (
-                <Card3D key={index}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -10, scale: 1.02 }}
-                    className="group relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all cursor-pointer"
-                  >
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity`}
-                    />
-                    <div
-                      className={`absolute -inset-0.5 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-30 rounded-3xl blur-xl transition-opacity`}
-                    />
-                    <stat.icon
-                      className={`w-10 h-10 mb-4 bg-gradient-to-br ${stat.color} p-2 rounded-xl text-white`}
-                    />
+              {statsConfig.map((stat, index) => {
+                const value = stats[stat.key as keyof typeof stats];
+                const displayValue =
+                  value > 0 ? `${value}${stat.suffix || "+"}` : "-";
+
+                return (
+                  <Card3D key={index}>
                     <motion.div
-                      className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}
-                      whileHover={{ scale: 1.1 }}
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ y: -10, scale: 1.02 }}
+                      className="group relative p-8 rounded-3xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all cursor-pointer"
                     >
-                      {stat.value}
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 rounded-3xl transition-opacity`}
+                      />
+                      <div
+                        className={`absolute -inset-0.5 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-30 rounded-3xl blur-xl transition-opacity`}
+                      />
+                      <stat.icon
+                        className={`w-10 h-10 mb-4 bg-gradient-to-br ${stat.color} p-2 rounded-xl text-white`}
+                      />
+                      <motion.div
+                        className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        {loading ? "-" : displayValue}
+                      </motion.div>
+                      <p className="text-sm text-muted-foreground">
+                        {stat.label}
+                      </p>
                     </motion.div>
-                    <p className="text-sm text-muted-foreground">
-                      {stat.label}
-                    </p>
-                  </motion.div>
-                </Card3D>
-              ))}
+                  </Card3D>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -1130,7 +1171,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* Testimonials Section - Hidden for SMA-only mode */}
+        {/*
         <section id="testimonials" className="py-32 px-4">
           <div className="container mx-auto">
             <motion.div
@@ -1212,6 +1254,7 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+        */}
 
         {/* CTA Section */}
         <section className="py-32 px-4 relative overflow-hidden">

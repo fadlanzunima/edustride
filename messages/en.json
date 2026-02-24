@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "EduStride - Skill & Digital Portfolio",
-    "description": "Integrated education platform to build digital portfolios and skills from high school to postgraduate"
+    "title": "EduStride - Digital Portfolio for High School Students",
+    "description": "Integrated education platform for high school students to build digital portfolios, prepare for university entrance exams, and explore careers"
   },
   "common": {
     "emptyState": {
@@ -34,23 +34,25 @@
     "profile": "Profile",
     "settings": "Settings",
     "main": "Main",
-    "account": "Account"
+    "account": "Account",
+    "allProfiles": "All Profiles",
+    "adminPanel": "Admin Panel"
   },
   "hero": {
-    "title": "Build Your Digital Legacy & Skills for the Future",
-    "subtitle": "Integrated education platform helping 10K+ Indonesian students from high school to postgraduate build professional portfolios, develop industry-relevant skills, and achieve dream careers.",
+    "title": "Build Your Digital Portfolio & Prepare for Your Future",
+    "subtitle": "Specialized education platform for high school students to build professional portfolios, prepare for university entrance exams, explore careers, and achieve dream universities.",
     "selectLevel": "Select your education pathway:"
   },
   "features": {
-    "title": "Key Features",
-    "subtitle": "Everything you need to succeed at every educational stage",
+    "title": "Features for High School Students",
+    "subtitle": "Everything you need to succeed in entering your dream university",
     "autoPortfolio": {
-      "title": "Auto-Portfolio Generator",
-      "description": "Create professional portfolios automatically from your data and achievements. Save time, maximize results."
+      "title": "High School Digital Portfolio",
+      "description": "Create professional portfolios for university applications and scholarships. Document achievements, organizations, and projects easily."
     },
     "smartRoadmap": {
-      "title": "Smart Skill Roadmap",
-      "description": "Personalized skill roadmap based on your education level and career goals. Structured and measurable."
+      "title": "University Prep Roadmap",
+      "description": "Structured learning guide for university entrance exam preparation, major exploration, and future planning."
     },
     "linkedin": {
       "title": "LinkedIn Integration",
@@ -58,12 +60,12 @@
     }
   },
   "levels": {
-    "title": "For Every Level",
-    "subtitle": "Specially designed for the unique needs of students at every educational stage",
+    "title": "For High School Students",
+    "subtitle": "Specially designed for the unique needs of high school students in building portfolios and university preparation",
     "sma": {
       "name": "High School",
-      "title": "Exploration & Discovery",
-      "description": "Discover your passion, explore various career paths, and prepare to enter your dream university with confidence."
+      "title": "University Prep & Portfolio",
+      "description": "Document your achievements, explore majors and careers, prepare to enter your dream university with a professional portfolio."
     },
     "s1": {
       "name": "Undergraduate",
@@ -130,12 +132,12 @@
     "selectLevel": "Select your education pathway:",
     "featuresTitle": "Key Features",
     "featuresSubtitle": "Everything you need to succeed at every educational stage",
-    "levelsTitle": "For Every Level",
-    "levelsSubtitle": "Specially designed for the unique needs of students at every stage",
+    "levelsTitle": "For High School Students",
+    "levelsSubtitle": "Specially designed for the unique needs of high school students in building portfolios and university preparation",
     "badge": "#1 Education Platform in Indonesia",
     "ctaTitle": "Ready to Start Your Journey?",
     "ctaDescription": "Join 10K+ students and build a digital portfolio that will open doors to your future.",
-    "subtitle": "Integrated education platform helping 10K+ Indonesian students build professional portfolios and industry-relevant skills.",
+    "subtitle": "Education platform for high school students to build professional portfolios, prepare for university entrance exams, and explore dream careers.",
     "ctaPrimary": "Get Started",
     "ctaSecondary": "Watch Demo"
   },

@@ -39,11 +39,22 @@ const SEED_USERS = [
     email: "empty@edustride.id",
     name: "New User",
     password: "password123",
-    level: "S1" as const,
+    level: "SMA" as const,
     institution: "",
     bio: "",
     image: "https://api.dicebear.com/7.x/avataaars/svg?seed=NewUser",
     hasData: false,
+  },
+  {
+    email: "admin@edustride.id",
+    name: "Super Admin",
+    password: "admin123",
+    level: "S1" as const,
+    institution: "EduStride HQ",
+    bio: "System Administrator",
+    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin",
+    hasData: false,
+    role: "ADMIN" as const,
   },
 ];
 
@@ -380,11 +391,23 @@ export async function POST(request: Request) {
           institution: userData.institution,
           bio: userData.bio,
           image: userData.image,
+          role:
+            ((userData as { role?: string }).role as "USER" | "ADMIN") ||
+            "USER",
         },
       });
 
       console.log(`✅ User created: ${user.name} (${user.email})`);
       results.users.push(`${user.name} (${user.email})`);
+
+      // Clean up existing data if force=true
+      if (force) {
+        await prisma.portfolio.deleteMany({ where: { userId: user.id } });
+        await prisma.skill.deleteMany({ where: { userId: user.id } });
+        await prisma.roadmap.deleteMany({ where: { userId: user.id } });
+        await prisma.activity.deleteMany({ where: { userId: user.id } });
+        await prisma.userStats.deleteMany({ where: { userId: user.id } });
+      }
 
       // Skip creating data for users with hasData = false
       if (!userData.hasData) {
@@ -406,6 +429,13 @@ export async function POST(request: Request) {
       results.portfolios += userPortfolios.length;
       console.log(`  📁 Created ${userPortfolios.length} portfolios`);
 
+      // Delete existing skills for this user (if force=true)
+      if (force) {
+        await prisma.skill.deleteMany({
+          where: { userId: user.id },
+        });
+      }
+
       // Create skills for this user
       const userSkills = SKILLS_DATA[userData.level];
       await prisma.skill.createMany({
@@ -413,6 +443,7 @@ export async function POST(request: Request) {
           userId: user.id,
           ...skill,
         })),
+        skipDuplicates: true,
       });
       results.skills += userSkills.length;
       console.log(`  🎯 Created ${userSkills.length} skills`);

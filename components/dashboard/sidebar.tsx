@@ -16,8 +16,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { navGroups, type NavItem } from "@/lib/data/navigation";
+import { navGroups, adminNavItems, type NavItem } from "@/lib/data/navigation";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
 
 interface SidebarProps {
   isCollapsed: boolean;
@@ -27,6 +28,8 @@ interface SidebarProps {
 export function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
   const t = useTranslations("navigation");
   const pathname = usePathname();
+  const { data: session } = useSession();
+  const isAdmin = session?.user?.role === "ADMIN";
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -56,8 +59,12 @@ export function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
                   </span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold tracking-tight">EduStride</span>
-                  <span className="text-xs text-muted-foreground">Learning Platform</span>
+                  <span className="text-xl font-bold tracking-tight">
+                    EduStride
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    Learning Platform
+                  </span>
                 </div>
               </motion.div>
             )}
@@ -116,6 +123,28 @@ export function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
                 )}
               </div>
             ))}
+
+            {/* Admin Only Section */}
+            {isAdmin && (
+              <div className="space-y-2">
+                {!isCollapsed && (
+                  <h4 className="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Admin
+                  </h4>
+                )}
+                <div className="space-y-1">
+                  {adminNavItems.map((item) => (
+                    <AdminNavLink
+                      key={item.href}
+                      item={item}
+                      isActive={pathname.startsWith(item.href)}
+                      isCollapsed={isCollapsed}
+                    />
+                  ))}
+                </div>
+                <Separator className="mt-4" />
+              </div>
+            )}
           </nav>
         </ScrollArea>
 
@@ -181,6 +210,76 @@ function NavLink({ item, isActive, isCollapsed }: NavLinkProps) {
         </>
       )}
     </Link>
+  );
+
+  if (isCollapsed) {
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{content}</TooltipTrigger>
+        <TooltipContent side="right" className="flex items-center gap-2">
+          {t(item.titleId)}
+          {item.badge && (
+            <Badge variant="secondary" className="h-5 min-w-5 px-1 text-xs">
+              {item.badge}
+            </Badge>
+          )}
+        </TooltipContent>
+      </Tooltip>
+    );
+  }
+
+  return content;
+}
+
+// Admin NavLink - Uses window.location for admin routes
+interface AdminNavLinkProps {
+  item: NavItem;
+  isActive: boolean;
+  isCollapsed: boolean;
+}
+
+function AdminNavLink({ item, isActive, isCollapsed }: AdminNavLinkProps) {
+  const t = useTranslations("navigation");
+  const pathname = usePathname();
+  const Icon = item.icon;
+
+  // Get locale from pathname
+  const locale = pathname.split("/")[1] || "id";
+  // Build admin href with locale
+  const href = `/${locale}${item.href}`;
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = href;
+  };
+
+  const content = (
+    <button
+      onClick={handleClick}
+      className={cn(
+        "w-full flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors",
+        "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
+        isCollapsed && "justify-center px-2"
+      )}
+      aria-current={isActive ? "page" : undefined}
+    >
+      <Icon className={cn("h-5 w-5 shrink-0", isActive && "text-primary")} />
+      {!isCollapsed && (
+        <>
+          <span className="flex-1 text-left truncate">{t(item.titleId)}</span>
+          {item.badge && (
+            <Badge
+              variant="secondary"
+              className="h-5 min-w-5 shrink-0 px-1 text-xs"
+            >
+              {item.badge}
+            </Badge>
+          )}
+        </>
+      )}
+    </button>
   );
 
   if (isCollapsed) {

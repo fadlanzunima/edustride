@@ -6,10 +6,9 @@ import {
   User,
   FolderOpen,
   GraduationCap,
-  Briefcase,
-  FileText,
   Award,
-  Brain,
+  Users,
+  Shield,
   type LucideIcon,
 } from "lucide-react";
 
@@ -46,8 +45,6 @@ export const mainNavItems: NavItem[] = [
     titleId: "activities",
     href: "/dashboard/activities",
     icon: Activity,
-    badge: "3",
-    badgeId: "newActivities",
   },
 ];
 
@@ -64,34 +61,14 @@ export const portfolioNavItems: NavItem[] = [
     href: "/dashboard/skills",
     icon: GraduationCap,
   },
-  {
-    title: "Quiz",
-    titleId: "quiz",
-    href: "/dashboard/quiz",
-    icon: Brain,
-    badge: "New",
-    badgeId: "newQuiz",
-  },
+  // Quiz menu removed for SMA-only focus
   {
     title: "Achievements",
     titleId: "achievements",
     href: "/dashboard/achievements",
     icon: Award,
-    badge: "2",
-    badgeId: "newAchievements",
   },
-  {
-    title: "Experience",
-    titleId: "experience",
-    href: "/dashboard/experience",
-    icon: Briefcase,
-  },
-  {
-    title: "Documents",
-    titleId: "documents",
-    href: "/dashboard/documents",
-    icon: FileText,
-  },
+  // Experience and Documents removed for SMA-only focus
 ];
 
 export const settingsNavItems: NavItem[] = [
@@ -106,6 +83,22 @@ export const settingsNavItems: NavItem[] = [
     titleId: "settings",
     href: "/dashboard/settings",
     icon: Settings,
+  },
+];
+
+// Admin-only navigation items
+export const adminNavItems: NavItem[] = [
+  {
+    title: "All Profiles",
+    titleId: "allProfiles",
+    href: "/admin/profiles",
+    icon: Users,
+  },
+  {
+    title: "Admin Panel",
+    titleId: "adminPanel",
+    href: "/admin",
+    icon: Shield,
   },
 ];
 

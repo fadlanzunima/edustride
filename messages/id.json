@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "EduStride - Skill & Digital Portfolio",
-    "description": "Platform edukasi terpadu untuk membangun portofolio digital dan skill dari SMA hingga S3"
+    "title": "EduStride - Portofolio Digital untuk Siswa SMA",
+    "description": "Platform edukasi terpadu untuk siswa SMA membangun portofolio digital, persiapan SNBT, dan eksplorasi karir"
   },
   "common": {
     "emptyState": {
@@ -34,23 +34,25 @@
     "profile": "Profil",
     "settings": "Pengaturan",
     "main": "Utama",
-    "account": "Akun"
+    "account": "Akun",
+    "allProfiles": "Semua Profil",
+    "adminPanel": "Admin Panel"
   },
   "hero": {
-    "title": "Bangun Warisan Digital & Skill untuk Masa Depan",
-    "subtitle": "Platform edukasi terpadu yang membantu 10K+ pelajar Indonesia dari SMA hingga S3 membangun portofolio profesional, mengembangkan skill relevan industri, dan meraih karir impian.",
+    "title": "Bangun Portofolio Digital & Persiapkan Masa Depanmu",
+    "subtitle": "Platform edukasi khusus siswa SMA untuk membangun portofolio profesional, persiapan SNBT, eksplorasi karir, dan meraih perguruan tinggi impian.",
     "selectLevel": "Pilih jalur edukasimu:"
   },
   "features": {
-    "title": "Fitur Unggulan",
-    "subtitle": "Lengkap dengan semua yang kamu butuhkan untuk sukses di setiap tahap pendidikan",
+    "title": "Fitur untuk Siswa SMA",
+    "subtitle": "Lengkap dengan semua yang kamu butuhkan untuk sukses masuk perguruan tinggi impian",
     "autoPortfolio": {
-      "title": "Auto-Portfolio Generator",
-      "description": "Buat portofolio profesional secara otomatis dari data dan pencapaianmu. Hemat waktu, hasil maksimal."
+      "title": "Portofolio Digital SMA",
+      "description": "Buat portofolio profesional untuk SNBT dan beasiswa. Dokumentasikan prestasi, organisasi, dan proyekmu dengan mudah."
     },
     "smartRoadmap": {
-      "title": "Smart Skill Roadmap",
-      "description": "Roadmap skill yang dipersonalisasi berdasarkan level pendidikan dan tujuan karirmu. Terstruktur dan terukur."
+      "title": "Roadmap Persiapan SNBT",
+      "description": "Panduan belajar terstruktur untuk persiapan SNBT, eksplorasi jurusan, dan planning masa depan."
     },
     "linkedin": {
       "title": "LinkedIn Integration",
@@ -58,12 +60,12 @@
     }
   },
   "levels": {
-    "title": "Untuk Setiap Jenjang",
-    "subtitle": "Didesain khusus untuk kebutuhan unik pelajar di setiap tahap pendidikan",
+    "title": "Untuk Siswa SMA",
+    "subtitle": "Didesain khusus untuk kebutuhan siswa SMA dalam membangun portofolio dan persiapan SNBT",
     "sma": {
       "name": "SMA",
-      "title": "Eksplorasi & Penemuan",
-      "description": "Temukan passionmu, eksplorasi berbagai jalur karir, dan persiapkan diri masuk perguruan tinggi impian dengan keyakinan."
+      "title": "Persiapan SNBT & Portofolio",
+      "description": "Dokumentasikan prestasimu, eksplorasi jurusan dan karir, persiapkan diri masuk PTN impian dengan portofolio profesional."
     },
     "s1": {
       "name": "S1",
@@ -130,12 +132,12 @@
     "selectLevel": "Pilih jalur edukasimu:",
     "featuresTitle": "Fitur Unggulan",
     "featuresSubtitle": "Lengkap dengan semua yang kamu butuhkan untuk sukses di setiap tahap pendidikan",
-    "levelsTitle": "Untuk Setiap Jenjang",
-    "levelsSubtitle": "Didesain khusus untuk kebutuhan unik pelajar di setiap tahap pendidikan",
+    "levelsTitle": "Untuk Siswa SMA",
+    "levelsSubtitle": "Didesain khusus untuk kebutuhan siswa SMA dalam membangun portofolio dan persiapan SNBT",
     "badge": "Platform Edukasi #1 Indonesia",
     "ctaTitle": "Siap Memulai Perjalananmu?",
     "ctaDescription": "Bergabunglah dengan 10K+ pelajar lainnya dan bangun portofolio digital yang akan membuka pintu masa depanmu.",
-    "subtitle": "Platform edukasi terpadu yang membantu 10K+ pelajar Indonesia membangun portofolio profesional dan skill yang relevan dengan industri.",
+    "subtitle": "Platform edukasi untuk siswa SMA membangun portofolio profesional, persiapan SNBT, dan eksplorasi karir impian.",
     "ctaPrimary": "Mulai Gratis",
     "ctaSecondary": "Lihat Demo"
   },

@@ -34,7 +34,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 
 // Simple floating particles with CSS animation
 function FloatingParticles() {
@@ -109,6 +109,30 @@ export default function LandingPage() {
   const t = useTranslations();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef });
+  const [dbStats, setDbStats] = useState({
+    totalSMAUsers: 0,
+    totalPortfolios: 0,
+    totalSchools: 0,
+    successRate: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const response = await fetch("/api/stats");
+        if (response.ok) {
+          const data = await response.json();
+          setDbStats(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch stats:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchStats();
+  }, []);
 
   const heroY = useTransform(scrollYProgress, [0, 0.2], [0, 100]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -159,30 +183,31 @@ export default function LandingPage() {
     },
   ];
 
-  const stats = [
+  const statsConfig = [
     {
-      value: "10K+",
+      key: "totalSMAUsers",
       label: t("about.stats.activeUsers"),
       icon: Users,
       color: "from-violet-500 to-purple-500",
     },
     {
-      value: "5K+",
+      key: "totalPortfolios",
       label: t("about.stats.portfolios"),
       icon: Briefcase,
       color: "from-blue-500 to-cyan-500",
     },
     {
-      value: "50+",
+      key: "totalSchools",
       label: t("about.stats.partners"),
       icon: Award,
       color: "from-orange-500 to-pink-500",
     },
     {
-      value: "100%",
+      key: "successRate",
       label: t("about.stats.roadmaps"),
       icon: Target,
       color: "from-emerald-500 to-teal-500",
+      suffix: "%",
     },
   ];
 
@@ -436,6 +461,8 @@ export default function LandingPage() {
             </motion.div>
 
             {/* Trust Badges */}
+            {/* Trusted by section - Hidden for SMA-only mode */}
+            {/*
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -456,6 +483,7 @@ export default function LandingPage() {
                 ))}
               </div>
             </motion.div>
+            */}
           </div>
         </motion.div>
       </section>
@@ -473,28 +501,34 @@ export default function LandingPage() {
             <div className="relative rounded-3xl bg-gradient-to-br from-violet-500/10 via-purple-500/10 to-fuchsia-500/10 border border-violet-500/20 p-8 md:p-12">
               <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-fuchsia-500/5 rounded-3xl" />
               <div className="relative grid grid-cols-2 md:grid-cols-4 gap-8">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    className="text-center"
-                  >
-                    <div
-                      className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br ${stat.color} mb-4`}
+                {statsConfig.map((stat, index) => {
+                  const value = dbStats[stat.key as keyof typeof dbStats];
+                  const displayValue =
+                    value > 0 ? `${value}${stat.suffix || "+"}` : "-";
+
+                  return (
+                    <motion.div
+                      key={stat.key}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                      className="text-center"
                     >
-                      <stat.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent mb-1">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {stat.label}
-                    </div>
-                  </motion.div>
-                ))}
+                      <div
+                        className={`inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br ${stat.color} mb-4`}
+                      >
+                        <stat.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-clip-text text-transparent mb-1">
+                        {loading ? "-" : displayValue}
+                      </div>
+                      <div className="text-sm text-muted-foreground">
+                        {stat.label}
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
@@ -639,7 +673,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section - Hidden for SMA-only mode */}
+      {/*
       <section className="py-24 relative">
         <div className="container mx-auto px-4">
           <motion.div
@@ -703,6 +738,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+      */}
 
       {/* CTA Section */}
       <section className="py-24 relative overflow-hidden">

@@ -51,12 +51,14 @@ declare module "next-auth" {
       image?: string | null;
       level?: string | null;
       institution?: string | null;
+      role?: "USER" | "ADMIN"; // NEW: User role
     };
   }
 
   interface User {
     level?: string | null;
     institution?: string | null;
+    role?: "USER" | "ADMIN";
   }
 }
 
@@ -66,6 +68,7 @@ declare module "next-auth/jwt" {
     level?: string | null;
     institution?: string | null;
     image?: string | null;
+    role?: "USER" | "ADMIN"; // NEW: User role
   }
 }
 
@@ -149,6 +152,7 @@ export const authConfig = {
             image: user.image,
             level: user.level,
             institution: user.institution,
+            role: user.role as "USER" | "ADMIN" | undefined,
           };
         } catch (error) {
           console.error("Authorization error:", error);
@@ -196,6 +200,7 @@ export const authConfig = {
         token.level = user.level;
         token.institution = user.institution;
         token.image = user.image;
+        token.role = user.role;
       }
 
       // Handle OAuth profile data on initial sign in
@@ -222,6 +227,7 @@ export const authConfig = {
         session.user.id = token.id as string;
         session.user.level = token.level as string | undefined;
         session.user.institution = token.institution as string | undefined;
+        session.user.role = token.role as "USER" | "ADMIN" | undefined;
         // Always provide a valid image URL with fallback to default avatar
         session.user.image = getUserImage(
           token.image as string | null | undefined

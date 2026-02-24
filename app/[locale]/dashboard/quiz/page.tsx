@@ -1,11 +1,28 @@
 "use client";
 
 import * as React from "react";
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { Brain, Plus, Search, Filter, Trophy, Clock, TrendingUp } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import {
+  Brain,
+  Plus,
+  Search,
+  Filter,
+  Trophy,
+  Clock,
+  TrendingUp,
+} from "lucide-react";
 import Link from "next/link";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -36,7 +53,21 @@ const categoryIcons = {
 };
 
 export default function QuizPage() {
+  const { data: session } = useSession();
+  const router = useRouter();
   const t = useTranslations("quiz");
+
+  // Redirect SMA users away from quiz page
+  useEffect(() => {
+    if (session?.user?.level === "SMA") {
+      router.push("/dashboard");
+    }
+  }, [session, router]);
+
+  // Show nothing while checking/redirecting
+  if (session?.user?.level === "SMA") {
+    return null;
+  }
   const [search, setSearch] = React.useState("");
   const [category, setCategory] = React.useState<string>("all");
   const [difficulty, setDifficulty] = React.useState<string>("all");
@@ -71,7 +102,9 @@ export default function QuizPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t("totalQuizzes")}</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {t("totalQuizzes")}
+            </CardTitle>
             <Brain className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -80,16 +113,22 @@ export default function QuizPage() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t("totalAttempts")}</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {t("totalAttempts")}
+            </CardTitle>
             <Trophy className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats?.totalAttempts || 0}</div>
+            <div className="text-2xl font-bold">
+              {stats?.totalAttempts || 0}
+            </div>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{t("passRate")}</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {t("passRate")}
+            </CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -119,7 +158,9 @@ export default function QuizPage() {
             <SelectItem value="SOFT_SKILL">{t("softSkill")}</SelectItem>
             <SelectItem value="LANGUAGE">{t("language")}</SelectItem>
             <SelectItem value="TOOL">{t("tool")}</SelectItem>
-            <SelectItem value="DOMAIN_KNOWLEDGE">{t("domainKnowledge")}</SelectItem>
+            <SelectItem value="DOMAIN_KNOWLEDGE">
+              {t("domainKnowledge")}
+            </SelectItem>
           </SelectContent>
         </Select>
         <Select value={difficulty} onValueChange={setDifficulty}>
@@ -182,7 +223,9 @@ export default function QuizPage() {
         <TabsContent value="advanced" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {quizzes
-              .filter((q) => q.difficulty === "ADVANCED" || q.difficulty === "EXPERT")
+              .filter(
+                (q) => q.difficulty === "ADVANCED" || q.difficulty === "EXPERT"
+              )
               .map((quiz) => (
                 <QuizCard key={quiz.id} quiz={quiz} t={t} />
               ))}
@@ -194,7 +237,8 @@ export default function QuizPage() {
 }
 
 function QuizCard({ quiz, t }: { quiz: any; t: any }) {
-  const Icon = categoryIcons[quiz.category as keyof typeof categoryIcons] || Brain;
+  const Icon =
+    categoryIcons[quiz.category as keyof typeof categoryIcons] || Brain;
 
   return (
     <Card className="hover:shadow-md transition-shadow">
@@ -205,30 +249,43 @@ function QuizCard({ quiz, t }: { quiz: any; t: any }) {
               <Icon className="h-5 w-5 text-muted-foreground" />
             </div>
             <div>
-              <CardTitle className="text-base line-clamp-1">{quiz.title}</CardTitle>
+              <CardTitle className="text-base line-clamp-1">
+                {quiz.title}
+              </CardTitle>
               <CardDescription className="text-xs">
                 {quiz.skill?.name || t("generalQuiz")}
               </CardDescription>
             </div>
           </div>
-          <Badge className={cn("text-xs", difficultyColors[quiz.difficulty as keyof typeof difficultyColors])}>
+          <Badge
+            className={cn(
+              "text-xs",
+              difficultyColors[quiz.difficulty as keyof typeof difficultyColors]
+            )}
+          >
             {t(`difficulty.${quiz.difficulty.toLowerCase()}`)}
           </Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-3">
         {quiz.description && (
-          <p className="text-sm text-muted-foreground line-clamp-2">{quiz.description}</p>
+          <p className="text-sm text-muted-foreground line-clamp-2">
+            {quiz.description}
+          </p>
         )}
         <div className="flex items-center justify-between text-xs text-muted-foreground">
           <div className="flex items-center gap-1">
             <Brain className="h-3 w-3" />
-            <span>{quiz._count?.questions || 0} {t("questions")}</span>
+            <span>
+              {quiz._count?.questions || 0} {t("questions")}
+            </span>
           </div>
           {quiz.timeLimit && (
             <div className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
-              <span>{quiz.timeLimit} {t("minutes")}</span>
+              <span>
+                {quiz.timeLimit} {t("minutes")}
+              </span>
             </div>
           )}
           <div className="flex items-center gap-1">
@@ -237,9 +294,7 @@ function QuizCard({ quiz, t }: { quiz: any; t: any }) {
           </div>
         </div>
         <Button asChild className="w-full" size="sm">
-          <Link href={`/dashboard/quiz/${quiz.id}`}>
-            {t("startQuiz")}
-          </Link>
+          <Link href={`/dashboard/quiz/${quiz.id}`}>{t("startQuiz")}</Link>
         </Button>
       </CardContent>
     </Card>
@@ -277,7 +332,9 @@ function EmptyState({ t }: { t: any }) {
       <CardContent className="flex flex-col items-center justify-center py-12">
         <Brain className="h-12 w-12 text-muted-foreground mb-4" />
         <h3 className="text-lg font-semibold mb-2">{t("noQuizzes")}</h3>
-        <p className="text-sm text-muted-foreground mb-4">{t("noQuizzesDescription")}</p>
+        <p className="text-sm text-muted-foreground mb-4">
+          {t("noQuizzesDescription")}
+        </p>
         <Button asChild>
           <Link href="/dashboard/quiz/create">
             <Plus className="mr-2 h-4 w-4" />

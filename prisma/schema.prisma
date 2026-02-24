@@ -55,6 +55,15 @@ model VerificationToken {
 }
 
 // ============================================
+// User Role Enum
+// ============================================
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+// ============================================
 // Core User Model
 // ============================================
 
@@ -65,32 +74,39 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String? // For credentials provider
-  level         String?   @default("S1") // SMA, S1, S2_S3
+  level         String?   @default("SMA") // Now defaults to SMA
+  role          UserRole  @default(USER) // NEW: Role field
   institution   String? // School/University name
   bio           String?   @db.Text
   location      String?
   website       String?
   linkedIn      String?
   github        String?
+  isProfilePublic Boolean @default(false) // NEW: For profile sharing
+  shareToken    String?   @unique // NEW: Unique token for sharing
+  viewCount     Int       @default(0) // NEW: Profile view count
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
   // Relations
-  accounts      Account[]
-  sessions      Session[]
-  portfolios    Portfolio[]
-  skills        Skill[]
-  roadmaps      Roadmap[]
-  achievements  Achievement[]
-  activities    Activity[]
-  stats         UserStats?
-  quizzes       Quiz[]
-  quizAttempts  QuizAttempt[]
-  userBadges    UserBadge[]
-  notifications Notification[]
+  accounts         Account[]
+  sessions         Session[]
+  portfolios       Portfolio[]
+  skills           Skill[]
+  roadmaps         Roadmap[]
+  achievements     Achievement[]
+  activities       Activity[]
+  stats            UserStats?
+  quizzes          Quiz[]
+  quizAttempts     QuizAttempt[]
+  userBadges       UserBadge[]
+  notifications    Notification[]
+  sharedPortfolios SharedPortfolio[]
 
   @@index([email])
   @@index([level])
+  @@index([role])
+  @@index([shareToken])
   @@index([createdAt])
 }
 
@@ -117,13 +133,37 @@ model Portfolio {
   updatedAt   DateTime        @updatedAt
 
   // Relations
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sharedPortfolios SharedPortfolio[]
 
   @@index([userId])
   @@index([type])
   @@index([status])
   @@index([isFeatured])
   @@index([createdAt])
+}
+
+// ============================================
+// Shared Portfolio Model (For Public Sharing)
+// ============================================
+
+model SharedPortfolio {
+  id          String    @id @default(cuid())
+  userId      String
+  portfolioId String
+  shareToken  String
+  isActive    Boolean   @default(true)
+  viewCount   Int       @default(0)
+  expiresAt   DateTime? // Optional expiration
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([shareToken])
+  @@index([isActive])
 }
 
 enum PortfolioType {

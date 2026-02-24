@@ -480,6 +480,7 @@ edustride/
 9. **Phase 7**: Advanced Dashboard Widgets ✅ (Latest - Feb 2026)
 10. **Phase 7b**: Landing Page Redesign ✅
 11. **Phase 8**: Integration & Polish ✅ (Latest - Feb 2026)
+12. **Phase 9**: SMA Priority & Super Admin ✅ (Latest - Feb 2026)
     - LinkedIn API integration with profile import
     - URL state management with nuqs
     - Testing setup (Vitest + Playwright)
@@ -607,10 +608,12 @@ edustride/
 
 **Models:**
 - User, Account, Session (Auth)
+  - User has `role` (USER/ADMIN), `isProfilePublic`, `shareToken`, `viewCount`
 - Portfolio, Skill, Roadmap
 - Achievement, Activity, UserStats
-- Quiz, QuizQuestion, QuizAttempt, QuizAnswer (New!)
-- Badge, UserBadge (New!)
+- Quiz, QuizQuestion, QuizAttempt, QuizAnswer
+- Badge, UserBadge
+- SharedPortfolio (NEW! - untuk profile sharing)
 
 **Commands:**
 ```bash
@@ -639,7 +642,10 @@ npx prisma studio                   # Open Prisma Studio GUI
 - `/api/skills/*` - Skill management
 - `/api/roadmap/*` - Roadmap operations
 - `/api/activities/*` - Activity feed
-- `/api/quizzes/*` - Quiz CRUD & attempts (New!)
+- `/api/quizzes/*` - Quiz CRUD & attempts
+- `/api/stats` - Public stats (SMA users, portfolios, etc.)
+- `/api/profile/share` - Profile sharing management
+- `/api/admin/users` - Admin user management
 - `/api/seed` - Database seeder
 
 ### 🛠️ Cache System
@@ -650,13 +656,45 @@ npx prisma studio                   # Open Prisma Studio GUI
 - Pattern-based invalidation
 - Works without external dependencies
 
+### 🎯 Phase 9: SMA Priority & Super Admin (Feb 2026)
+
+**Fokus pengembangan untuk siswa SMA dengan menyembunyikan fitur S1/S2/S3.**
+
+#### SMA-Only Mode
+- **Landing Page**: Fokus pada siswa SMA (Portofolio SNBT, Persiapan PTN)
+- **Navigation**: Quiz, Experience, Documents dihidden untuk SMA users
+- **Profile**: SMA-specific fields (School, Grade, SNBT Target, Dream Major)
+- **Stats**: Real-time data dari database (jika kosong, tampil "-")
+
+#### Super Admin System
+- **Role-based Access**: USER dan ADMIN roles
+- **Admin Routes**: `/admin/*` dengan middleware protection
+- **Features**:
+  - Dashboard overview
+  - User management (view, edit, delete)
+  - All profiles viewer
+  - All portfolios viewer
+
+#### Profile Sharing
+- **Public Profile**: Token-based access di `/p/[token]`
+- **Toggle**: User bisa mengatur profile public/private
+- **View Count**: Tracking jumlah views
+
+**Files:**
+- `app/admin/*` - Admin pages
+- `app/api/stats/route.ts` - Stats API
+- `app/api/profile/share/route.ts` - Profile sharing API
+- `app/p/[token]/page.tsx` - Public profile
+- `lib/auth/admin.ts` - Admin helpers
+
 ### 🚀 Demo Credentials (after seeding)
 
-| Email | Password | Level |
-|-------|----------|-------|
-| demo@edustride.id | password123 | S1 |
-| sma@edustride.id | password123 | SMA |
-| s2@edustride.id | password123 | S2/S3 |
+| Email | Password | Level | Role |
+|-------|----------|-------|------|
+| demo@edustride.id | password123 | S1 | USER |
+| sma@edustride.id | password123 | SMA | USER |
+| s2@edustride.id | password123 | S2/S3 | USER |
+| admin@edustride.id | admin123 | - | ADMIN |
 
 ## Known Issues & Configuration
 
@@ -788,5 +826,5 @@ UPSTASH_REDIS_REST_TOKEN=...
 
 ---
 
-**Last Updated**: February 19, 2026
-**Version**: 2.1
+**Last Updated**: February 24, 2026
+**Version**: 2.2

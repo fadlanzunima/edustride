@@ -70,8 +70,13 @@ export default function LoginPage() {
         }
       } else if (result?.ok) {
         toast.success("Login successful!");
-        router.push(`/${locale}/dashboard`);
-        router.refresh();
+        // Check if admin by email (immediate check)
+        const isAdmin = data.email === "admin@edustride.id";
+        // Redirect admin to /admin, others to /dashboard
+        const redirectUrl = isAdmin
+          ? `/${locale}/admin`
+          : `/${locale}/dashboard`;
+        window.location.href = redirectUrl;
       } else {
         toast.error("Login failed: Unknown error");
       }

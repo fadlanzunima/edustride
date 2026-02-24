@@ -111,11 +111,17 @@ export function DashboardContent() {
     }
   }, [status, session?.user?.level, initializeFromSession]);
 
-  // Determine effective level: ALWAYS prioritize session level over store level
-  // This ensures the correct level is shown based on the logged-in user
+  // Feature flag: SMA-only mode
+  const isSMAOnlyMode = process.env.NEXT_PUBLIC_SMA_ONLY_MODE === "true";
+
+  // Determine effective level: In SMA-only mode, always use SMA
   const effectiveLevel: Level = React.useMemo(() => {
-    // Priority 1: Session level (from database) - check regardless of status
-    // This ensures we show the database level immediately when available
+    // In SMA-only mode, force SMA
+    if (isSMAOnlyMode) {
+      return "SMA";
+    }
+
+    // Normal mode: Priority 1: Session level (from database)
     if (session?.user?.level) {
       const sessionLevel = session.user.level as Level;
       if (["SMA", "S1", "S2/S3"].includes(sessionLevel)) {
@@ -123,14 +129,14 @@ export function DashboardContent() {
       }
     }
 
-    // Priority 2: Store level (from localStorage) - only if no session level
+    // Priority 2: Store level (from localStorage)
     if (currentLevel) {
       return currentLevel;
     }
 
-    // Priority 3: Default to S1 if no session level and no store
-    return "S1";
-  }, [session?.user?.level, currentLevel]);
+    // Priority 3: Default to SMA
+    return "SMA";
+  }, [session?.user?.level, currentLevel, isSMAOnlyMode]);
 
   const welcome = welcomeMessages[effectiveLevel];
   const colors = levelColors[effectiveLevel];
@@ -246,9 +252,14 @@ export function DashboardContent() {
       >
         {/* Primary Level-Specific Widget */}
         <div className="lg:col-span-2">
-          {effectiveLevel === "SMA" && <CareerExplorerWidget />}
-          {effectiveLevel === "S1" && <PortfolioPreviewWidget />}
-          {effectiveLevel === "S2/S3" && <ResearchImpactWidget />}
+          {/* In SMA-only mode, always show Career Explorer */}
+          {isSMAOnlyMode || effectiveLevel === "SMA" ? (
+            <CareerExplorerWidget />
+          ) : effectiveLevel === "S1" ? (
+            <PortfolioPreviewWidget />
+          ) : (
+            <ResearchImpactWidget />
+          )}
         </div>
 
         {/* Secondary Widgets */}

@@ -910,7 +910,110 @@ curl -X POST "http://localhost:3000/api/seed?force=true"
   - Speed Insights setup
   - Error tracking preparation
 
-### Phase 9: Post-Launch & Maintenance (Minggu 10+)
+### Phase 9: SMA Priority & Super Admin ✅ COMPLETED (Feb 2026)
+
+**Goal:** Fokus pengembangan untuk siswa SMA dengan menyembunyikan fitur S1/S2/S3, dan implementasi sistem Super Admin untuk manajemen global.
+
+#### 9.1 Database Schema Updates ✅
+- [x] Tambah `UserRole` enum (USER, ADMIN) di Prisma schema
+- [x] Tambah field baru ke User model:
+  - `role`: UserRole (default: USER)
+  - `isProfilePublic`: Boolean (default: false)
+  - `shareToken`: String (unique, nullable)
+  - `viewCount`: Int (default: 0)
+- [x] Buat model `SharedPortfolio` untuk tracking profile shares
+- [x] Migration: `npx prisma migrate dev --name add_user_roles`
+
+#### 9.2 SMA-Only Mode ✅
+- [x] Hide LevelSwitcher dari landing page
+- [x] Update navigation - remove items untuk non-SMA:
+  - Quiz menu (dihidden)
+  - Experience menu (dihidden)
+  - Documents menu (dihidden)
+  - Badges dari Activities & Achievements (dihidden)
+- [x] Redirect protection: SMA users di-redirect dari `/dashboard/quiz`
+- [x] Feature flags untuk menampilkan konten level-specific
+
+#### 9.3 SMA Profile Module ✅
+- [x] SMA-specific profile page dengan fields:
+  - School name (Nama Sekolah)
+  - Grade level (Kelas)
+  - Major stream (Jurusan: IPA/IPS/Bahasa)
+  - SNBT target year (Target Tahun SNBT)
+  - Dream major (Jurusan Impian)
+  - Achievements (Prestasi)
+  - Extracurriculars (Ekstrakurikuler)
+- [x] Profile sharing system:
+  - Generate unique share token
+  - Toggle public/private profile
+  - Public profile page di `/p/[token]`
+  - View count tracking
+- [x] Share API endpoint: `/api/profile/share`
+
+#### 9.4 Super Admin System ✅
+- [x] Admin authentication & authorization:
+  - Role-based access control (RBAC)
+  - Admin middleware untuk proteksi route
+  - Helper functions: `isAdmin()`, `requireAdmin()`
+- [x] Admin Dashboard (`/admin`):
+  - Overview stats (total users, portfolios, etc.)
+  - Quick links ke management pages
+- [x] User Management (`/admin/users`):
+  - View all users dengan filter & search
+  - Edit user details
+  - Delete users
+  - View user portfolios
+- [x] Profile Management (`/admin/profiles`):
+  - View all public profiles
+  - Stats per profile
+- [x] Portfolio Management (`/admin/portfolios`):
+  - View all portfolios grouped by user
+  - Portfolio details view
+
+#### 9.5 Landing Page SMA Focus ✅
+- [x] Copywriting update untuk fokus SMA:
+  - "Portofolio Digital untuk Siswa SMA"
+  - "Persiapan SNBT & Eksplorasi Karir"
+  - "Lolos PTN Impian"
+- [x] Hide sections:
+  - "Dipercaya oleh pelajar dari" (Partners section)
+  - "Apa Kata Mereka" (Testimonials section)
+  - LevelSwitcher di header
+- [x] Update stats untuk real-time data dari database
+- [x] Update features:
+  - Portofolio Digital SMA
+  - Roadmap Persiapan SNBT
+  - SNBT Progress Tracker
+  - Eksplorasi Karir
+- [x] Update testimonials ke success stories SMA:
+  - Diterima di UI, FK UI, Beasiswa LPDP
+
+**Files Created:**
+- `app/api/stats/route.ts` - Stats API
+- `app/api/profile/share/route.ts` - Profile sharing API
+- `app/api/admin/users/route.ts` - Admin users API
+- `app/admin/layout.tsx` - Admin layout
+- `app/admin/page.tsx` - Admin dashboard
+- `app/admin/users/page.tsx` - User management
+- `app/admin/profiles/page.tsx` - Profile management
+- `app/admin/portfolios/page.tsx` - Portfolio management
+- `app/p/[token]/page.tsx` - Public profile page
+- `lib/auth/admin.ts` - Admin helpers
+- `components/admin/admin-sidebar.tsx` - Admin sidebar
+
+**Files Modified:**
+- `prisma/schema.prisma` - UserRole enum, new fields
+- `auth.ts` - Role-based session
+- `lib/data/navigation.ts` - Updated nav items
+- `app/[locale]/(landing)/page.tsx` - SMA focus
+- `app/[locale]/landing/page.tsx` - SMA focus
+- `app/[locale]/dashboard/profile/page.tsx` - SMA profile
+- `app/[locale]/dashboard/quiz/page.tsx` - Redirect protection
+- `messages/id.json` & `messages/en.json` - Updated translations
+
+---
+
+### Phase 10: Post-Launch & Maintenance (Future)
 - [ ] User feedback collection system
 - [ ] Bug fixes & hotfixes
 - [ ] Feature enhancements berdasarkan feedback
