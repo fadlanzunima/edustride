@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { motion } from "motion/react";
 import {
   FileText,
@@ -14,6 +15,7 @@ import {
   BookOpen,
   Sparkles,
 } from "lucide-react";
+import { toast } from "sonner";
 import { StatCard } from "./stat-card";
 import { ActivityFeed, sampleActivities } from "./activity-feed";
 import { ProgressBar, CircularProgress } from "./progress-bar";
@@ -180,13 +182,31 @@ export function DashboardContent() {
 
         {/* Action Buttons - Inline with content flow */}
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={async () => {
+              try {
+                const shareUrl = `${window.location.origin}/p/${session?.user?.id}`;
+                await navigator.clipboard.writeText(shareUrl);
+                toast.success("Link profil berhasil disalin!");
+              } catch {
+                toast.error("Gagal menyalin link");
+              }
+            }}
+          >
             <Share2 className="mr-2 h-4 w-4" />
             Share
           </Button>
-          <Button size="sm" className={cn("bg-gradient-to-r", colors.gradient)}>
-            <Plus className="mr-2 h-4 w-4" />
-            New Project
+          <Button
+            size="sm"
+            className={cn("bg-gradient-to-r", colors.gradient)}
+            asChild
+          >
+            <Link href="/dashboard/portfolio/create">
+              <Plus className="mr-2 h-4 w-4" />
+              New Project
+            </Link>
           </Button>
         </div>
       </div>
