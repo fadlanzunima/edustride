@@ -11,6 +11,7 @@ import {
   School,
   FolderOpen,
   GraduationCap,
+  ExternalLink,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -29,6 +30,7 @@ export default async function AdminUsersPage() {
       role: true,
       institution: true,
       isProfilePublic: true,
+      shareToken: true,
       createdAt: true,
       _count: {
         select: {
@@ -164,6 +166,22 @@ export default async function AdminUsersPage() {
                             View
                           </Button>
                         </Link>
+                        {user.shareToken && (
+                          <Link
+                            href={`/p/${user.shareToken}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="gap-1"
+                            >
+                              <ExternalLink className="h-3 w-3" />
+                              /p/{user.shareToken.slice(0, 8)}...
+                            </Button>
+                          </Link>
+                        )}
                         {user.role !== "ADMIN" && (
                           <Button
                             variant="outline"
