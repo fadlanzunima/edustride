@@ -193,24 +193,7 @@ export function DashboardContent() {
           </div>
         </div>
 
-        {/* Level Display - SMA Only */}
-        <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-blue-500">
-            <GraduationCap className="h-5 w-5 text-white" />
-          </div>
-          <div className="flex-1">
-            <p className="text-sm font-medium">Siswa SMA</p>
-            <p className="text-xs text-muted-foreground">
-              Persiapan SNBT dan Eksplorasi Karir
-            </p>
-          </div>
-          <Badge
-            variant="secondary"
-            className="bg-cyan-500/20 text-cyan-600 border-cyan-500/30"
-          >
-            SMA
-          </Badge>
-        </div>
+        {/* Level section removed for SMA-only mode */}
       </div>
 
       {/* Stats Row */}
