@@ -187,7 +187,19 @@ export function DashboardContent() {
             size="sm"
             onClick={async () => {
               try {
-                const shareUrl = `${window.location.origin}/p/${session?.user?.id}`;
+                // Call API to generate share token
+                const response = await fetch("/api/profile/share", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ isPublic: true }),
+                });
+
+                if (!response.ok) {
+                  throw new Error("Failed to generate share link");
+                }
+
+                const data = await response.json();
+                const shareUrl = `${window.location.origin}/p/${data.shareToken}`;
                 await navigator.clipboard.writeText(shareUrl);
                 toast.success("Link profil berhasil disalin!");
               } catch {
